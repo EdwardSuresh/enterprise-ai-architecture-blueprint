@@ -44,6 +44,10 @@ flowchart LR
 - Raising a level is a material change: new intake, ARB review, updated agent scopes.
 - Human oversight requirements are in the [human oversight policy](../01-governance/policies/human-oversight.md).
 
+## Contracts make the level binding
+
+From v1.1 every agent at L2 or above runs under an **agent contract** (`contracts/`). The contract states the autonomy level, and the enforcer applies it on every step: at L0–L2 write tools must go through human approval, at L3 writes run only inside the contract's stated limits. Delegated agents get the lower of the two levels. See `02-architecture/agent-contracts.md`.
+
 ## Signals that a level is wrong
 
 | Signal | Possible problem |

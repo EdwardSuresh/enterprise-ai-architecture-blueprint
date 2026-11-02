@@ -1,5 +1,5 @@
 # Blueprint manifest - the first file an adopting team edits.
-kit_version: 1.0.1
+kit_version: 1.1.0
 organization: Example Org          # your organization name
 mode: day0                         # day0 | plugin  (see docs/rollout-day0.md, docs/rollout-plugin.md)
 primary_cloud: azure               # azure | aws | gcp | onprem

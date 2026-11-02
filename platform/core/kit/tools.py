@@ -74,6 +74,21 @@ class ToolRegistry:
         self._log(agent.name, name, args, "ok")
         return result
 
+    def execute_within_limits(self, agent: AgentIdentity, tool_name: str, /, **args: Any) -> Any:
+        """Run a write tool without the approval queue.
+
+        Only for autonomy L3 ("act within limits"): the caller (the contract
+        enforcer) has already checked the contract's limits for this call.
+        Allow-list and scope checks still apply here.
+        """
+        tool = self.tools.get(tool_name)
+        if tool is None or tool_name not in agent.allowed_tools or tool.scope not in agent.scopes:
+            self._log(agent.name, tool_name, args, "denied:not_allowed")
+            raise ToolDenied(f"{agent.name} may not call {tool_name}")
+        result = tool.func(**args)
+        self._log(agent.name, tool_name, args, "executed_within_limits")
+        return result
+
     def approve(self, approval_id: int, approver: str) -> Any:
         item = self.queue[approval_id]
         if item.status != "pending":

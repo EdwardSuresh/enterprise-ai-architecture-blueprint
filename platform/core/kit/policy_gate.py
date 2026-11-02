@@ -16,12 +16,67 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 from .config import load_yaml, repo_root
+from .contracts import AUTONOMY, AgentContract, ContractError
 from .prompts import PromptError, PromptRegistry
 
-AUTONOMY = ["L0", "L1", "L2", "L3", "L4"]
 REQUIRED = ["id", "name", "owner", "risk_tier", "pattern", "autonomy_level", "models",
             "data_class", "status", "system_card"]
 STATUSES = {"proposed", "pilot", "production", "retired"}
+AGENTIC_PATTERNS = {"tool-using-agent", "multi-agent-orchestration", "conversational-customer-agent"}
+DATA_ORDER = ["public", "internal", "confidential", "restricted"]
+
+
+def check_contracts(s: dict, models: dict, today: dt.date) -> Findings:
+    """Agents that act need an executable contract that stays inside the inventory entry."""
+    f = Findings()
+    sid = s["id"]
+    refs = s.get("contracts") or []
+    needs = AUTONOMY.index(s["autonomy_level"]) >= 2 or s["pattern"] in AGENTIC_PATTERNS
+    if needs and not refs and s["status"] != "proposed":
+        f.errors.append(f"{sid}: autonomy {s['autonomy_level']} / pattern {s['pattern']} needs an agent contract")
+        return f
+    loaded: dict[str, AgentContract] = {}
+    for ref in refs:
+        if not _exists(ref):
+            f.errors.append(f"{sid}: contract file not found {ref}")
+            continue
+        try:
+            c = AgentContract.load(ref)
+        except ContractError as exc:
+            f.errors.append(f"{sid}: {ref}: {exc}")
+            continue
+        loaded[c.agent] = c
+        tag = f"{sid}: {c.ref}"
+        if c.inventory_id != sid:
+            f.errors.append(f"{tag} belongs to {c.inventory_id}, not {sid}")
+        ok, why = c.is_usable(today)
+        if not ok:
+            f.errors.append(f"{tag}: {why}")
+        elif c.valid_until and (c.valid_until - today).days <= 30:
+            f.warnings.append(f"{tag}: expires {c.valid_until}; re-approve through the ARB")
+        if AUTONOMY.index(c.autonomy_level) > AUTONOMY.index(s["autonomy_level"]):
+            f.errors.append(f"{tag}: autonomy {c.autonomy_level} exceeds the system's {s['autonomy_level']}")
+        if not c.models <= set(s["models"]):
+            f.errors.append(f"{tag}: models {sorted(c.models - set(s['models']))} not listed for the system")
+        for alias in c.models:
+            m = models.get(alias)
+            if m is None:
+                f.errors.append(f"{tag}: model '{alias}' not approved")
+            else:
+                bad = c.data_classes - set(m.get("allowed_data_classes", []))
+                if bad:
+                    f.errors.append(f"{tag}: data classes {sorted(bad)} not allowed for '{alias}'")
+        sys_level = DATA_ORDER.index(s["data_class"]) if s["data_class"] in DATA_ORDER else -1
+        above = sorted(d for d in c.data_classes if d not in DATA_ORDER or DATA_ORDER.index(d) > sys_level)
+        if above:
+            f.errors.append(f"{tag}: data classes {above} exceed the system's '{s['data_class']}'")
+        if s.get("arb_id") and c.approved_by != s["arb_id"]:
+            f.errors.append(f"{tag}: approved_by {c.approved_by or '(none)'} does not match ARB {s['arb_id']}")
+    for c in loaded.values():
+        for d in c.delegates:
+            if d not in loaded:
+                f.errors.append(f"{sid}: {c.ref} delegates to '{d}' which has no contract in this system")
+    return f
 
 
 @dataclass
@@ -95,6 +150,10 @@ def check_system(s: dict, tiers: dict, models: dict, today: dt.date,
         except PromptError as exc:
             f.errors.append(f"{sid}: prompt {ref}: {exc}")
 
+    cf = check_contracts(s, models, today)
+    f.errors += cf.errors
+    f.warnings += cf.warnings
+
     if s["status"] == "production":
         last = s.get("last_review")
         if not last:
@@ -113,6 +172,22 @@ def run(inventory: str, tiers_path: str, models_path: str, today: dt.date | None
     inv = load_yaml(inventory)
     prompts = PromptRegistry.load() if (repo_root() / "prompts" / "registry.yaml").is_file() else None
     total = Findings()
+    # Contracts the runtime could load must be exactly the ones the inventory references.
+    referenced = {str((repo_root() / r).resolve()) for s in inv.get("systems", []) for r in (s.get("contracts") or [])}
+    agents_seen: dict[str, str] = {}
+    cdir = repo_root() / "contracts"
+    for fpath in sorted(cdir.glob("*.yaml")) if cdir.is_dir() else []:
+        rel = fpath.relative_to(repo_root())
+        if str(fpath.resolve()) not in referenced:
+            total.errors.append(f"{rel}: not referenced by any inventory entry (orphan contract)")
+        try:
+            agent = AgentContract.load(fpath).agent
+        except ContractError as exc:
+            total.errors.append(f"{rel}: {exc}")
+            continue
+        if agent in agents_seen:
+            total.errors.append(f"{rel}: second contract for agent '{agent}' (also {agents_seen[agent]})")
+        agents_seen[agent] = str(rel)
     seen: set[str] = set()
     for s in inv.get("systems", []):
         if s.get("id") in seen:

@@ -1,0 +1,40 @@
+# Agent contract - ILLUSTRATIVE sub-agent for AIS-003.
+# It asks for MORE than its parent (higher refund limit, account closure).
+# When the fee-dispute-agent delegates to it, kit.contracts.narrow() keeps only
+# the intersection, so those extra permissions disappear.
+contract_id: CT-AIS-003-B
+version: 1.0.0
+agent: fee-lookup-agent
+inventory_id: AIS-003
+owner: retail-banking-ai
+approved_by: ARB-2026-019
+status: active
+valid_until: 2027-06-30
+autonomy_level: L2
+
+planning:
+  intents:
+    check_history:  {tools: [get_fee_history]}
+    request_refund: {tools: [request_fee_refund]}
+    close_account:  {tools: [close_account]}
+  max_steps: 4
+
+models: [reasoning-small]
+data_classes: [internal, confidential]
+
+memory:
+  short_term: {read: true, write: false}
+  long_term: {read_keys: [], write_keys: []}
+
+tools:
+  get_fee_history:    {mode: read}
+  request_fee_refund: {mode: write, approval: human, max_amount: 500}
+  close_account:      {mode: write, approval: human}
+
+delegation:
+  allowed_delegates: []
+  max_depth: 0
+
+execution:
+  max_cost_usd_per_task: 0.10
+  max_tool_calls_per_task: 4

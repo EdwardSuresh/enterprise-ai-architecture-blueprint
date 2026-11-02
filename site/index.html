@@ -139,7 +139,7 @@ footer .wrap{padding-block:18px}
 </head>
 <body>
 <header class="top"><div class="wrap">
-  <div class="eyebrow">The Architect's Series · Enterprise-wide · Cloud-neutral · Industry-neutral · v1.0.1</div>
+  <div class="eyebrow">The Architect's Series · Enterprise-wide · Cloud-neutral · Industry-neutral · v1.1.0</div>
   <h1>Enterprise AI Architecture Blueprint</h1>
   <p class="lede">An enterprise-wide blueprint for governing and scaling AI, with a runnable reference implementation. It covers project structure, reference architecture, governance and the Enterprise Architecture playbook, works on AWS, Azure or Google Cloud, and applies to any industry or services sector. Start from zero (Day 0) or plug it into AI you already run.</p>
   <p class="links"><a href="https://github.com/EdwardSuresh/enterprise-ai-architecture-blueprint" target="_blank" rel="noopener">GitHub repository</a> · <a href="https://www.linkedin.com/in/sureshedward" target="_blank" rel="noopener">Author on LinkedIn</a> · <a href="https://edwardsuresh.github.io/architects-ml-playbook/" target="_blank" rel="noopener">The Architect's ML Playbook</a> · v1.0.1 · MIT + CC BY 4.0</p>
@@ -159,10 +159,11 @@ footer .wrap{padding-block:18px}
     <button class="tab" role="tab" data-t="industry">Industry packs</button>
     <button class="tab" role="tab" data-t="rank">Pattern ranking</button>
     <button class="tab" role="tab" data-t="when">Which pattern when</button>
-    <button class="tab" role="tab" data-t="labs">Labs (18)</button>
+    <button class="tab" role="tab" data-t="labs">Labs (21)</button>
     <button class="tab" role="tab" data-t="maturity">Maturity check</button>
     <button class="tab" role="tab" data-t="anti">Anti-patterns</button>
     <button class="tab" role="tab" data-t="templates">Templates</button>
+    <button class="tab" role="tab" data-t="contracts">Agent contracts</button>
     <button class="tab" role="tab" data-t="controls">Control maps</button>
     <button class="tab" role="tab" data-t="author">About the author</button>
   </div>
@@ -266,7 +267,7 @@ flowchart LR
 <section class="panel active" id="overview" role="tabpanel">
   <h2>Start here: the blueprint in 5W1H</h2>
   <div class="card" id="progress-card"><h3>Your progress</h3>
-    <p><span id="prog-text" class="mono">0 of 18 labs marked complete</span></p>
+    <p><span id="prog-text" class="mono">0 of 21 labs marked complete</span></p>
     <div class="bar" aria-hidden="true"><span id="prog-bar"></span></div>
     <p class="sub" style="margin-top:6px">Tick labs on the Labs tab. Progress is saved in this browser only.</p></div>
   <div class="grid w5">
@@ -294,7 +295,7 @@ flowchart LR
       <li><b>Agent repo vs. blueprint</b> and <b>Project structure</b>: know where everything lives.</li>
       <li><b>Architecture</b> and <b>Sequence</b>: trace one request end to end.</li>
       <li><b>Which pattern when</b> and <b>Pattern ranking</b>: pick patterns for your industry.</li>
-      <li><b>Labs</b>: do the Concept level of all six building blocks first, then Build, then Production.</li>
+      <li><b>Labs</b>: do the Concept level of all seven building blocks first, then Build, then Production.</li>
       <li><b>EA must-do</b> tabs: turn the build into an enterprise program.</li>
     </ol>
     <p class="ex" style="margin-top:10px"><b>Pairing with the ML Playbook:</b> when a lab needs a prediction (fraud score, demand forecast, failure risk), take the model from the matching ML Playbook lesson and serve it through <code>platform/ml</code>.</p></div>
@@ -336,6 +337,8 @@ flowchart LR
 │   │   ├── tools.py                 <span class="c"># agent identities · allow-lists · approval queue</span>
 │   │   ├── <span class="n">prompts.py</span>               <span class="c"># versioned prompt registry, approved-only</span>
 │   │   ├── <span class="n">memory.py</span>                <span class="c"># conversation memory with retention · export · forget</span>
+│   │   ├── <span class="n">contracts.py · enforcer.py</span> <span class="c"># agent contracts + independent execution layer</span>
+│   │   ├── <span class="n">evidence.py</span>              <span class="c"># hash-chained provenance · verification · authorization · execution</span>
 │   │   ├── orchestrator.py · tracing.py
 │   │   ├── evals.py                 <span class="c"># CLI: kit-evals</span>
 │   │   └── <span class="n">policy_gate.py</span>           <span class="c"># CLI: kit-policy-gate</span>
@@ -343,6 +346,7 @@ flowchart LR
 │   └── <span class="n">ml/</span>                          <span class="c"># classic ML; algorithms from The Architect's ML Playbook</span>
 ├── config/models.yaml               <span class="c"># alias routing + cloud bindings</span>
 ├── <span class="n">prompts/</span>                         <span class="c"># registry.yaml + library/&lt;id&gt;/&lt;version&gt;.md</span>
+├── <span class="n">contracts/</span>                       <span class="c"># one executable contract per agent (ARB-approved, expiring, revocable)</span>
 ├── api/                             <span class="c"># reference FastAPI service</span>
 │
 ├── <span class="n">domain-packs/</span>                    <span class="c"># _template + 10 sectors</span>
@@ -352,8 +356,8 @@ flowchart LR
 ├── <span class="n">finops/</span>                          <span class="c"># budgets.yaml · cost-model.md</span>
 ├── <span class="n">ops/</span>                             <span class="c"># slo.yaml · autonomy-levels.md · runbooks/</span>
 ├── evals/                           <span class="c"># suites/quality.yaml · datasets/ · reports/</span>
-├── tests/                           <span class="c"># 74 tests: core, prompts, memory, adapters, policy gate, packs, red team</span>
-├── <span class="n">labs/</span>                            <span class="c"># 6 building blocks × Concept / Build / Production</span>
+├── tests/                           <span class="c"># 116 tests: core, contracts, prompts, memory, adapters, policy gate, packs, red team</span>
+├── <span class="n">labs/</span>                            <span class="c"># 7 building blocks × Concept / Build / Production</span>
 ├── deploy/                          <span class="c"># docker · k8s · terraform/{{aws,azure,gcp}} module contracts</span>
 ├── <span class="n">enablement/</span>                      <span class="c"># learning paths · champions · workforce impact</span>
 ├── docs/                            <span class="c"># executive summary · maturity model · rollout · anti-patterns · cloud mapping · glossary · FAQ</span>
@@ -702,8 +706,8 @@ flowchart TD
 
 <!-- ================= LABS ================= -->
 <section class="panel" id="labs" role="tabpanel">
-  <h2>Labs: six building blocks × three levels</h2>
-  <p class="sub">Each building block has a runnable Concept script in the repo, plus Build and Production steps in its lab guide: 18 lab levels in all.</p>
+  <h2>Labs: seven building blocks × three levels</h2>
+  <p class="sub">Each building block has a runnable Concept script in the repo, plus Build and Production steps in its lab guide: 21 lab levels in all.</p>
   <p>Same structure as the ML Playbook. <b>Concept</b> runs in plain Python with no cloud. <b>Build</b> uses Azure free or low-cost tiers. <b>Production</b> adds governance, CI and evidence. Each lab uses one business case through all three levels.</p>
   <div class="callout blue"><p><b>Reference implementation:</b> Build labs are written for Azure. The same steps map to AWS and Google Cloud using the services on the AWS · Azure · GCP tab, so an organization can run them on its own cloud.</p></div>
   <div class="callout"><p><b>Sandbox budget guard:</b> the labs aim to stay under about $50 in total if you use free tiers (for example Azure AI Search Free and Content Safety F0), small pay-per-token deployments, a budget alert, and delete resource groups after each session. Some services, such as API Management tiers, bill by the hour, and prices change, so check current pricing first.</p></div>
@@ -733,6 +737,10 @@ flowchart TD
       <td><label><input type="checkbox" id="lab-6c"> Fill risk-tiers.yaml and one model card by hand</label></td>
       <td><label><input type="checkbox" id="lab-6b"> ai-inventory.yaml + Python validator for required fields</label></td>
       <td><label><input type="checkbox" id="lab-6p"> policy-gate.yml fails builds without model card, tier or ARB ID</label></td></tr>
+    <tr><td>7 · Agent contracts</td><td>Bank: fee-dispute agent and sub-agent</td>
+      <td><label><input type="checkbox" id="lab-7c"> Contract YAML + enforcer: conflicting instruction, plan deviation, delegation and revocation all blocked and audited</label></td>
+      <td><label><input type="checkbox" id="lab-7b"> Enforcer as its own service in front of tools; agents in Foundry Agent Service have no direct tool route</label></td>
+      <td><label><input type="checkbox" id="lab-7p"> Contracts required by the policy gate; evidence ledger exported to immutable storage and verified daily</label></td></tr>
   </table></div>
   <div class="diagram"><div class="cap">Lab sequence · from Concept to Production</div>
 <pre class="mermaid">
@@ -863,6 +871,92 @@ retirement_trigger: score &lt; 0.90 for 2 weeks</pre></div>
   </div>
 </section>
 
+<!-- ================= CONTRACTS ================= -->
+<section class="panel" id="contracts" role="tabpanel">
+  <h2>Agent contracts: executable, enforced, auditable</h2>
+  <p><b>The model proposes. The contract defines obligations. An independent execution layer enforces them.</b> New in v1.1: every agent at autonomy L2 or above runs under one machine-readable contract that binds the whole stack, not one checkpoint.</p>
+  <div class="grid w5">
+    <div class="card"><h3><span class="q">WHAT</span></h3><p>One contract per agent: planning, models, data classes, memory, tools, delegation and execution limits.</p></div>
+    <div class="card"><h3><span class="q">WHY</span></h3><p>An agent cannot enforce its own boundaries. The architecture must block and audit unauthorized actions when models fail or instructions conflict.</p></div>
+    <div class="card"><h3><span class="q">WHO</span></h3><p>Owner drafts, AI ARB approves (ARB id in the contract), platform runs the enforcer, audit reads the evidence.</p></div>
+    <div class="card"><h3><span class="q">HOW</span></h3><p>Approve one plan per task; run each approved step once; authorize every step against the live contract; narrow and share one budget on delegation; record four kinds of evidence.</p></div>
+  </div>
+  <div class="diagram"><div class="cap">Independent execution layer</div>
+<pre class="mermaid">
+flowchart LR
+  subgraph AG["Agent (untrusted)"]
+    M["Model proposes a plan"]
+  end
+  subgraph EL["Independent execution layer"]
+    PDP["Contract enforcer: approve plan, authorize each step"]
+    CS["Contract store: versioned, revocable"]
+    EV["Evidence ledger: hash-chained"]
+  end
+  subgraph RS["Protected resources"]
+    T["Tools / MCP servers"]
+    G["LLM gateway"]
+    MEM["Memory"]
+    SUB["Delegated agents"]
+  end
+  M -->|"plan, steps"| PDP
+  CS --> PDP
+  PDP -->|"approved, allowed steps only"| T
+  PDP --> G
+  PDP --> MEM
+  PDP -->|"narrowed contract"| SUB
+  PDP --> EV
+  T -->|"results as data, never authority"| M
+</pre></div>
+  <div class="diagram"><div class="cap">One step under a contract</div>
+<pre class="mermaid">
+sequenceDiagram
+  autonumber
+  participant A as Agent model
+  participant E as Contract enforcer
+  participant C as Contract store
+  participant T as Tool
+  participant H as Human approver
+  participant L as Evidence ledger
+  A->>E: propose plan
+  E->>C: load live contract
+  E->>L: plan evidence
+  A->>E: execute step: refund 500
+  E->>C: re-check status and expiry
+  E->>E: unused approved step? intent allows tool? amount 0..limit? budget left?
+  alt within contract
+    E->>T: call (writes queue for a human)
+    E->>L: provenance, verification, authorization, execution
+    H->>E: approve, with approver id
+    E->>C: re-check contract still live
+    E->>L: four records naming the approver
+  else outside contract
+    E->>L: four records, decision deny
+    E-->>A: refused with reason
+  end
+</pre></div>
+  <div class="tbl"><table>
+    <tr><th>Evidence record</th><th>Answers</th><th>Examples</th></tr>
+    <tr><td>Provenance</td><td>Where did this come from?</td><td>Task source, plan hash, step hash, delegation chain</td></tr>
+    <tr><td>Verification</td><td>What was checked?</td><td>In approved plan, tool allowed, amount within limit, cost so far</td></tr>
+    <tr><td>Authorization</td><td>Who allowed it, under which rule?</td><td>Allow or deny, contract id and version, rule, approver</td></tr>
+    <tr><td>Execution</td><td>What actually happened?</td><td>Done, queued or failed; output hash; approval id</td></tr>
+  </table></div>
+  <div class="tbl"><table>
+    <tr><th>Failure mode</th><th>What stops it</th></tr>
+    <tr><td>A retrieved note says "ignore refund limits"</td><td>Authority is read only from the contract; the $500 refund is refused</td></tr>
+    <tr><td>The model acts outside its approved plan</td><td>Each step must match an approved step</td></tr>
+    <tr><td>A sub-agent asks for more than its parent has</td><td>Delegation only narrows: intersection of permissions, tighter limits</td></tr>
+    <tr><td>An incident needs one agent stopped now</td><td>Revoke the contract; running tasks stop at their next step</td></tr>
+    <tr><td>The model replays an approved refund, or re-plans mid-task</td><td>Each approved step runs once; one plan per task</td></tr>
+    <tr><td>A step labelled "explain fee" tries to delegate</td><td>Each intent lists exactly which tools, models, memory or delegates it may use</td></tr>
+    <tr><td>Sub-agents fan out to multiply limits</td><td>Cost and tool calls are counted once across the delegation chain</td></tr>
+    <tr><td>A queued refund is approved after the contract is revoked</td><td>Approvals go through the enforcer, which re-checks the contract and records the approver</td></tr>
+    <tr><td>Amount is NaN, negative or missing</td><td>Refused; malformed steps are recorded as denials, never as allows</td></tr>
+    <tr><td>Someone edits, deletes or cuts off audit records</td><td>The hash chain fails; an anchor stored outside the runtime detects truncation</td></tr>
+  </table></div>
+  <div class="callout blue"><p><b>Honest limit:</b> the reference enforcer runs in-process so the lab works anywhere. In production, run it as its own service in front of tools, models and memory, so agents have no path around it. 42 tests cover these failure modes (<code>tests/test_contracts.py</code>); they were added after an independent adversarial review of the first draft.</p></div>
+</section>
+
 <!-- ================= CONTROLS ================= -->
 <section class="panel" id="controls" role="tabpanel">
   <h2>Control maps</h2>
@@ -924,7 +1018,7 @@ retirement_trigger: score &lt; 0.90 for 2 weeks</pre></div>
     <tr><th>If you are hiring for…</th><th>Look at</th></tr>
     <tr><td>AI governance and the ARB</td><td>Governance &amp; ARB tab, <code>01-governance/</code>, the policy gate</td></tr>
     <tr><td>Reference architecture</td><td>Architecture and Reference architecture tabs, <code>02-architecture/</code>, ADRs</td></tr>
-    <tr><td>Hands-on platform engineering</td><td><code>platform/core/kit</code>, the 74 tests, the three CI gates</td></tr>
+    <tr><td>Hands-on platform engineering</td><td><code>platform/core/kit</code>, the 116 tests, the three CI gates</td></tr>
     <tr><td>Multi-cloud strategy</td><td>AWS · Azure · GCP tab, <code>platform/adapters</code></td></tr>
     <tr><td>Industry depth</td><td>Industry packs, especially financial services and insurance</td></tr>
   </table></div>

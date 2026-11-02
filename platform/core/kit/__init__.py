@@ -10,6 +10,9 @@ retrieval    permission-aware retrieval with citations (pure Python TF-IDF)
 tools        tool registry, agent identities, allow-lists, human approval queue
 prompts      versioned prompt registry (prompts/registry.yaml)
 memory       short-term and long-term memory with retention rules
+contracts    executable agent contracts; delegation only narrows
+enforcer     independent execution layer: plan approval, per-step authorization
+evidence     hash-chained provenance / verification / authorization / execution
 orchestrator one guarded request end to end
 evals        golden-set evaluation runner (CLI: kit-evals)
 policy_gate  AI inventory validator for CI (CLI: kit-policy-gate)
@@ -17,4 +20,4 @@ policy_gate  AI inventory validator for CI (CLI: kit-policy-gate)
 Everything here runs with only PyYAML installed. Cloud SDKs live in kit_adapters.
 """
 
-__version__ = "1.0.1"
+__version__ = "1.1.0"

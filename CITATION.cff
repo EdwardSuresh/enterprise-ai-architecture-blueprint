@@ -3,7 +3,7 @@ message: "If you use this kit, please cite it as below."
 title: "Enterprise AI Architecture Blueprint"
 authors:
   - name: "Rajaretnam Suresh Edward David"
-version: 1.0.1
+version: 1.1.0
 date-released: 2026-11-01
 url: "https://github.com/EdwardSuresh/enterprise-ai-architecture-blueprint"
 license: MIT
