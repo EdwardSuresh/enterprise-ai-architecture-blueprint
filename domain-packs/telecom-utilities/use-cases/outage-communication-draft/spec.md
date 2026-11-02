@@ -47,4 +47,4 @@ Summarization of outage management system data into approved message templates.
 
 Use past outages with the final approved messages as references.
 
-Each golden line follows the kit schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.
+Each golden line follows the blueprint schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.

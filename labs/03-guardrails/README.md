@@ -35,9 +35,9 @@ Try this: add a rule to `domain-packs/retail/guardrails.yaml`, rerun, and check 
 2. Create **Azure AI Content Safety** on the **F0 (free) tier**.
 3. Call **Prompt Shields** on the user input and on retrieved documents (to catch indirect injection).
 4. Call text moderation on input and output. Set category thresholds for your use case.
-5. Use groundedness detection (if available in your region) or keep the kit's grounding check on outputs.
+5. Use groundedness detection (if available in your region) or keep the blueprint's grounding check on outputs.
 6. Configure content filters on your **Microsoft Foundry** model deployment. Note what they block by default.
-7. Keep `kit.guardrails` in the flow for PII redaction and sector rules. Managed services and kit rules work together; neither covers everything.
+7. Keep `kit.guardrails` in the flow for PII redaction and sector rules. Managed services and blueprint rules work together; neither covers everything.
 8. Run the Concept test inputs plus the prompts in `security/red-team/prompts.jsonl` through the full chain.
 
 ## Build on AWS (short)

@@ -3,7 +3,7 @@
 | 5W1H | Answer |
 |---|---|
 | **Who** | Platform and cloud engineers on Google Cloud |
-| **What** | Resources a Google Cloud landing zone needs for the kit, and the module inputs and outputs |
+| **What** | Resources a Google Cloud landing zone needs for the blueprint, and the module inputs and outputs |
 | **When** | Day-0 platform build, or adding Google Cloud as a secondary or exit cloud |
 | **Where** | One project per environment under your organization and folder hierarchy |
 | **Why** | Same contract as AWS and Azure, so platform code is unchanged |
@@ -20,7 +20,7 @@
 | `secrets_keys` | Secret Manager; Cloud KMS keys per data class (CMEK) |
 | `model_access` | Vertex AI API enablement, Model Garden model access, regional endpoints; Model Armor templates |
 | `search` | Vertex AI Search, Vertex AI RAG Engine or Vertex AI Vector Search index and endpoint |
-| `gateway` | Apigee (or API Gateway) with policies, plus the kit gateway service |
+| `gateway` | Apigee (or API Gateway) with policies, plus the blueprint gateway service |
 | `runtime` | Google Kubernetes Engine (GKE) or Cloud Run; Artifact Registry |
 | `observability` | Cloud Logging buckets and sinks, Cloud Monitoring, Cloud Trace; OpenTelemetry export |
 | `data_governance` | Dataplex lakes and zones, data catalog integration |

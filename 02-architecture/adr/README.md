@@ -1,6 +1,6 @@
 # Architecture Decision Records
 
-Decisions that shape the kit itself. Use-case teams write their own ADRs with the [ADR template](../../01-governance/templates/adr-ai.md).
+Decisions that shape the blueprint itself. Use-case teams write their own ADRs with the [ADR template](../../01-governance/templates/adr-ai.md).
 
 | 5W1H | Answer |
 |---|---|

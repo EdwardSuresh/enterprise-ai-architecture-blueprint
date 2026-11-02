@@ -4,7 +4,7 @@
 
 This list covers common rules that affect AI in the sector. It is a starting point, not a complete register. Jurisdictions differ. Add local, state and national rules that apply to you.
 
-| Regulation / framework / regulator | What it means for AI | Kit control that helps |
+| Regulation / framework / regulator | What it means for AI | Blueprint control that helps |
 |---|---|---|
 | Export Administration Regulations (EAR, US BIS) | Control dual-use items and technology. Sending controlled technology to a cloud model or foreign-person support team can be an export. | Data classification (restricted), region pinning in kit.gateway, SC guardrails |
 | International Traffic in Arms Regulations (ITAR, US DDTC) | Control defense articles and technical data. Hosting, model access and support staff must be cleared for ITAR data. | Separate restricted environment, kit.retrieval ACLs, require_human |
@@ -17,7 +17,7 @@ This list covers common rules that affect AI in the sector. It is a starting poi
 ## How to use this list
 
 1. Legal confirms which items apply and adds missing ones.
-2. Map each item to controls in the kit's control-maps (see [01-governance](../../01-governance/)).
+2. Map each item to controls in the blueprint's control-maps (see [01-governance](../../01-governance/)).
 3. Record the mapping on each use case in the AI inventory.
 4. Review the list at least once a year and when a regulator issues new guidance.
 

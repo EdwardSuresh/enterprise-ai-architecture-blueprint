@@ -4,11 +4,11 @@ The map of the whole kit. Start with the [executive summary](executive-summary.m
 
 | 5W1H | Answer |
 |---|---|
-| **Who** | Everyone using the kit |
+| **Who** | Everyone using the blueprint |
 | **What** | An index of every folder and key document |
 | **When** | First visit, and whenever you need to find something |
 | **Where** | This file |
-| **Why** | The kit is broad; this page saves searching |
+| **Why** | The blueprint is broad; this page saves searching |
 | **How** | Find your role below, then follow the links |
 
 ## Start here by role
@@ -31,7 +31,7 @@ The map of the whole kit. Start with the [executive summary](executive-summary.m
 | [00-strategy](../00-strategy/README.md) | Strategy, capability map, use-case portfolio, value scorecard, build-buy-partner |
 | [01-governance](../01-governance/README.md) | Charter, RACI, policies, ARB, impact assessments, templates, control maps, risk tiers, AI inventory, policy-as-code |
 | [02-architecture](../02-architecture/README.md) | Reference architecture, 10 patterns, standards, ADRs |
-| `platform/` | Runnable kit package: gateway, guardrails, retrieval, tools, orchestrator, tracing, evals, policy gate, cloud adapters |
+| `platform/` | Runnable Python package `kit`: gateway, guardrails, retrieval, tools, orchestrator, tracing, evals, policy gate, cloud adapters |
 | `config/` | Model alias bindings |
 | [data](../data/README.md) | Classification, data contracts, lineage |
 | [security](../security/README.md) | Threat models, red team, agent identities |
@@ -53,11 +53,11 @@ The map of the whole kit. Start with the [executive summary](executive-summary.m
 | [maturity-model.md](maturity-model.md) | 8 dimensions × 5 levels, with self-assessment |
 | [rollout-day0.md](rollout-day0.md) | Week-by-week plan when no AI is in production |
 | [rollout-plugin.md](rollout-plugin.md) | Week-by-week plan when AI is already running |
-| [anti-patterns.md](anti-patterns.md) | 13 anti-patterns with kit controls |
-| [cloud-mapping.md](cloud-mapping.md) | Kit capabilities mapped to AWS, Azure and Google Cloud services |
-| [glossary.md](glossary.md) | Terms used in the kit |
+| [anti-patterns.md](anti-patterns.md) | 13 anti-patterns with blueprint controls |
+| [cloud-mapping.md](cloud-mapping.md) | Blueprint capabilities mapped to AWS, Azure and Google Cloud services |
+| [glossary.md](glossary.md) | Terms used in the blueprint |
 | [faq.md](faq.md) | Common questions |
 
 ## A note on examples
 
-Organization examples across the kit are **illustrative composites**, not client case studies.
+Organization examples across the blueprint are **illustrative composites**, not client case studies.

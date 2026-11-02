@@ -48,4 +48,4 @@ RAG drafting from approved boilerplate, credentials and past winning proposals.
 
 Business development leads pick past questions and the approved answers.
 
-Each golden line follows the kit schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.
+Each golden line follows the blueprint schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.

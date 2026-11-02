@@ -48,4 +48,4 @@ RAG Q&A over published policies plus read-only order lookup tools; handoff to ag
 
 Use real chat transcripts. Customer service leads write expected answers from policy. Include adversarial prompts and card-number attempts.
 
-Each golden line follows the kit schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.
+Each golden line follows the blueprint schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.

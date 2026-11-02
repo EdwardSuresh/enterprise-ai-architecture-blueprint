@@ -2,8 +2,8 @@
 
 | 5W1H | Answer |
 |---|---|
-| **Who** | Anyone reading the kit |
-| **What** | Plain definitions of terms used across the kit |
+| **Who** | Anyone reading the blueprint |
+| **What** | Plain definitions of terms used across the blueprint |
 | **When** | Whenever a term is unclear |
 | **Where** | Terms are used across all folders |
 | **Why** | Shared words prevent misunderstanding between business, risk and technology |

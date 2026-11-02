@@ -1,11 +1,11 @@
 # Kubernetes
 
-Guidance for running kit services on Amazon EKS, Azure Kubernetes Service or Google Kubernetes Engine.
+Guidance for running blueprint services on Amazon EKS, Azure Kubernetes Service or Google Kubernetes Engine.
 
 | 5W1H | Answer |
 |---|---|
 | **Who** | Platform and SRE engineers |
-| **What** | Namespaces, identity, networking, scaling and policy for kit services |
+| **What** | Namespaces, identity, networking, scaling and policy for blueprint services |
 | **When** | When the `runtime` module is Kubernetes |
 | **Where** | Any conformant cluster from the landing zone |
 | **Why** | Same workload layout on every cloud |

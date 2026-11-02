@@ -5,7 +5,7 @@
 | 5W1H | Answer |
 |---|---|
 | **Who** | Security architects, platform team, delivery teams, red team |
-| **What** | Each OWASP LLM risk mapped to kit controls, where they are enforced, and the test that proves them |
+| **What** | Each OWASP LLM risk mapped to blueprint controls, where they are enforced, and the test that proves them |
 | **When** | Threat modelling (design), red teaming (release), monitoring (run) |
 | **Where** | LLM gateway, retrieval layer, agent runtime, application code |
 | **Why** | Gives a shared checklist for LLM-specific security risk |
@@ -24,7 +24,7 @@ flowchart LR
 
 ## Map
 
-| # | Risk | Short intent (paraphrased) | Kit controls | Enforced at | Test or evidence |
+| # | Risk | Short intent (paraphrased) | Blueprint controls | Enforced at | Test or evidence |
 |---|---|---|---|---|---|
 | LLM01 | Prompt Injection | Crafted input, direct or hidden in content, changes the model's behaviour | Input guardrails and injection shields; treat retrieved content as data; tool allow-lists; human approval for high-impact actions | Control plane, gateway, agent runtime | `security/red-team/prompts.jsonl` injection cases; red-team report |
 | LLM02 | Sensitive Information Disclosure | The model reveals personal, confidential or secret data | Data classification hosting rules; output redaction; permission-aware retrieval; minimization | Gateway, retrieval layer | Data-exfil red-team cases; ACL tests |

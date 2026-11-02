@@ -48,4 +48,4 @@ Drafting from structured PIM attributes and brand style guide.
 
 Use approved descriptions with their PIM records. Expected keywords are material, size and care attributes.
 
-Each golden line follows the kit schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.
+Each golden line follows the blueprint schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.

@@ -47,4 +47,4 @@ RAG Q&A over released SOPs and work instructions, current revision only.
 
 Area supervisors supply real operator questions with the governing step.
 
-Each golden line follows the kit schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.
+Each golden line follows the blueprint schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.

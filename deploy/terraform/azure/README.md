@@ -3,7 +3,7 @@
 | 5W1H | Answer |
 |---|---|
 | **Who** | Platform and cloud engineers on Azure |
-| **What** | Resources an Azure landing zone needs for the kit, and the module inputs and outputs |
+| **What** | Resources an Azure landing zone needs for the blueprint, and the module inputs and outputs |
 | **When** | Day-0 platform build, or adding Azure as a secondary or exit cloud |
 | **Where** | One subscription per environment under your management group hierarchy |
 | **Why** | Same contract as AWS and Google Cloud, so platform code is unchanged |
@@ -20,7 +20,7 @@
 | `secrets_keys` | Azure Key Vault; customer-managed keys per data class |
 | `model_access` | Microsoft Foundry resource and project (or Azure OpenAI resource) with model deployments per alias; public network access disabled; Azure AI Content Safety and Prompt Shields |
 | `search` | Azure AI Search with private endpoint |
-| `gateway` | Azure API Management with AI gateway policies (token limits, logging), plus the kit gateway service if needed |
+| `gateway` | Azure API Management with AI gateway policies (token limits, logging), plus the blueprint gateway service if needed |
 | `runtime` | Azure Kubernetes Service (AKS) or Azure Container Apps; Azure Container Registry |
 | `observability` | Log Analytics workspace, Application Insights, Azure Monitor alerts; OpenTelemetry export |
 | `data_governance` | Microsoft Purview account and data map integration |

@@ -1,14 +1,14 @@
-# The Architect's Enterprise AI Kit
+# The Architect's Enterprise AI Blueprint
 
 **Move AI from scattered pilots to governed, multi-cloud production, in any industry.**
 
-[![CI](https://github.com/EdwardSuresh/architects-enterprise-ai-kit/actions/workflows/ci.yml/badge.svg)](https://github.com/EdwardSuresh/architects-enterprise-ai-kit/actions/workflows/ci.yml)
-[![Evals gate](https://github.com/EdwardSuresh/architects-enterprise-ai-kit/actions/workflows/evals.yml/badge.svg)](https://github.com/EdwardSuresh/architects-enterprise-ai-kit/actions/workflows/evals.yml)
-[![Policy gate](https://github.com/EdwardSuresh/architects-enterprise-ai-kit/actions/workflows/policy-gate.yml/badge.svg)](https://github.com/EdwardSuresh/architects-enterprise-ai-kit/actions/workflows/policy-gate.yml)
+[![CI](https://github.com/EdwardSuresh/architects-enterprise-ai-blueprint/actions/workflows/ci.yml/badge.svg)](https://github.com/EdwardSuresh/architects-enterprise-ai-blueprint/actions/workflows/ci.yml)
+[![Evals gate](https://github.com/EdwardSuresh/architects-enterprise-ai-blueprint/actions/workflows/evals.yml/badge.svg)](https://github.com/EdwardSuresh/architects-enterprise-ai-blueprint/actions/workflows/evals.yml)
+[![Policy gate](https://github.com/EdwardSuresh/architects-enterprise-ai-blueprint/actions/workflows/policy-gate.yml/badge.svg)](https://github.com/EdwardSuresh/architects-enterprise-ai-blueprint/actions/workflows/policy-gate.yml)
 
-**Website:** https://edwardsuresh.github.io/architects-enterprise-ai-kit/ · Part of **The Architect's Series** with [The Architect's ML Playbook](https://edwardsuresh.github.io/architects-ml-playbook/).
+**Website:** https://edwardsuresh.github.io/architects-enterprise-ai-blueprint/ · Part of **The Architect's Series** with [The Architect's ML Playbook](https://edwardsuresh.github.io/architects-ml-playbook/).
 
-## The kit in 5W1H
+## The blueprint in 5W1H
 
 | | |
 |---|---|
@@ -22,8 +22,8 @@
 ## Quick start (5 minutes, no cloud account)
 
 ```bash
-git clone https://github.com/EdwardSuresh/architects-enterprise-ai-kit.git
-cd architects-enterprise-ai-kit
+git clone https://github.com/EdwardSuresh/architects-enterprise-ai-blueprint.git
+cd architects-enterprise-ai-blueprint
 pip install -e ".[test]"
 pytest -q                                   # unit, integration and pack checks
 python labs/02-rag/concept.py               # one guarded, permission-aware request
@@ -67,7 +67,7 @@ See `docs/rollout-day0.md` and `docs/rollout-plugin.md`.
 
 ## A note on examples
 
-Organization examples throughout the kit (banks, insurers, retailers and so on) are **illustrative composites** based on common patterns. They are not client case studies. Real, client-approved case studies will be added to `case-studies/`.
+Organization examples throughout the blueprint (banks, insurers, retailers and so on) are **illustrative composites** based on common patterns. They are not client case studies. Real, client-approved case studies will be added to `case-studies/`.
 
 ## Licence
 
@@ -84,6 +84,6 @@ Cloud service names and regulatory references change often. Verify against curre
 - Depth in **architecture review boards and governance**, TOGAF ADM, reference architecture and application portfolio rationalization.
 - **Hands-on AI architecture** with Microsoft Foundry (formerly Azure AI Foundry) and the Claude API.
 
-I built this kit to show how I would stand up AI governance and a governed AI platform in a real enterprise, end to end: from the ARB and risk tiers down to running code and CI gates. Every design decision is recorded in `02-architecture/adr/`.
+I built this blueprint to show how I would stand up AI governance and a governed AI platform in a real enterprise, end to end: from the ARB and risk tiers down to running code and CI gates. Every design decision is recorded in `02-architecture/adr/`.
 
-**Open to Enterprise Architect and Enterprise AI Architect roles.** I'm happy to walk through the kit with your team; [connect on LinkedIn](https://www.linkedin.com/in/sureshedward).
+**Open to Enterprise Architect and Enterprise AI Architect roles.** I'm happy to walk through the blueprint with your team; [connect on LinkedIn](https://www.linkedin.com/in/sureshedward).

@@ -4,12 +4,15 @@ All notable changes to the kit. Versions follow semantic versioning: a major
 version changes the governance schemas (`ai-inventory.yaml`, `risk-tiers.yaml`).
 
 ## [1.0.1] - 2026-11-01
+### Changed (name)
+- Renamed from "The Architect's Enterprise AI Kit" to **The Architect's Enterprise AI Blueprint**, to reflect enterprise-wide, industry-neutral use. Repository: `architects-enterprise-ai-blueprint`. The reference code package keeps the name `kit`.
+
 ### Added
 - Prompt registry: `prompts/registry.yaml`, versioned prompt library, `kit.prompts` (approved-only loading, required variables, content hash in traces, registry validation).
 - Conversation memory: `kit.memory` with short-term memory per conversation (turn limit, idle expiry) and long-term facts per user (allowed keys, retention, export, forget); PII redacted before storing.
 - Orchestrator uses the registry prompt and conversation memory; responses carry the prompt reference.
 - Policy gate checks that prompts listed in the AI inventory exist and are approved.
-- Acknowledgements file; disclaimer note on how the kit was built.
+- Acknowledgements file; disclaimer note on how the blueprint was built.
 ### Changed
 - Lab 02 demonstrates the prompt registry and memory. Test suite: 74 tests.
 

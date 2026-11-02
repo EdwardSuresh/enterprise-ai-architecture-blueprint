@@ -4,7 +4,7 @@
 
 This list covers common rules that affect AI in the sector. It is a starting point, not a complete register. Jurisdictions differ. Add local, state and national rules that apply to you.
 
-| Regulation / framework / regulator | What it means for AI | Kit control that helps |
+| Regulation / framework / regulator | What it means for AI | Blueprint control that helps |
 |---|---|---|
 | PHMSA pipeline safety regulations (49 CFR Parts 192 and 195) | Set integrity management, control room, operator qualification and reporting rules for gas and hazardous liquid pipelines. AI may support analysis but qualified people make integrity decisions. | Tier 3 for integrity decisions, require_human, kit.tracing evidence |
 | OSHA Process Safety Management (29 CFR 1910.119) | Covers process hazard analysis, operating procedures, management of change and incident investigation. An AI tool that changes how procedures are used may need management of change. | ARB review as management of change, OG guardrails |
@@ -18,7 +18,7 @@ This list covers common rules that affect AI in the sector. It is a starting poi
 ## How to use this list
 
 1. Legal confirms which items apply and adds missing ones.
-2. Map each item to controls in the kit's control-maps (see [01-governance](../../01-governance/)).
+2. Map each item to controls in the blueprint's control-maps (see [01-governance](../../01-governance/)).
 3. Record the mapping on each use case in the AI inventory.
 4. Review the list at least once a year and when a regulator issues new guidance.
 

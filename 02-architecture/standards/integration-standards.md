@@ -25,7 +25,7 @@
 
 ## 3. Tools through MCP with allow-lists
 
-3.1 Agents **should** reach tools through Model Context Protocol (MCP) servers, or through the kit tool registry with the same contract.
+3.1 Agents **should** reach tools through Model Context Protocol (MCP) servers, or through the blueprint tool registry with the same contract.
 3.2 Each agent **must** have its own non-human identity and an explicit tool allow-list in [agent-scopes.yaml](../../security/identity/agent-scopes.yaml).
 3.3 Dynamic tool discovery **must not** be used in production. Only allow-listed servers and tools are reachable.
 3.4 Write tools **must** go through the approval queue unless the ARB has approved L3 limits for that tool.

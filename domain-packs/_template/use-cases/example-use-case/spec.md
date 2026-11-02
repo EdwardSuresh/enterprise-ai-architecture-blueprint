@@ -18,7 +18,7 @@ Pack: `<pack-slug>`. Copy this folder to `use-cases/<use-case-slug>/`. Make thre
 
 ## Pattern
 
-<Which kit pattern, and why it fits.>
+<Which blueprint pattern, and why it fits.>
 
 ## Data
 

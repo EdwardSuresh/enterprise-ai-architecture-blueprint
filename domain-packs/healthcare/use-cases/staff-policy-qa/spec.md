@@ -47,4 +47,4 @@ RAG Q&A over current policies with citations.
 
 Policy owners collect real questions. See evals/golden.jsonl for examples.
 
-Each golden line follows the kit schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.
+Each golden line follows the blueprint schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.

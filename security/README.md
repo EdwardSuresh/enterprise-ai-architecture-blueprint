@@ -31,4 +31,4 @@ AI adds new attack surfaces: prompts, retrieved content, tools, agents and model
 | No secrets in prompts | Prompt registry | Integration standard §6.3 |
 | Kill switch | Gateway | [AI incident runbook](../ops/runbooks/ai-incident.md) |
 
-Report vulnerabilities in the kit itself as described in the repo's `SECURITY.md`.
+Report vulnerabilities in the blueprint itself as described in the repo's `SECURITY.md`.

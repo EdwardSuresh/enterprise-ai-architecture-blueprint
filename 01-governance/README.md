@@ -1,6 +1,6 @@
 # 01 Governance
 
-Governance in this kit is light for low-risk work and strict for high-risk work. Every AI system follows the same path: intake, risk tier, review in proportion to the tier, entry in the inventory, and monitoring for as long as it runs.
+Governance in this blueprint is light for low-risk work and strict for high-risk work. Every AI system follows the same path: intake, risk tier, review in proportion to the tier, entry in the inventory, and monitoring for as long as it runs.
 
 | 5W1H | Answer |
 |---|---|
@@ -31,7 +31,7 @@ flowchart LR
 
 ## Risk tiers in one line each
 
-The authoritative tier rules are in `risk-tiers.yaml` (maintained separately). The summary used across this kit:
+The authoritative tier rules are in `risk-tiers.yaml` (maintained separately). The summary used across this blueprint:
 
 | Tier | Typical profile | Review | Max autonomy (see [autonomy levels](../ops/autonomy-levels.md)) |
 |---|---|---|---|

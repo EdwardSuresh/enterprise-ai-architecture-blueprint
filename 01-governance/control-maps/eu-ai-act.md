@@ -5,11 +5,11 @@
 | 5W1H | Answer |
 |---|---|
 | **Who** | Legal, compliance, risk, EA, system owners with EU users or EU-placed systems |
-| **What** | The Act's risk classes and general-purpose AI obligations mapped to kit tiers and controls |
+| **What** | The Act's risk classes and general-purpose AI obligations mapped to blueprint tiers and controls |
 | **When** | At intake (classification), design, release and in operation |
 | **Where** | Any AI system placed on the EU market or whose output is used in the EU |
 | **Why** | The Act sets binding obligations with significant penalties |
-| **How** | Classify at intake, map to kit tier, apply the controls, keep the evidence |
+| **How** | Classify at intake, map to blueprint tier, apply the controls, keep the evidence |
 
 ## Phased application (summary)
 
@@ -34,23 +34,23 @@ flowchart TD
   C -- "Yes" --> T3["Kit Tier 3 plus high-risk obligations"]
   C -- "No" --> D{"Interacts with people, generates synthetic content, or does emotion or biometric categorization?"}
   D -- "Yes" --> T2["Kit Tier 2 by default, Tier 1 if internal and low impact, plus transparency duties"]
-  D -- "No" --> T1["Minimal risk: kit Tier 1 or as tiering rules decide"]
+  D -- "No" --> T1["Minimal risk: blueprint Tier 1 or as tiering rules decide"]
 ```
 
-The kit tier is set by `risk-tiers.yaml`. The Act classification is a minimum: other factors can raise the kit tier.
+The blueprint tier is set by `risk-tiers.yaml`. The Act classification is a minimum: other factors can raise the blueprint tier.
 
-## Risk classes mapped to the kit
+## Risk classes mapped to the blueprint
 
-| Act risk class | Plain summary | Kit tier (minimum) | Key kit controls | Evidence |
+| Act risk class | Plain summary | Blueprint tier (minimum) | Key blueprint controls | Evidence |
 |---|---|---|---|---|
 | **Prohibited** | Practices banned outright (for example certain manipulation, social scoring and some biometric uses) | Not allowed | `policies/acceptable-use.md` 5.1; intake screening question | Intake record showing screening |
 | **High-risk** | Uses in listed sensitive areas (such as employment, credit, essential services, education, critical infrastructure) or safety components of regulated products | Tier 3 | Impact assessment; `policies/human-oversight.md`; L2 maximum autonomy; data contracts; logging standard; system card; eval and fairness tests; incident runbook | Signed assessment, system card, eval reports, logs, decision log |
 | **Limited risk (transparency)** | Systems that interact with people or create synthetic content must disclose this | Tier 2 by default (Tier 1 if internal and low impact) | AI disclosure in UI (`acceptable-use.md` 8.1–8.2); content labelling in `content-generation` pattern | UI copy, labelling configuration |
-| **Minimal risk** | Everything else; voluntary codes encouraged | Tier 1 | Standard kit baseline | Inventory entry, basic eval |
+| **Minimal risk** | Everything else; voluntary codes encouraged | Tier 1 | Standard blueprint baseline | Inventory entry, basic eval |
 
-## High-risk obligation groups mapped to kit artifacts
+## High-risk obligation groups mapped to blueprint artifacts
 
-| Obligation group (summary) | Kit artifact |
+| Obligation group (summary) | Blueprint artifact |
 |---|---|
 | Risk management system across the life cycle | `risk-tiers.yaml`, impact assessment, ARB process, ops runbooks |
 | Data governance and quality | `data/contracts/`, `data/lineage/`, `policies/data-use.md` |
@@ -65,13 +65,13 @@ The kit tier is set by `risk-tiers.yaml`. The Act classification is a minimum: o
 
 ## General-purpose AI (GPAI) models
 
-| Topic | Summary | Kit relevance |
+| Topic | Summary | Blueprint relevance |
 |---|---|---|
-| GPAI provider obligations | Technical documentation, information for downstream providers, copyright policy, training-data summary | Mostly falls on model providers. Kit collects this through the vendor questionnaire |
+| GPAI provider obligations | Technical documentation, information for downstream providers, copyright policy, training-data summary | Mostly falls on model providers. Blueprint collects this through the vendor questionnaire |
 | GPAI with systemic risk | Extra evaluation, incident reporting and cybersecurity duties for the most capable models | Provider duty; check your providers' public commitments |
 | Building on GPAI | If you integrate a GPAI model into your own system, you may become the provider of that system | Classify the system at intake; follow tier controls |
 | Fine-tuning or significant modification | Can change your role and obligations | ADR plus legal review required (see `02-architecture/adr/`) |
 
 ## AI literacy
 
-The Act expects organizations to take steps for sufficient AI literacy of staff dealing with AI systems. Kit artifact: [learning paths](../../enablement/learning-paths.md), with completion records as evidence.
+The Act expects organizations to take steps for sufficient AI literacy of staff dealing with AI systems. Blueprint artifact: [learning paths](../../enablement/learning-paths.md), with completion records as evidence.

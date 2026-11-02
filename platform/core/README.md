@@ -1,6 +1,6 @@
 # platform/core: the cloud-neutral runtime
 
-Python package `kit` (install with `pip install -e .` from the repo root). Only PyYAML is required.
+The blueprint's reference code is the Python package `kit` (install with `pip install -e .` from the repo root). Only PyYAML is required.
 
 | Module | Role | Lab |
 |---|---|---|

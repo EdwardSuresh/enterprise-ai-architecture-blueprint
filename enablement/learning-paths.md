@@ -5,7 +5,7 @@
 | **Who** | All staff; builders (engineers, data scientists, architects); reviewers (people who approve AI outputs or AI systems); leaders |
 | **What** | Role-based modules with outcomes and evidence of completion |
 | **When** | All-staff literacy before AI tool access; other paths before taking on the role |
-| **Where** | Your learning platform; kit labs for builders |
+| **Where** | Your learning platform; blueprint labs for builders |
 | **Why** | Safe and effective use needs shared basics and role-specific skills |
 | **How** | Assign by role in HR or identity data; track completion as governance evidence |
 
@@ -23,7 +23,7 @@ Evidence: completion record, short knowledge check, policy acknowledgement.
 
 ## 2. Builders (about 3–5 days, plus labs)
 
-| Module | Outcome | Kit material |
+| Module | Outcome | Blueprint material |
 |---|---|---|
 | Reference architecture and patterns | Pick and apply the right pattern | `02-architecture/` |
 | LLM gateway and aliases | Call models only through the gateway | `labs/01-llm-gateway` |

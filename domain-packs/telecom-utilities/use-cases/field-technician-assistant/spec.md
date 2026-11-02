@@ -47,4 +47,4 @@ RAG Q&A over field procedures and equipment manuals on a mobile device.
 
 Field supervisors provide real questions with the governing procedure step.
 
-Each golden line follows the kit schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.
+Each golden line follows the blueprint schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.

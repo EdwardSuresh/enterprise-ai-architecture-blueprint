@@ -48,4 +48,4 @@ Classification of work requests into equipment class, failure mode and suggested
 
 Use closed work orders with the planner's final codes. Over-sample safety-critical equipment.
 
-Each golden line follows the kit schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.
+Each golden line follows the blueprint schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.

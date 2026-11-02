@@ -49,4 +49,4 @@ Tool agent. Read tools look up PO, receipt and invoice; write tools (update PO, 
 
 Use resolved exceptions with the buyer's final action as the label. Include cases where the correct action is 'escalate'.
 
-Each golden line follows the kit schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.
+Each golden line follows the blueprint schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.

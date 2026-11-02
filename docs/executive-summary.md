@@ -1,6 +1,6 @@
 # Executive Summary
 
-**The Architect's Enterprise AI Kit**: a cloud-neutral, industry-neutral way to run AI as a governed enterprise capability.
+**The Architect's Enterprise AI Blueprint**: a cloud-neutral, industry-neutral way to run AI as a governed enterprise capability.
 
 | 5W1H | Answer |
 |---|---|
@@ -22,7 +22,7 @@ Most organizations now have AI in many places: pilots in business units, feature
 - Risk and compliance teams review late, so they become a bottleneck.
 - Regulation and standards (EU AI Act, ISO/IEC 42001, NIST AI RMF) ask for evidence that is hard to produce.
 
-## 2. What the kit is
+## 2. What the blueprint is
 
 | Part | What it gives you |
 |---|---|
@@ -79,7 +79,7 @@ Most organizations aim for Level 3 in the first year and Level 4 in the second. 
 
 ## 6. What it costs to adopt (effort, not licence)
 
-The kit is free and open source. The cost is people's time and your normal cloud spend.
+The blueprint is free and open source. The cost is people's time and your normal cloud spend.
 
 | Role | Day-0 or plug-in (first ~12 weeks) | Ongoing |
 |---|---|---|

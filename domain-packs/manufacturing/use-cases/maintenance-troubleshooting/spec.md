@@ -48,4 +48,4 @@ RAG Q&A over equipment manuals and past CMMS work orders.
 
 Reliability engineers build questions from real fault cases with the known fix.
 
-Each golden line follows the kit schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.
+Each golden line follows the blueprint schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.

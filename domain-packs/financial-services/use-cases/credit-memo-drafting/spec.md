@@ -49,4 +49,4 @@ RAG drafting over the borrower file, producing a structured draft with citations
 
 Credit officers pick past approved memos and the source files. Expected keywords are key ratios, covenants and risk ratings found in the sources.
 
-Each golden line follows the kit schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.
+Each golden line follows the blueprint schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.

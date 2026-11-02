@@ -1,6 +1,6 @@
 # Deploy
 
-How the kit lands on a cloud. This folder defines **module contracts**: what each cloud's landing zone must provide and the inputs and outputs every module exposes. Same contract, three implementations, so the rest of the kit does not care which cloud it runs on.
+How the blueprint lands on a cloud. This folder defines **module contracts**: what each cloud's landing zone must provide and the inputs and outputs every module exposes. Same contract, three implementations, so the rest of the blueprint does not care which cloud it runs on.
 
 | 5W1H | Answer |
 |---|---|
@@ -49,7 +49,7 @@ flowchart LR
 | `model_access` | Access to foundation model services with private connectivity; per-alias deployments where the cloud requires them |
 | `search` | Vector and keyword search service for retrieval |
 | `gateway` | API management or gateway service in front of models |
-| `runtime` | Container platform (Kubernetes or managed containers) for the kit services |
+| `runtime` | Container platform (Kubernetes or managed containers) for the blueprint services |
 | `observability` | Logs, metrics, traces; OpenTelemetry collector endpoint |
 | `data_governance` | Catalog and classification integration |
 | `budgets` | Cloud budget alerts aligned to `finops/budgets.yaml` |

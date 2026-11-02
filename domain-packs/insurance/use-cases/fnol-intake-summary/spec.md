@@ -48,4 +48,4 @@ Extraction and summarization into a structured FNOL record that a handler confir
 
 Use closed claims with the final confirmed loss facts as labels. Cover each major peril and line.
 
-Each golden line follows the kit schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.
+Each golden line follows the blueprint schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.

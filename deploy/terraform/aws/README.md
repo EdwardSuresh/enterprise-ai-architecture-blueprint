@@ -3,7 +3,7 @@
 | 5W1H | Answer |
 |---|---|
 | **Who** | Platform and cloud engineers on AWS |
-| **What** | Resources an AWS landing zone needs for the kit, and the module inputs and outputs |
+| **What** | Resources an AWS landing zone needs for the blueprint, and the module inputs and outputs |
 | **When** | Day-0 platform build, or adding AWS as a secondary or exit cloud |
 | **Where** | One AWS account per environment, inside your AWS Organization |
 | **Why** | Same contract as Azure and Google Cloud, so platform code is unchanged |
@@ -20,7 +20,7 @@
 | `secrets_keys` | AWS Secrets Manager, AWS KMS customer-managed keys per data class |
 | `model_access` | Amazon Bedrock model access, inference profiles where used, Amazon Bedrock Guardrails configurations |
 | `search` | Amazon OpenSearch Serverless collections, or Amazon Bedrock Knowledge Bases |
-| `gateway` | Amazon API Gateway (private) plus the kit gateway service on the runtime |
+| `gateway` | Amazon API Gateway (private) plus the blueprint gateway service on the runtime |
 | `runtime` | Amazon EKS cluster or Amazon ECS; Amazon ECR for images |
 | `observability` | Amazon CloudWatch log groups and metrics, AWS X-Ray or an OpenTelemetry collector (for example AWS Distro for OpenTelemetry) |
 | `data_governance` | AWS Lake Formation permissions, Amazon DataZone domain (optional) |

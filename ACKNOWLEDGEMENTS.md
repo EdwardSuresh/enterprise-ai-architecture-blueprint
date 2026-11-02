@@ -2,12 +2,12 @@
 
 ## Inspiration
 
-- The starting point for this kit was a public infographic, **"Enterprise AI Project Structure File Tree" by Poornachandra Kongara**, which lays out a well-organized agent application repository. This kit asks what an *enterprise* needs on top of that (governance, multi-cloud, industry overlays, evidence) and answers it independently. No text or graphics from the infographic are reproduced here.
+- The starting point for this blueprint was a public infographic, **"Enterprise AI Project Structure File Tree" by Poornachandra Kongara**, which lays out a well-organized agent application repository. This blueprint asks what an *enterprise* needs on top of that (governance, multi-cloud, industry overlays, evidence) and answers it independently. No text or graphics from the infographic are reproduced here.
 - **[The Architect's ML Playbook](https://edwardsuresh.github.io/architects-ml-playbook/)** by the same author, for the classic and deep-learning algorithms referenced in `platform/ml/`.
 
 ## Frameworks and standards referenced
 
-The kit maps its artifacts to these works. Descriptions in this repository are the author's own short paraphrases, not reproductions. Consult the originals for authoritative text.
+The blueprint maps its artifacts to these works. Descriptions in this repository are the author's own short paraphrases, not reproductions. Consult the originals for authoritative text.
 
 | Work | Publisher | Link |
 |---|---|---|
@@ -23,7 +23,7 @@ Sector regulations named in `domain-packs/*/regulations.md` belong to their resp
 
 ## Third-party software
 
-The kit's own code is MIT-licensed. It uses, but does not copy into this repository, the following:
+The blueprint's own code is MIT-licensed. It uses, but does not copy into this repository, the following:
 
 | Component | Use | Licence |
 |---|---|---|

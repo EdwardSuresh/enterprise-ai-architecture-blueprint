@@ -48,4 +48,4 @@ Classification of requests and search for candidate records; human decides relea
 
 Records officers build test requests with the known responsive records.
 
-Each golden line follows the kit schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.
+Each golden line follows the blueprint schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.

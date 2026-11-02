@@ -48,4 +48,4 @@ Summarization of case notes and documents into a structured brief.
 
 Supervisors select de-identified cases with expected key facts. Over-sample complex and appeal cases.
 
-Each golden line follows the kit schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.
+Each golden line follows the blueprint schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.

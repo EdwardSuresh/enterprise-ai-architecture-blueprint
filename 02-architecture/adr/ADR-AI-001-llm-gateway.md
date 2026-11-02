@@ -4,7 +4,7 @@
 |---|---|
 | **Status** | Accepted |
 | **Date** | 2026-09-15 |
-| **Deciders** | Kit author (enterprise architecture), platform reviewers |
+| **Deciders** | Blueprint author (enterprise architecture), platform reviewers |
 | **Use case id** | platform |
 | **Risk tier** | Applies to all tiers |
 | **Pattern** | All patterns |

@@ -47,7 +47,7 @@ Try this: add a case for a new event type (for example a lost circulation event)
 ## Build on AWS (short)
 
 - Use **Amazon Bedrock evaluations** (model evaluation or RAG evaluation jobs) with your dataset in S3.
-- Add the kit's keyword check as a custom metric or run `kit-evals` against Bedrock outputs.
+- Add the blueprint's keyword check as a custom metric or run `kit-evals` against Bedrock outputs.
 
 ## Build on Google Cloud (short)
 

@@ -47,4 +47,4 @@ RAG Q&A over current HSE procedures with citations.
 
 HSE advisors supply real field questions. Include questions about limits (distances, gas levels, durations).
 
-Each golden line follows the kit schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.
+Each golden line follows the blueprint schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.

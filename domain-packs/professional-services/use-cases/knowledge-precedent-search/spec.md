@@ -48,4 +48,4 @@ RAG Q&A over sanitized precedents and firm methods, with matter-level ACL filter
 
 Knowledge managers write questions with known precedent answers. Include tests where a screened document must not appear.
 
-Each golden line follows the kit schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.
+Each golden line follows the blueprint schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.

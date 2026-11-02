@@ -5,13 +5,13 @@
 | 5W1H | Answer |
 |---|---|
 | **Who** | Risk, compliance, audit, EA |
-| **What** | Kit artifacts mapped to the 19 categories of the four NIST AI RMF functions |
+| **What** | Blueprint artifacts mapped to the 19 categories of the four NIST AI RMF functions |
 | **When** | Program set-up, audit preparation, annual review |
 | **Where** | This file |
 | **Why** | NIST AI RMF is a common reference for AI risk programs, including outside the US |
 | **How** | Find the category, use the listed artifacts, collect the listed evidence |
 
-## How the functions fit the kit
+## How the functions fit the blueprint
 
 ```mermaid
 flowchart LR
@@ -23,7 +23,7 @@ flowchart LR
 
 ## GOVERN
 
-| Category | Intent (paraphrased) | Kit artifact(s) | Evidence produced |
+| Category | Intent (paraphrased) | Blueprint artifact(s) | Evidence produced |
 |---|---|---|---|
 | GOVERN 1 | Policies and processes for AI risk exist, are clear and are followed | `01-governance/charter.md`, `policies/`, `risk-tiers.yaml`, `policy-as-code/` | Approved policies, policy-as-code check results |
 | GOVERN 2 | Clear accountability; people are trained and empowered | `raci.md`, `charter.md`, `enablement/learning-paths.md` | Signed RACI, training completion records |
@@ -34,7 +34,7 @@ flowchart LR
 
 ## MAP
 
-| Category | Intent (paraphrased) | Kit artifact(s) | Evidence produced |
+| Category | Intent (paraphrased) | Blueprint artifact(s) | Evidence produced |
 |---|---|---|---|
 | MAP 1 | Context, purpose and setting of the AI system are understood | `arb/intake-form.yaml`, `00-strategy/use-case-portfolio.csv` | Intake records, portfolio rows |
 | MAP 2 | The AI system is categorized (task, methods, limits) | Intake `pattern`, `risk-tiers.yaml`, `templates/system-card.yaml` | Tier decision, system card |
@@ -44,7 +44,7 @@ flowchart LR
 
 ## MEASURE
 
-| Category | Intent (paraphrased) | Kit artifact(s) | Evidence produced |
+| Category | Intent (paraphrased) | Blueprint artifact(s) | Evidence produced |
 |---|---|---|---|
 | MEASURE 1 | Suitable methods and metrics are chosen and applied | Pattern "eval approach" sections, `arb/review-checklist.md` | Eval plans with thresholds |
 | MEASURE 2 | Systems are evaluated for trustworthiness (validity, safety, security, fairness, privacy, explainability) | Eval reports, `security/red-team/`, fairness tests in impact assessment | Eval and red-team reports |
@@ -53,7 +53,7 @@ flowchart LR
 
 ## MANAGE
 
-| Category | Intent (paraphrased) | Kit artifact(s) | Evidence produced |
+| Category | Intent (paraphrased) | Blueprint artifact(s) | Evidence produced |
 |---|---|---|---|
 | MANAGE 1 | Risks are prioritized and a response chosen | `arb/decision-log.md` (conditions), impact assessment risk table | Decisions with conditions and owners |
 | MANAGE 2 | Benefits are maximized and harms reduced, with plans to disengage if needed | `ops/autonomy-levels.md`, kill switch in `ops/runbooks/ai-incident.md`, `ops/runbooks/model-retirement.md` | Kill-switch tests, autonomy approvals |

@@ -48,4 +48,4 @@ RAG Q&A over current underwriting manuals with section citations and effective d
 
 Senior underwriters supply 100-300 real questions per line of business, with the governing section. Include edge cases near eligibility limits.
 
-Each golden line follows the kit schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.
+Each golden line follows the blueprint schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.

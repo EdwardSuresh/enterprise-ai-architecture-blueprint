@@ -1,6 +1,6 @@
 # Cloud Mapping
 
-How kit capabilities map to services on AWS, Microsoft Azure and Google Cloud.
+How blueprint capabilities map to services on AWS, Microsoft Azure and Google Cloud.
 
 > **Names change often.** Cloud providers rename, merge and retire services frequently. Verify every row against current provider documentation before design decisions. Being listed here is not an endorsement or a statement of feature parity.
 
@@ -10,12 +10,12 @@ How kit capabilities map to services on AWS, Microsoft Azure and Google Cloud.
 | **What** | A capability-to-service table across the three major clouds |
 | **When** | Landing zone design; adapter development; cloud comparison |
 | **Where** | Applies to the [reference architecture](../02-architecture/reference-architecture.md) layers |
-| **Why** | The kit is cloud-neutral; this table shows how to realize it on each cloud |
+| **Why** | The blueprint is cloud-neutral; this table shows how to realize it on each cloud |
 | **How** | Pick the cloud column; check the service still exists and fits; record choices in an ADR |
 
 ## Mapping
 
-| Capability (kit layer) | AWS | Azure | Google Cloud |
+| Capability (blueprint layer) | AWS | Azure | Google Cloud |
 |---|---|---|---|
 | **Foundation models** (5) | Amazon Bedrock | Microsoft Foundry (formerly Azure AI Foundry) and Azure OpenAI | Vertex AI Model Garden |
 | **Agent runtime** (3) | Amazon Bedrock AgentCore | Foundry Agent Service | Vertex AI Agent Engine |
@@ -30,7 +30,7 @@ How kit capabilities map to services on AWS, Microsoft Azure and Google Cloud.
 
 ## Notes
 
-- **Gateway.** Managed API gateways provide auth, quotas and logging. Kit features such as alias resolution, data-class routing and the kill switch may need a thin custom service on any cloud. The kit's own gateway (`platform/core/kit/gateway.py`) shows the contract.
+- **Gateway.** Managed API gateways provide auth, quotas and logging. Blueprint features such as alias resolution, data-class routing and the kill switch may need a thin custom service on any cloud. The blueprint's own gateway (`platform/core/kit/gateway.py`) shows the contract.
 - **Third-party models.** Models from several providers are available through each cloud's model catalog, and some directly from the model provider. Route all of them through your gateway.
 - **Tracing.** Prefer OpenTelemetry instrumentation exported to the cloud's observability service, so traces stay portable.
 - **Multi-cloud.** Only `platform/adapters/` and `deploy/terraform/<cloud>/` should contain cloud-specific code.

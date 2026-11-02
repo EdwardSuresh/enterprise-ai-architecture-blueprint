@@ -48,4 +48,4 @@ RAG Q&A over approved internal policies, with citations.
 
 Collect 100-300 real staff questions from contact center logs. Policy owners write the expected answer and the source section. Include questions where the right answer is 'not covered'.
 
-Each golden line follows the kit schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.
+Each golden line follows the blueprint schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.

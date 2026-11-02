@@ -49,4 +49,4 @@ RAG drafting from approved templates, policy language and the claim file.
 
 Use approved past letters as references. Expected keywords include provision citations and required notice phrases.
 
-Each golden line follows the kit schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.
+Each golden line follows the blueprint schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.

@@ -4,7 +4,7 @@
 
 This list covers common rules that affect AI in the sector. It is a starting point, not a complete register. Jurisdictions differ. Add local, state and national rules that apply to you.
 
-| Regulation / framework / regulator | What it means for AI | Kit control that helps |
+| Regulation / framework / regulator | What it means for AI | Blueprint control that helps |
 |---|---|---|
 | Product safety laws (e.g. US Consumer Product Safety Act, EU General Product Safety Regulation) | Manufacturers must report certain defects and hazards. AI cannot decide reportability. | MFG-G03 require_human, kit.tracing evidence |
 | ISO 9001 (quality management) and sector standards (e.g. IATF 16949, AS9100, ISO 13485) | Require controlled documents and records. AI outputs that become quality records must be controlled and traceable. | kit.tracing, document revision checks in kit.retrieval |
@@ -17,7 +17,7 @@ This list covers common rules that affect AI in the sector. It is a starting poi
 ## How to use this list
 
 1. Legal confirms which items apply and adds missing ones.
-2. Map each item to controls in the kit's control-maps (see [01-governance](../../01-governance/)).
+2. Map each item to controls in the blueprint's control-maps (see [01-governance](../../01-governance/)).
 3. Record the mapping on each use case in the AI inventory.
 4. Review the list at least once a year and when a regulator issues new guidance.
 

@@ -49,7 +49,7 @@ The same contract applies when tools are served by an MCP server: the agent sees
 
 ## Build on Google Cloud (short)
 
-- Use **Vertex AI Agent Engine** with the Agent Development Kit, with tools as functions or from an MCP server.
+- Use **Vertex AI Agent Engine** with the Agent Development Blueprint, with tools as functions or from an MCP server.
 - Give the agent a service account with read-only roles. Use Workflows or a queue for approvals.
 
 Service names and features change. Check the current docs for each provider.

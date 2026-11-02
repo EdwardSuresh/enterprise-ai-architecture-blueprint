@@ -2,16 +2,16 @@
 
 | 5W1H | Answer |
 |---|---|
-| **Who** | Executives, architects, risk, procurement and delivery teams evaluating the kit |
+| **Who** | Executives, architects, risk, procurement and delivery teams evaluating the blueprint |
 | **What** | Short answers to common questions |
 | **When** | Before and during adoption |
 | **Where** | This file |
 | **Why** | Saves repeat explanations |
 | **How** | Scan the headings; follow links for detail |
 
-## About the kit
+## About the blueprint
 
-**What is the kit?**
+**What is the blueprint?**
 An open-source repo template, governance pack and architecture playbook for running AI as an enterprise capability. See the [executive summary](executive-summary.md).
 
 **Is it free?**
@@ -21,7 +21,7 @@ Yes. Code is MIT-licensed and content is CC BY 4.0. Your costs are people's time
 No. Cloud-specific code is limited to `platform/adapters/` and `deploy/terraform/<cloud>/`. Models are reached by alias through the gateway. See [cloud mapping](cloud-mapping.md).
 
 **Is it only for financial services?**
-No. The author's background is financial services, but the kit is industry-neutral. Sector specifics go in `domain-packs/`.
+No. The author's background is financial services, but the blueprint is industry-neutral. Sector specifics go in `domain-packs/`.
 
 **Do I have to adopt all of it?**
 No. Common starting points are the governance pack alone, the gateway standard alone, or one pattern. The [maturity model](maturity-model.md) helps choose.
@@ -34,7 +34,7 @@ It should speed up low-risk work. Tier 1 uses an asynchronous fast-track review 
 **Does the AI ARB replace our existing architecture board or risk committees?**
 No. It is a specialty board that plugs into existing governance.
 
-**Does using the kit make us compliant with the EU AI Act or certified to ISO/IEC 42001?**
+**Does using the blueprint make us compliant with the EU AI Act or certified to ISO/IEC 42001?**
 No. The [control maps](../01-governance/control-maps/README.md) help you organize evidence. Compliance and certification depend on your own implementation, legal advice and, for ISO, an accredited audit.
 
 **How do we handle AI features that vendors switch on inside our SaaS tools?**

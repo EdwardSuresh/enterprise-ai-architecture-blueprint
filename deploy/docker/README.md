@@ -1,11 +1,11 @@
 # Docker
 
-Container guidance for the kit services: the reference API (`api/app.py`), the LLM gateway and any MCP tool servers.
+Container guidance for the blueprint services: the reference API (`api/app.py`), the LLM gateway and any MCP tool servers.
 
 | 5W1H | Answer |
 |---|---|
 | **Who** | Platform engineers |
-| **What** | How to build and run kit service images |
+| **What** | How to build and run blueprint service images |
 | **When** | Local testing, CI, and before deploying to Kubernetes or managed containers |
 | **Where** | Any OCI-compatible registry and runtime |
 | **Why** | One image per service, built the same way on every cloud |

@@ -15,7 +15,7 @@ Sector overlay for telecom and utilities. Use it with the core kit. It does not 
 
 | File | Purpose |
 |---|---|
-| [regulations.md](regulations.md) | Rules and regulators that shape AI use in this sector, mapped to kit controls |
+| [regulations.md](regulations.md) | Rules and regulators that shape AI use in this sector, mapped to blueprint controls |
 | [guardrails.yaml](guardrails.yaml) | Sector guardrail rules loaded by `kit.guardrails` |
 | [evals/golden.jsonl](evals/golden.jsonl) | Starter golden examples run by `kit.evals` |
 | [data-contracts/README.md](data-contracts/README.md) | Main data sources, owners, classification and ACL source |
@@ -33,7 +33,7 @@ Sector overlay for telecom and utilities. Use it with the core kit. It does not 
 | Network or grid incident ticket summary | Summarization | Tier 2 | L1 | Operations engineer confirms |
 | Regulatory filing research support | RAG Q&A | Tier 1 | L0 | Regulatory affairs owns filings |
 
-_L0 = suggest only, L1 = draft for human approval, L2 = act with approval per action, L3 = act within limits with after-the-fact review. Tier 3 = high risk, Tier 1 = low risk. Final tier comes from the kit's risk tiering in [01-governance](../../01-governance/)._
+_L0 = suggest only, L1 = draft for human approval, L2 = act with approval per action, L3 = act within limits with after-the-fact review. Tier 3 = high risk, Tier 1 = low risk. Final tier comes from the blueprint's risk tiering in [01-governance](../../01-governance/)._
 
 ## Key data types and classification
 
@@ -45,7 +45,7 @@ _L0 = suggest only, L1 = draft for human approval, L2 = act with approval per ac
 | Field procedures and equipment manuals | internal | Good first RAG source |
 | Published tariffs and rate schedules | public | Use the approved tariff version |
 
-Classes are the kit's four: public, internal, confidential, restricted.
+Classes are the blueprint's four: public, internal, confidential, restricted.
 
 ## What AI must never do in this sector
 

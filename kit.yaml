@@ -1,4 +1,4 @@
-# Kit manifest - the first file an adopting team edits.
+# Blueprint manifest - the first file an adopting team edits.
 kit_version: 1.0.1
 organization: Example Org          # your organization name
 mode: day0                         # day0 | plugin  (see docs/rollout-day0.md, docs/rollout-plugin.md)

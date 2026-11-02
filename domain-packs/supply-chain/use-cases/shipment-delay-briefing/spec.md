@@ -49,4 +49,4 @@ Summarization of TMS events and carrier notes into an approved template.
 
 Use past delay cases with the final sent message. Expected keywords are shipment IDs, new ETA and cause.
 
-Each golden line follows the kit schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.
+Each golden line follows the blueprint schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.

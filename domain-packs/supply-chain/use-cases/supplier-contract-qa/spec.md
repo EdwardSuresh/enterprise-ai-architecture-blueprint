@@ -47,4 +47,4 @@ RAG Q&A over executed contracts with clause citations.
 
 Category managers write questions and point to the clause. Include amended contracts where the amendment overrides the base term.
 
-Each golden line follows the kit schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.
+Each golden line follows the blueprint schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.

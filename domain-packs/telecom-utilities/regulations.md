@@ -4,7 +4,7 @@
 
 This list covers common rules that affect AI in the sector. It is a starting point, not a complete register. Jurisdictions differ. Add local, state and national rules that apply to you.
 
-| Regulation / framework / regulator | What it means for AI | Kit control that helps |
+| Regulation / framework / regulator | What it means for AI | Blueprint control that helps |
 |---|---|---|
 | FCC CPNI rules (47 U.S.C. 222 and 47 CFR 64.2001 et seq.) | Carriers must protect customer proprietary network information, authenticate customers before disclosure and report breaches. | Restricted class, authentication before tool access in kit.tools, TU-G03 |
 | NERC CIP Reliability Standards | Cybersecurity standards for the bulk electric system, including information protection and electronic security perimeters. | Keep AI outside ESPs, restricted class, network patterns in 02-architecture |
@@ -17,7 +17,7 @@ This list covers common rules that affect AI in the sector. It is a starting poi
 ## How to use this list
 
 1. Legal confirms which items apply and adds missing ones.
-2. Map each item to controls in the kit's control-maps (see [01-governance](../../01-governance/)).
+2. Map each item to controls in the blueprint's control-maps (see [01-governance](../../01-governance/)).
 3. Record the mapping on each use case in the AI inventory.
 4. Review the list at least once a year and when a regulator issues new guidance.
 

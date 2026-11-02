@@ -19,7 +19,7 @@ One reference architecture, a catalog of reusable patterns, a small set of stand
 | [patterns/which-pattern-when.md](patterns/which-pattern-when.md) | Decision flow to choose a pattern |
 | [patterns/](patterns/) | Ten solution patterns |
 | [standards/](standards/README.md) | Integration and logging standards; approved models list (`approved-models.yaml`, maintained separately) |
-| [adr/](adr/README.md) | Architecture decision records for the kit itself |
+| [adr/](adr/README.md) | Architecture decision records for the blueprint itself |
 
 ## Pattern catalog
 

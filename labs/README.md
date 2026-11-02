@@ -21,7 +21,7 @@ There are 18 hands-on labs: six building blocks, each at three levels. You start
 
 ## The six building blocks
 
-| Lab | Building block | Business case (Illustrative example) | Kit module |
+| Lab | Building block | Business case (Illustrative example) | Blueprint module |
 |---|---|---|---|
 | [01-llm-gateway](01-llm-gateway/) | LLM gateway | A bank routes all model calls through one gateway | `kit.gateway` |
 | [02-rag](02-rag/) | Permission-aware RAG | An insurer's underwriting manual Q&A | `kit.retrieval` |

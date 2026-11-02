@@ -7,7 +7,7 @@ For organizations with no AI in production (or only experiments). Twelve weeks t
 | **Who** | Executive sponsor, EA lead, platform team, risk and security, two lighthouse delivery teams |
 | **What** | Foundation (governance and platform) plus two use cases in production |
 | **When** | 12 weeks; then scale |
-| **Where** | One cloud to start; the kit stays portable |
+| **Where** | One cloud to start; the blueprint stays portable |
 | **Why** | Starting with controls is cheaper than retrofitting them |
 | **How** | Three phases: Foundation, Build, Launch |
 

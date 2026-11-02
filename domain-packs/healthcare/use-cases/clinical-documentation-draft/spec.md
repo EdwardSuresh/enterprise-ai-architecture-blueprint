@@ -50,4 +50,4 @@ Summarization of visit transcript and chart context into a draft note for clinic
 
 Clinical informatics builds de-identified test visits with expected findings. Expected keywords are key findings, medications and plan items.
 
-Each golden line follows the kit schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.
+Each golden line follows the blueprint schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.

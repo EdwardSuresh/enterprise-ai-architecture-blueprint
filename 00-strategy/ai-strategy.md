@@ -58,7 +58,7 @@ Chosen model: ______  Reason: ______
 
 ## 6. Platform position
 
-> Guidance: State the cloud and model posture in one paragraph. The kit's default is: one shared AI platform, all model calls through an LLM gateway, more than one model provider approved, model access by alias. See [reference architecture](../02-architecture/reference-architecture.md).
+> Guidance: State the cloud and model posture in one paragraph. The blueprint's default is: one shared AI platform, all model calls through an LLM gateway, more than one model provider approved, model access by alias. See [reference architecture](../02-architecture/reference-architecture.md).
 
 ## 7. Governance
 

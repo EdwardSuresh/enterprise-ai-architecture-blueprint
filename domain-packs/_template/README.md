@@ -15,7 +15,7 @@ Copy this folder to `domain-packs/<sector-slug>/`. Replace every `<placeholder>`
 
 | File | Purpose |
 |---|---|
-| [regulations.md](regulations.md) | Rules and regulators mapped to kit controls |
+| [regulations.md](regulations.md) | Rules and regulators mapped to blueprint controls |
 | [guardrails.yaml](guardrails.yaml) | Sector guardrail rules loaded by `kit.guardrails` |
 | [evals/golden.jsonl](evals/golden.jsonl) | Golden examples run by `kit.evals` |
 | [data-contracts/README.md](data-contracts/README.md) | Data sources, owners, classification, ACL source |

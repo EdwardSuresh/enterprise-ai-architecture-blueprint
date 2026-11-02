@@ -4,7 +4,7 @@
 
 This list covers common rules that affect AI in the sector. It is a starting point, not a complete register. Jurisdictions differ. Add local, state and national rules that apply to you.
 
-| Regulation / framework / regulator | What it means for AI | Kit control that helps |
+| Regulation / framework / regulator | What it means for AI | Blueprint control that helps |
 |---|---|---|
 | HIPAA Privacy, Security and Breach Notification Rules | PHI in prompts, outputs, logs and indexes is covered. AI vendors that handle PHI are business associates and need a BAA. | Data classification, kit.guardrails PII/PHI redaction, kit.tracing log controls, vendor register |
 | 42 CFR Part 2 | Extra protection for substance use disorder treatment records. | Separate ACL tags in kit.retrieval, data contracts |
@@ -17,7 +17,7 @@ This list covers common rules that affect AI in the sector. It is a starting poi
 ## How to use this list
 
 1. Legal confirms which items apply and adds missing ones.
-2. Map each item to controls in the kit's control-maps (see [01-governance](../../01-governance/)).
+2. Map each item to controls in the blueprint's control-maps (see [01-governance](../../01-governance/)).
 3. Record the mapping on each use case in the AI inventory.
 4. Review the list at least once a year and when a regulator issues new guidance.
 

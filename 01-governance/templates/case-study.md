@@ -1,14 +1,14 @@
 # Case Study Template
 
-Use this template only for real, approved client or organization case studies. Nothing is published without written client approval. Illustrative examples elsewhere in the kit are composites and must not be written as case studies.
+Use this template only for real, approved client or organization case studies. Nothing is published without written client approval. Illustrative examples elsewhere in the blueprint are composites and must not be written as case studies.
 
 | 5W1H | Answer |
 |---|---|
 | **Who** | Written by the practitioner who led the work; approved by the client |
-| **What** | A factual account of adopting part or all of the kit |
+| **What** | A factual account of adopting part or all of the blueprint |
 | **When** | After at least one use case has run in production long enough to measure |
 | **Where** | `case-studies/<slug>.md` once approved |
-| **Why** | Shows how the kit works in practice, with honest lessons |
+| **Why** | Shows how the blueprint works in practice, with honest lessons |
 | **How** | Fill every field. Use only metrics the client has agreed to share |
 
 ---
@@ -21,7 +21,7 @@ Use this template only for real, approved client or organization case studies. N
 | **Size band** | e.g. 1,000–5,000 staff |
 | **Starting maturity** | Level 1–5 per [maturity model](../../docs/maturity-model.md), by dimension if known |
 | **Adoption mode** | Day-0 / Plug-in |
-| **Kit parts used** | e.g. governance, gateway standard, RAG pattern |
+| **Blueprint parts used** | e.g. governance, gateway standard, RAG pattern |
 
 ## Challenge
 

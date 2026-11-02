@@ -48,4 +48,4 @@ Summarization and classification of NCRs, plus search for similar past NCRs.
 
 Quality engineers label past NCRs with the correct category and owner. Include safety-related NCRs.
 
-Each golden line follows the kit schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.
+Each golden line follows the blueprint schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.

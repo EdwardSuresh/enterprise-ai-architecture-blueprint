@@ -48,4 +48,4 @@ Classification and clause extraction with reviewer confirmation and sampling.
 
 Senior reviewers code a seed set. Expected keywords are clause names and key terms found in the documents.
 
-Each golden line follows the kit schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.
+Each golden line follows the blueprint schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.

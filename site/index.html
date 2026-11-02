@@ -10,7 +10,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://edwardsuresh.github.io/architects-enterprise-ai-kit/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231d4ed8'/%3E%3Cpath d='M8 22h16M8 16h10M8 10h16' stroke='%23e3b341' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
-<title>The Architect's Enterprise AI Kit</title>
+<title>Enterprise AI Blueprint</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
@@ -134,16 +134,16 @@ footer .wrap{padding-block:18px}
 <body>
 <header class="top"><div class="wrap">
   <div class="eyebrow">The Architect's Series · Cloud-neutral · Industry-neutral · Version 1.0.1</div>
-  <h1>The Architect's Enterprise AI Kit</h1>
+  <h1>The Architect's Enterprise AI Blueprint</h1>
   <p class="lede">How an enterprise runs AI safely and at scale: a reusable project structure, reference architecture, governance model and Enterprise Architecture playbook. It works on AWS, Azure or Google Cloud and in any industry or services sector. Start from zero (Day 0) or plug it into AI you already run.</p>
-  <p class="links"><a href="https://github.com/EdwardSuresh/architects-enterprise-ai-kit" target="_blank" rel="noopener">GitHub repository</a> · <a href="https://www.linkedin.com/in/sureshedward" target="_blank" rel="noopener">Author on LinkedIn</a> · <a href="https://edwardsuresh.github.io/architects-ml-playbook/" target="_blank" rel="noopener">The Architect's ML Playbook</a> · v1.0.1 · MIT + CC BY 4.0</p>
+  <p class="links"><a href="https://github.com/EdwardSuresh/architects-enterprise-ai-blueprint" target="_blank" rel="noopener">GitHub repository</a> · <a href="https://www.linkedin.com/in/sureshedward" target="_blank" rel="noopener">Author on LinkedIn</a> · <a href="https://edwardsuresh.github.io/architects-ml-playbook/" target="_blank" rel="noopener">The Architect's ML Playbook</a> · v1.0.1 · MIT + CC BY 4.0</p>
 </div></header>
 
 <nav class="tabs" aria-label="Sections"><div class="wrap" role="tablist">
-  <div class="group"><span class="glabel">The kit</span>
+  <div class="group"><span class="glabel">The blueprint</span>
     <button class="tab" role="tab" data-t="overview" aria-selected="true">Start here</button>
-    <button class="tab" role="tab" data-t="get">Get the kit</button>
-    <button class="tab" role="tab" data-t="review">Agent repo vs. kit</button>
+    <button class="tab" role="tab" data-t="get">Get the blueprint</button>
+    <button class="tab" role="tab" data-t="review">Agent repo vs. blueprint</button>
     <button class="tab" role="tab" data-t="tree">Project structure</button>
     <button class="tab" role="tab" data-t="arch">Architecture</button>
     <button class="tab" role="tab" data-t="cloud">AWS · Azure · GCP</button>
@@ -177,8 +177,8 @@ footer .wrap{padding-block:18px}
 
 <!-- ================= GET ================= -->
 <section class="panel" id="get" role="tabpanel">
-  <h2>Get the kit</h2>
-  <p>The kit is a working repository, not just a page. It runs offline in five minutes with a built-in mock model, then plugs into Microsoft Foundry, Amazon Bedrock, Google Vertex AI or the Claude API.</p>
+  <h2>Get the blueprint</h2>
+  <p>The blueprint is a working repository, not just a page. It runs offline in five minutes with a built-in mock model, then plugs into Microsoft Foundry, Amazon Bedrock, Google Vertex AI or the Claude API.</p>
   <div class="grid w5">
     <div class="card"><h3><span class="q">WHAT</span></h3><p>Governance files, patterns, a runnable Python package, 10 industry packs, 18 labs and CI gates.</p></div>
     <div class="card"><h3><span class="q">WHO</span></h3><p>EA teams, platform teams and delivery teams. No cloud account needed to start.</p></div>
@@ -186,8 +186,8 @@ footer .wrap{padding-block:18px}
     <div class="card"><h3><span class="q">COST</span></h3><p>Free under MIT (code) and CC BY 4.0 (content). Build labs aim to stay under about $50 in a sandbox; check current pricing.</p></div>
   </div>
   <div class="card tpl"><div class="tpl-head"><h3>Quick start</h3><button class="copy" type="button" data-copy="qs">Copy</button></div>
-<pre class="tree" id="qs">git clone https://github.com/EdwardSuresh/architects-enterprise-ai-kit.git
-cd architects-enterprise-ai-kit
+<pre class="tree" id="qs">git clone https://github.com/EdwardSuresh/architects-enterprise-ai-blueprint.git
+cd architects-enterprise-ai-blueprint
 pip install -e ".[test]"
 pytest -q                                    # tests
 python labs/02-rag/concept.py                # one guarded request
@@ -207,20 +207,20 @@ flowchart LR
 </pre></div>
   <div class="tbl"><table>
     <tr><th>Start with</th><th>Why</th><th>Link</th></tr>
-    <tr><td>Executive summary</td><td>Short brief for leaders and procurement</td><td><a href="https://github.com/EdwardSuresh/architects-enterprise-ai-kit/blob/main/docs/executive-summary.md" target="_blank" rel="noopener">docs/executive-summary.md</a></td></tr>
-    <tr><td>Kit manifest</td><td>Set cloud, sector and Day-0 or plug-in mode</td><td><a href="https://github.com/EdwardSuresh/architects-enterprise-ai-kit/blob/main/kit.yaml" target="_blank" rel="noopener">kit.yaml</a></td></tr>
-    <tr><td>AI inventory</td><td>Register every AI system with owner and tier</td><td><a href="https://github.com/EdwardSuresh/architects-enterprise-ai-kit/blob/main/01-governance/ai-inventory.yaml" target="_blank" rel="noopener">01-governance/ai-inventory.yaml</a></td></tr>
-    <tr><td>Platform core</td><td>Gateway, guardrails, retrieval, tools, evals, policy gate</td><td><a href="https://github.com/EdwardSuresh/architects-enterprise-ai-kit/tree/main/platform/core/kit" target="_blank" rel="noopener">platform/core/kit</a></td></tr>
-    <tr><td>Domain packs</td><td>Sector overlays and the method for any other sector</td><td><a href="https://github.com/EdwardSuresh/architects-enterprise-ai-kit/tree/main/domain-packs" target="_blank" rel="noopener">domain-packs/</a></td></tr>
-    <tr><td>Labs</td><td>18 hands-on labs</td><td><a href="https://github.com/EdwardSuresh/architects-enterprise-ai-kit/tree/main/labs" target="_blank" rel="noopener">labs/</a></td></tr>
+    <tr><td>Executive summary</td><td>Short brief for leaders and procurement</td><td><a href="https://github.com/EdwardSuresh/architects-enterprise-ai-blueprint/blob/main/docs/executive-summary.md" target="_blank" rel="noopener">docs/executive-summary.md</a></td></tr>
+    <tr><td>Blueprint manifest</td><td>Set cloud, sector and Day-0 or plug-in mode</td><td><a href="https://github.com/EdwardSuresh/architects-enterprise-ai-blueprint/blob/main/kit.yaml" target="_blank" rel="noopener">kit.yaml</a></td></tr>
+    <tr><td>AI inventory</td><td>Register every AI system with owner and tier</td><td><a href="https://github.com/EdwardSuresh/architects-enterprise-ai-blueprint/blob/main/01-governance/ai-inventory.yaml" target="_blank" rel="noopener">01-governance/ai-inventory.yaml</a></td></tr>
+    <tr><td>Platform core</td><td>Gateway, guardrails, retrieval, tools, evals, policy gate</td><td><a href="https://github.com/EdwardSuresh/architects-enterprise-ai-blueprint/tree/main/platform/core/kit" target="_blank" rel="noopener">platform/core/kit</a></td></tr>
+    <tr><td>Domain packs</td><td>Sector overlays and the method for any other sector</td><td><a href="https://github.com/EdwardSuresh/architects-enterprise-ai-blueprint/tree/main/domain-packs" target="_blank" rel="noopener">domain-packs/</a></td></tr>
+    <tr><td>Labs</td><td>18 hands-on labs</td><td><a href="https://github.com/EdwardSuresh/architects-enterprise-ai-blueprint/tree/main/labs" target="_blank" rel="noopener">labs/</a></td></tr>
   </table></div>
 </section>
 
 <!-- ================= REVIEW ================= -->
 <section class="panel" id="review" role="tabpanel">
-  <h2>From a typical agent repo to an enterprise kit</h2>
-  <p>Most published "AI project structures", such as Poornachandra Kongara's widely shared "Enterprise AI Project Structure File Tree" infographic, describe <b>one agent application repository</b>: agents, prompts, tools, RAG, memory, evals and a deploy folder. That is a sound start. It is not yet an <b>enterprise kit</b>. An enterprise kit has to serve many teams, several clouds and several industries, and it has to carry the governance evidence that auditors and regulators ask for.</p>
-  <div class="callout blue"><p><b>How it relates to The Architect's ML Playbook:</b> a typical agent repo covers the GenAI runtime only. The ML Playbook covers 30 classic and deep-learning algorithms with Concept, Build and Production labs. This kit puts both under one roof: the agent runtime in <code>platform/core</code>, classic models in <code>platform/ml</code>, and one governance, observability and ARB layer over both.</p></div>
+  <h2>From a typical agent repo to an enterprise blueprint</h2>
+  <p>Most published "AI project structures", such as Poornachandra Kongara's widely shared "Enterprise AI Project Structure File Tree" infographic, describe <b>one agent application repository</b>: agents, prompts, tools, RAG, memory, evals and a deploy folder. That is a sound start. It is not yet an <b>enterprise blueprint</b>. An enterprise blueprint has to serve many teams, several clouds and several industries, and it has to carry the governance evidence that auditors and regulators ask for.</p>
+  <div class="callout blue"><p><b>How it relates to The Architect's ML Playbook:</b> a typical agent repo covers the GenAI runtime only. The ML Playbook covers 30 classic and deep-learning algorithms with Concept, Build and Production labs. This blueprint puts both under one roof: the agent runtime in <code>platform/core</code>, classic models in <code>platform/ml</code>, and one governance, observability and ARB layer over both.</p></div>
   <div class="grid2">
     <div class="card"><h3>What a good agent repo already has <span class="pill ok">keep</span></h3>
       <ul>
@@ -253,12 +253,12 @@ flowchart LR
       <li>CI runs a <b>policy gate</b> next to tests and evals: is the tier approved, the model on the approved list, the system card present?</li>
       <li>Infrastructure code has one module per cloud behind a common interface.</li>
     </ul></div>
-  <div class="callout"><p><b>Simple way to remember the difference:</b> an agent repo is a well-built house. The Enterprise AI Kit is the town plan: zoning rules (governance), shared utilities (gateway, observability), building codes per district (industry packs) and an inspector (the AI ARB).</p></div>
+  <div class="callout"><p><b>Simple way to remember the difference:</b> an agent repo is a well-built house. The Enterprise AI Blueprint is the town plan: zoning rules (governance), shared utilities (gateway, observability), building codes per district (industry packs) and an inspector (the AI ARB).</p></div>
 </section>
 
 <!-- ================= OVERVIEW ================= -->
 <section class="panel active" id="overview" role="tabpanel">
-  <h2>Start here: the kit in 5W1H</h2>
+  <h2>Start here: the blueprint in 5W1H</h2>
   <div class="card" id="progress-card"><h3>Your progress</h3>
     <p><span id="prog-text" class="mono">0 of 18 labs marked complete</span></p>
     <div class="bar" aria-hidden="true"><span id="prog-bar"></span></div>
@@ -267,12 +267,12 @@ flowchart LR
     <div class="card"><h3><span class="q">WHAT</span> A packaged starter</h3><p>Three things in one: a <b>repo template</b> (code + config), a <b>governance pack</b> (policies, ARB, templates) and an <b>EA playbook</b> (how architects run AI across the company).</p></div>
     <div class="card"><h3><span class="q">WHY</span> Stop reinventing</h3><p>Without it, each team picks its own model, vector store and logging. Six months later nobody can say how many AI systems exist, what they cost, or which ones touch customer data.</p></div>
     <div class="card"><h3><span class="q">WHO</span> Roles</h3><p>EA owns the kit. Platform team runs shared services. Delivery teams build use cases. Risk, Legal and Security approve. Business sponsors own value.</p></div>
-    <div class="card"><h3><span class="q">WHEN</span> Two entry points</h3><p><b>Day 0</b>: no AI in production yet. <b>Plug-in</b>: AI already running; the kit wraps and standardizes it without a rewrite.</p></div>
+    <div class="card"><h3><span class="q">WHEN</span> Two entry points</h3><p><b>Day 0</b>: no AI in production yet. <b>Plug-in</b>: AI already running; the blueprint wraps and standardizes it without a rewrite.</p></div>
     <div class="card"><h3><span class="q">WHERE</span> Any cloud, any sector</h3><p>Cloud-specific code lives only in <code>adapters/</code> and <code>deploy/terraform/&lt;cloud&gt;</code>. Sector rules live only in <code>domain-packs/</code>.</p></div>
     <div class="card"><h3><span class="q">HOW</span> Fork, configure, gate</h3><p>Fork the template, set <code>kit.yaml</code> (cloud, industry, mode, risk tier), build, then pass the three CI gates: tests, evals and policy.</p></div>
   </div>
   <div class="card"><h3>Illustrative example</h3>
-    <p class="ex"><b>Regional insurer, Azure shop.</b> Claims wanted a claims-summary assistant, Underwriting wanted submission extraction, IT had already built a ChatGPT-style internal bot. With the kit in plug-in mode, the existing bot was routed through the LLM gateway and given tracing and a model card in two weeks. The two new use cases started from the <code>insurance</code> domain pack, which already included PII rules, a "no coverage decisions without a human" guardrail and golden test cases.</p></div>
+    <p class="ex"><b>Regional insurer, Azure shop.</b> Claims wanted a claims-summary assistant, Underwriting wanted submission extraction, IT had already built a ChatGPT-style internal bot. With the blueprint in plug-in mode, the existing bot was routed through the LLM gateway and given tracing and a model card in two weeks. The two new use cases started from the <code>insurance</code> domain pack, which already included PII rules, a "no coverage decisions without a human" guardrail and golden test cases.</p></div>
   <div class="card"><h3>Design principles</h3>
     <ol>
       <li><b>Cloud-neutral core, thin adapters.</b> Swap Bedrock for Foundry without touching agents.</li>
@@ -284,8 +284,8 @@ flowchart LR
     </ol></div>
   <div class="card"><h3>Suggested learning path</h3>
     <ol class="steps">
-      <li><b>Get the kit</b>: clone the repo and run it offline in five minutes.</li>
-      <li><b>Agent repo vs. kit</b> and <b>Project structure</b>: know where everything lives.</li>
+      <li><b>Get the blueprint</b>: clone the repo and run it offline in five minutes.</li>
+      <li><b>Agent repo vs. blueprint</b> and <b>Project structure</b>: know where everything lives.</li>
       <li><b>Architecture</b> and <b>Sequence</b>: trace one request end to end.</li>
       <li><b>Which pattern when</b> and <b>Pattern ranking</b>: pick patterns for your industry.</li>
       <li><b>Labs</b>: do the Concept level of all six building blocks first, then Build, then Production.</li>
@@ -298,7 +298,7 @@ flowchart LR
 <section class="panel" id="tree" role="tabpanel">
   <h2>Project structure</h2>
   <p class="sub">This is the actual layout of the repository. Gold marks what an enterprise adds to a typical agent repo. Numbered folders are the governance spine and are read in order.</p>
-<pre class="tree"><span class="d">architects-enterprise-ai-kit/</span>
+<pre class="tree"><span class="d">architects-enterprise-ai-blueprint/</span>
 ├── README.md · CHANGELOG.md · CONTRIBUTING.md · SECURITY.md
 ├── LICENSE (MIT, code) · LICENSE-CONTENT.md (CC BY 4.0, content)
 ├── CLAUDE.md · AGENTS.md            <span class="c"># rules for AI coding assistants</span>
@@ -440,10 +440,10 @@ flowchart TB
 
 <!-- ================= CLOUD ================= -->
 <section class="panel" id="cloud" role="tabpanel">
-  <h2>Same kit, three clouds</h2>
+  <h2>Same blueprint, three clouds</h2>
   <p>The <code>platform/core</code> interfaces stay the same. Only the adapter changes. Service names change often, so confirm current names in each provider's docs before a design review.</p>
   <div class="tbl"><table>
-    <tr><th>Kit capability</th><th>AWS</th><th>Azure</th><th>Google Cloud</th></tr>
+    <tr><th>Blueprint capability</th><th>AWS</th><th>Azure</th><th>Google Cloud</th></tr>
     <tr><td>Foundation models</td><td>Amazon Bedrock</td><td>Microsoft Foundry (formerly Azure AI Foundry) / Azure OpenAI</td><td>Vertex AI Model Garden</td></tr>
     <tr><td>Agent runtime</td><td>Bedrock AgentCore / Bedrock Agents</td><td>Foundry Agent Service</td><td>Vertex AI Agent Engine / Agent Builder</td></tr>
     <tr><td>LLM gateway</td><td>API Gateway with a custom gateway service (inference profiles help with routing and cost tagging)</td><td>API Management (AI gateway policies)</td><td>Apigee (AI gateway policies)</td></tr>
@@ -515,7 +515,7 @@ flowchart LR
   B --> C{"3 Risk tier"}
   C -->|"Tier 1"| D1["Fast track: reuse pattern"]
   C -->|"Tier 2 or 3"| D2["AI ARB + impact assessment"]
-  D1 --> E["4 Build from kit template"]
+  D1 --> E["4 Build from blueprint template"]
   D2 --> E
   E --> F{"5 Eval gate"}
   F -->|fail| E
@@ -591,8 +591,8 @@ sequenceDiagram
   <div class="card"><h3>Industry overlay method · any sector</h3>
     <ol class="steps">
       <li><b>Name the regulated decisions.</b> Which outcomes affect a person's money, health, safety, job or rights? Those are Tier 3 by default.</li>
-      <li><b>List sector regulators and rules</b> with Legal. Map each to a kit control in <code>control-maps/</code>.</li>
-      <li><b>Classify sector data</b> (account, policy, patient, citizen, OT telemetry) into the kit's four data classes.</li>
+      <li><b>List sector regulators and rules</b> with Legal. Map each to a blueprint control in <code>control-maps/</code>.</li>
+      <li><b>Classify sector data</b> (account, policy, patient, citizen, OT telemetry) into the blueprint's four data classes.</li>
       <li><b>Write sector guardrails</b>: what AI must never say or do here.</li>
       <li><b>Collect golden examples</b> from front-line experts, 100–300 per use case.</li>
       <li><b>Pick 3–5 starter use cases</b> from the Pattern ranking and publish the pack.</li>
@@ -760,7 +760,7 @@ sequenceDiagram
     <ol id="mat-next"></ol>
   </div>
   <div class="tbl"><table>
-    <tr><th>Level</th><th>What it looks like</th><th>Kit entry point</th></tr>
+    <tr><th>Level</th><th>What it looks like</th><th>Blueprint entry point</th></tr>
     <tr><td>1 · Ad hoc</td><td>Individuals use public AI tools; no inventory or rules</td><td>Day-0 rollout, charter, acceptable-use policy</td></tr>
     <tr><td>2 · Experimenting</td><td>Several pilots, each built differently; spend unknown</td><td>Plug-in mode: inventory, gateway, risk tiers</td></tr>
     <tr><td>3 · Defined</td><td>Shared platform, ARB, patterns and evals exist</td><td>Domain packs, CI gates, FinOps</td></tr>
@@ -771,10 +771,10 @@ sequenceDiagram
 
 <!-- ================= ANTI-PATTERNS ================= -->
 <section class="panel" id="anti" role="tabpanel">
-  <h2>Anti-patterns and the kit control that stops each one</h2>
-  <p>Named failure modes make risks easy to discuss in an ARB. Each row names the pattern, shows how it appears in real programs, and points to the part of the kit that prevents it. The first two are from the FS-AI anti-pattern series.</p>
+  <h2>Anti-patterns and the blueprint control that stops each one</h2>
+  <p>Named failure modes make risks easy to discuss in an ARB. Each row names the pattern, shows how it appears in real programs, and points to the part of the blueprint that prevents it. The first two are from the FS-AI anti-pattern series.</p>
   <div class="tbl"><table>
-    <tr><th>Anti-pattern</th><th>What it looks like</th><th>Illustrative example</th><th>Kit control</th></tr>
+    <tr><th>Anti-pattern</th><th>What it looks like</th><th>Illustrative example</th><th>Blueprint control</th></tr>
     <tr><td>Silent vendor update</td><td>Provider changes the model behind the same name; behavior shifts</td><td>Claims summaries suddenly drop deductible amounts after a model refresh</td><td>Pinned model versions in <code>models.yaml</code>; eval suite reruns on any version change</td></tr>
     <tr><td>Helpful hallucination</td><td>Confident, plausible, wrong answer that tries to please</td><td>Agent invents a fee waiver policy that does not exist</td><td>Grounding check, mandatory citations, "I don't know" path, output guardrail</td></tr>
     <tr><td>Pilot purgatory</td><td>Dozens of pilots, none in production</td><td>18 proofs of concept, zero scaled after a year</td><td>Value scorecard with exit criteria set at intake</td></tr>
@@ -860,16 +860,16 @@ retirement_trigger: score &lt; 0.90 for 2 weeks</pre></div>
 <!-- ================= CONTROLS ================= -->
 <section class="panel" id="controls" role="tabpanel">
   <h2>Control maps</h2>
-  <p>Auditors and regulators ask how your AI program lines up with recognised frameworks. The repo maps every kit artifact to four of them; this tab is the summary. Mappings are at category level, so verify wording against the official texts before audit use.</p>
+  <p>Auditors and regulators ask how your AI program lines up with recognised frameworks. The repo maps every blueprint artifact to four of them; this tab is the summary. Mappings are at category level, so verify wording against the official texts before audit use.</p>
   <div class="tbl"><table>
-    <tr><th>NIST AI RMF function</th><th>What it asks for</th><th>Kit artifacts</th></tr>
+    <tr><th>NIST AI RMF function</th><th>What it asks for</th><th>Blueprint artifacts</th></tr>
     <tr><td>GOVERN</td><td>Policies, roles, accountability, culture</td><td>Charter, RACI, policies, AI ARB, risk tiers, enablement</td></tr>
     <tr><td>MAP</td><td>Context, purpose and risks of each system</td><td>Use-case intake, portfolio, system cards, impact assessments, threat models</td></tr>
     <tr><td>MEASURE</td><td>Test, evaluate and track risks</td><td>Golden evals, red-team set, bias tests, tracing, SLOs</td></tr>
     <tr><td>MANAGE</td><td>Prioritise, respond and recover</td><td>Kill switch, incident runbook, model-change runbook, retirement, FinOps</td></tr>
   </table></div>
   <div class="tbl"><table>
-    <tr><th>ISO/IEC 42001 Annex A area</th><th>Kit artifacts</th></tr>
+    <tr><th>ISO/IEC 42001 Annex A area</th><th>Blueprint artifacts</th></tr>
     <tr><td>A.2 Policies related to AI</td><td>01-governance/policies</td></tr>
     <tr><td>A.3 Internal organization</td><td>Charter, RACI, AI ARB terms of reference</td></tr>
     <tr><td>A.4 Resources for AI systems</td><td>Approved models, data classification, platform, enablement</td></tr>
@@ -881,13 +881,13 @@ retirement_trigger: score &lt; 0.90 for 2 weeks</pre></div>
     <tr><td>A.10 Third-party and customer relationships</td><td>Third-party AI policy, vendor questionnaire</td></tr>
   </table></div>
   <div class="grid2">
-    <div class="card"><h3>EU AI Act → kit tiers</h3><ul>
+    <div class="card"><h3>EU AI Act → blueprint tiers</h3><ul>
       <li><b>Prohibited practices:</b> rejected at intake, never tiered</li>
       <li><b>High-risk:</b> Tier 3 with impact assessment, human oversight and logging</li>
       <li><b>Transparency obligations:</b> AI disclosure in channels; system card</li>
       <li><b>Minimal risk:</b> Tier 1 with standard controls</li>
     </ul><p class="sub" style="margin-top:8px">Obligations apply in phases. Not legal advice.</p></div>
-    <div class="card"><h3>OWASP Top 10 for LLM apps → kit controls</h3><ul>
+    <div class="card"><h3>OWASP Top 10 for LLM apps → blueprint controls</h3><ul>
       <li>Prompt injection → input guardrail, retrieved-content handling</li>
       <li>Sensitive information disclosure → PII redaction, data-class matrix</li>
       <li>Excessive agency → agent identities, allow-lists, approval queue</li>
@@ -909,7 +909,7 @@ retirement_trigger: score &lt; 0.90 for 2 weeks</pre></div>
         <li>Depth in <b>architecture review boards and governance</b>, TOGAF ADM, reference architecture and application portfolio rationalization.</li>
         <li><b>Hands-on AI architecture</b> with Microsoft Foundry (formerly Azure AI Foundry) and the Claude API.</li>
       </ul></div>
-    <div class="card"><h3>Why this kit exists</h3>
+    <div class="card"><h3>Why this blueprint exists</h3>
       <p>It shows, end to end, how I would stand up AI governance and a governed AI platform in a real enterprise: from the ARB, risk tiers and control maps down to running code, tests and CI gates. Every design decision is recorded as an architecture decision record in the repository.</p>
       <p style="margin-top:10px"><b>Open to Enterprise Architect and Enterprise AI Architect roles.</b> Happy to walk your team through the kit.</p>
       <p style="margin-top:10px"><a href="https://www.linkedin.com/in/sureshedward" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/EdwardSuresh" target="_blank" rel="noopener">GitHub profile</a> · <a href="https://edwardsuresh.github.io/architects-ml-playbook/" target="_blank" rel="noopener">The Architect's ML Playbook</a></p></div>
@@ -1044,7 +1044,7 @@ sequenceDiagram
       <li>Red-team suite runs in CI and before each major release.</li>
     </ul></div>
   </div>
-  <div class="card"><h3>Illustrative example</h3><p class="ex"><b>Bank HR-policy bot</b> answered a branch employee's question using an executive compensation document, because retrieval ignored SharePoint permissions. Fix: carry user identity into the retriever and filter by document ACL. Now a standard in the kit's <code>knowledge/retrievers</code>.</p></div>
+  <div class="card"><h3>Illustrative example</h3><p class="ex"><b>Bank HR-policy bot</b> answered a branch employee's question using an executive compensation document, because retrieval ignored SharePoint permissions. Fix: carry user identity into the retriever and filter by document ACL. Now a standard in the blueprint's <code>knowledge/retrievers</code>.</p></div>
 </section>
 
 <!-- ================= EA5 ================= -->
@@ -1134,7 +1134,7 @@ sequenceDiagram
     <div class="card"><h3><span class="q">WHEN</span></h3><p>At every SaaS renewal, at intake, and before any rollout that changes jobs.</p></div>
   </div>
   <div class="tbl"><table>
-    <tr><th>Principle</th><th>Control in the kit</th><th>Evidence</th></tr>
+    <tr><th>Principle</th><th>Control in the blueprint</th><th>Evidence</th></tr>
     <tr><td>Fairness</td><td>Bias tests by group in <code>evals/suites/bias</code></td><td>Disparity report per release</td></tr>
     <tr><td>Transparency</td><td>AI disclosure in channels; system card</td><td>Screenshot of disclosure; published card</td></tr>
     <tr><td>Explainability</td><td>Citations for GenAI; reason codes for ML</td><td>Sample explanations in eval report</td></tr>
@@ -1177,7 +1177,7 @@ sequenceDiagram
       <li>Cloud and primary model decision as ADRs</li>
     </ul></div>
     <div class="card"><h3>Days 31–60 · Build the rails</h3><ul class="check">
-      <li>Kit repo forked; <code>kit.yaml</code> set</li>
+      <li>Blueprint repo forked; <code>kit.yaml</code> set</li>
       <li>LLM gateway, guardrails, tracing live in dev</li>
       <li>Approved model list and data matrix published</li>
       <li>First domain pack drafted</li>
@@ -1197,7 +1197,7 @@ sequenceDiagram
 </div></main>
 
 <footer><div class="wrap"><p>The Architect's Series by Rajaretnam Suresh Edward David · Also in the series: <a href="https://edwardsuresh.github.io/architects-ml-playbook/" target="_blank" rel="noopener">The Architect's ML Playbook</a>.</p>
-<p><b>Disclaimer:</b> general guidance only, not legal, regulatory or compliance advice, and no guarantee of compliance or certification. Organization examples are illustrative composites, not client case studies. Independent work, not affiliated with or endorsed by any vendor, standards body or regulator named; product and standard names are trademarks of their respective owners. Personal views, not those of any employer or client. Service names and prices change; verify before use. <a href="https://github.com/EdwardSuresh/architects-enterprise-ai-kit/blob/main/DISCLAIMER.md" target="_blank" rel="noopener">Full disclaimer</a> · <a href="https://github.com/EdwardSuresh/architects-enterprise-ai-kit/blob/main/ACKNOWLEDGEMENTS.md" target="_blank" rel="noopener">Acknowledgements and references</a>.</p></div></footer>
+<p><b>Disclaimer:</b> general guidance only, not legal, regulatory or compliance advice, and no guarantee of compliance or certification. Organization examples are illustrative composites, not client case studies. Independent work, not affiliated with or endorsed by any vendor, standards body or regulator named; product and standard names are trademarks of their respective owners. Personal views, not those of any employer or client. Service names and prices change; verify before use. <a href="https://github.com/EdwardSuresh/architects-enterprise-ai-blueprint/blob/main/DISCLAIMER.md" target="_blank" rel="noopener">Full disclaimer</a> · <a href="https://github.com/EdwardSuresh/architects-enterprise-ai-blueprint/blob/main/ACKNOWLEDGEMENTS.md" target="_blank" rel="noopener">Acknowledgements and references</a>.</p></div></footer>
 
 <script>
 (function(){

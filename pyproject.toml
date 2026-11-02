@@ -3,9 +3,9 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "architects-enterprise-ai-kit"
+name = "architects-enterprise-ai-blueprint"
 version = "1.0.1"
-description = "The Architect's Enterprise AI Kit: cloud-neutral, industry-neutral reference implementation for governed enterprise AI."
+description = "The Architect's Enterprise AI Blueprint: cloud-neutral, industry-neutral reference implementation for governed enterprise AI."
 readme = "README.md"
 requires-python = ">=3.10"
 license = { text = "MIT" }

@@ -48,4 +48,4 @@ RAG drafting grounded in chart context and approved patient education.
 
 Nursing leaders select real de-identified messages. Include emergency phrasing and medication requests.
 
-Each golden line follows the kit schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.
+Each golden line follows the blueprint schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.

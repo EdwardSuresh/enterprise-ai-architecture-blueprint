@@ -1,6 +1,6 @@
 # Domain Packs
 
-A domain pack is a sector overlay. The core kit (strategy, governance, platform, operations) works the same in every industry. A pack adds what changes by sector: the regulated decisions, the regulators, the sensitive data, the guardrail rules and the test examples.
+A domain pack is a sector overlay. The core blueprint (strategy, governance, platform, operations) works the same in every industry. A pack adds what changes by sector: the regulated decisions, the regulators, the sensitive data, the guardrail rules and the test examples.
 
 | 5W1H | Answer |
 |---|---|
@@ -8,7 +8,7 @@ A domain pack is a sector overlay. The core kit (strategy, governance, platform,
 | **What** | Ten starter packs plus a template. Each holds use cases, regulations, guardrails, golden evals and data contracts |
 | **When** | When a business unit in a sector starts its first AI use case, and at each annual review |
 | **Where** | `domain-packs/<sector>/`, loaded by `kit.guardrails` and `kit.evals` from `platform/core/kit` |
-| **Why** | Generic AI controls miss sector rules. Packs make sector risk visible and testable without forking the kit |
+| **Why** | Generic AI controls miss sector rules. Packs make sector risk visible and testable without forking the blueprint |
 | **How** | Copy a pack (or `_template`), follow the six-step overlay method below, and send each use case through governance intake |
 
 ## What is in every pack
@@ -16,7 +16,7 @@ A domain pack is a sector overlay. The core kit (strategy, governance, platform,
 | File | Purpose | Used by |
 |---|---|---|
 | `README.md` | 5W1H, starter use cases, data classes, what AI must never do | People |
-| `regulations.md` | Sector rules mapped to kit controls | Legal, compliance, ARB |
+| `regulations.md` | Sector rules mapped to blueprint controls | Legal, compliance, ARB |
 | `use-cases/<slug>/spec.md` | Three starter use case specs | Product owners, architects |
 | `guardrails.yaml` | Sector rules (`block_topic`, `require_human`) | `kit.guardrails` |
 | `evals/golden.jsonl` | Starter golden examples | `kit.evals` |
@@ -36,8 +36,8 @@ flowchart LR
 ```
 
 1. **Name the regulated decisions.** List the decisions that affect people's money, health, safety, legal rights or access to services. Examples: credit approval, claim denial, benefit eligibility, permit to work, product release. Any AI use that feeds these decisions starts at **Tier 3** by default.
-2. **List sector regulators and rules with Legal.** Write them in `regulations.md`. Say in one or two sentences what each means for AI. Map each to the kit's control-maps in [01-governance](../01-governance/).
-3. **Classify sector data into the kit's four classes.** Use public, internal, confidential and restricted. Name the sector data types (for example PHI, CPNI, export-controlled technical data) and give each a class.
+2. **List sector regulators and rules with Legal.** Write them in `regulations.md`. Say in one or two sentences what each means for AI. Map each to the blueprint's control-maps in [01-governance](../01-governance/).
+3. **Classify sector data into the blueprint's four classes.** Use public, internal, confidential and restricted. Name the sector data types (for example PHI, CPNI, export-controlled technical data) and give each a class.
 4. **Write sector guardrails.** Put 3-5 rules in `guardrails.yaml`. Use `block_topic` for things AI must never discuss or do. Use `require_human` for things a person must handle. Test the rules so they do not fire on normal answers.
 5. **Collect golden examples from front-line experts.** The starter packs have six examples each. In real use, aim for **100-300 examples per use case**, written or checked by the people who do the work today. Include edge cases and questions where the right answer is "not covered".
 6. **Pick 3-5 starter use cases and publish.** Write a spec for each. Start with one low-risk internal Q&A use case. Send each through governance intake. Publish the approved list so teams know what is allowed.

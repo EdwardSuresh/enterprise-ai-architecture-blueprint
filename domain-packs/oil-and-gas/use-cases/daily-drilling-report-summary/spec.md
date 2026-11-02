@@ -48,4 +48,4 @@ Summarization of the structured daily report into a fixed template: depth, opera
 
 Drilling engineers pick reports with known key events. Expected keywords are the depth, NPT cause and any HSE or well control event. See evals/golden.jsonl.
 
-Each golden line follows the kit schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.
+Each golden line follows the blueprint schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.

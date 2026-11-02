@@ -4,16 +4,16 @@
 
 | 5W1H | Answer |
 |---|---|
-| **Who** | Practitioners who have adopted the kit, with their client's written approval |
+| **Who** | Practitioners who have adopted the blueprint, with their client's written approval |
 | **What** | Factual accounts of adoption with honest lessons and agreed metrics |
 | **When** | After at least one use case has run in production long enough to measure |
 | **Where** | This folder, one file per case study |
-| **Why** | Show how the kit works in practice |
+| **Why** | Show how the blueprint works in practice |
 | **How** | Use the template; get written client approval; open a pull request |
 
-## About examples elsewhere in the kit
+## About examples elsewhere in the blueprint
 
-Organization examples throughout the kit (banks, insurers, hospitals, retailers, public agencies, manufacturers, logistics firms, energy companies) are **illustrative composites** based on common patterns. They are always labelled "Illustrative example". They are not client case studies and do not describe any specific organization.
+Organization examples throughout the blueprint (banks, insurers, hospitals, retailers, public agencies, manufacturers, logistics firms, energy companies) are **illustrative composites** based on common patterns. They are always labelled "Illustrative example". They are not client case studies and do not describe any specific organization.
 
 ## How a real case study gets added
 
@@ -44,4 +44,4 @@ flowchart LR
 
 ## Reference runs
 
-Before any client case study, this folder will hold **reference runs**: the author's own deployments of the labs on real cloud services, with measured results (eval pass rates, latency, cost per request) and screenshots. They show the kit working outside the offline mock model. Each run states the date, region, services and model versions used.
+Before any client case study, this folder will hold **reference runs**: the author's own deployments of the labs on real cloud services, with measured results (eval pass rates, latency, cost per request) and screenshots. They show the blueprint working outside the offline mock model. Each run states the date, region, services and model versions used.

@@ -7,7 +7,7 @@ Sector overlay for financial services. Use it with the core kit. It does not rep
 | **Who** | Banks, credit unions, broker-dealers, asset managers, payments firms. Owners: business line leaders, model risk management, compliance, information security, EA. |
 | **What** | A sector overlay with starter use cases, regulation mapping, data classification, guardrails and golden evals for banking and capital markets. |
 | **When** | When a financial services team proposes its first AI use case, and at every model risk validation or annual review. |
-| **Where** | Applied on top of the kit's core platform (platform/core) and governance (01-governance). Lives in this folder. |
+| **Where** | Applied on top of the blueprint's core platform (platform/core) and governance (01-governance). Lives in this folder. |
 | **Why** | Credit, trading, AML and customer communications are heavily regulated. Models that touch them need model risk controls, fair lending checks and records. |
 | **How** | Copy this pack, confirm the regulation list with Legal and Compliance, load guardrails.yaml into kit.guardrails, and run evals/golden.jsonl through kit.evals before go-live. |
 
@@ -15,7 +15,7 @@ Sector overlay for financial services. Use it with the core kit. It does not rep
 
 | File | Purpose |
 |---|---|
-| [regulations.md](regulations.md) | Rules and regulators that shape AI use in this sector, mapped to kit controls |
+| [regulations.md](regulations.md) | Rules and regulators that shape AI use in this sector, mapped to blueprint controls |
 | [guardrails.yaml](guardrails.yaml) | Sector guardrail rules loaded by `kit.guardrails` |
 | [evals/golden.jsonl](evals/golden.jsonl) | Starter golden examples run by `kit.evals` |
 | [data-contracts/README.md](data-contracts/README.md) | Main data sources, owners, classification and ACL source |
@@ -33,7 +33,7 @@ Sector overlay for financial services. Use it with the core kit. It does not rep
 | Marketing and client communication pre-review | Classification + drafting | Tier 2 | L1 | Registered principal approves every piece |
 | Suspicious activity alert narrative draft | Summarization | Tier 3 | L1 | BSA/AML investigator decides and files |
 
-_L0 = suggest only, L1 = draft for human approval, L2 = act with approval per action, L3 = act within limits with after-the-fact review. Tier 3 = high risk, Tier 1 = low risk. Final tier comes from the kit's risk tiering in [01-governance](../../01-governance/)._
+_L0 = suggest only, L1 = draft for human approval, L2 = act with approval per action, L3 = act within limits with after-the-fact review. Tier 3 = high risk, Tier 1 = low risk. Final tier comes from the blueprint's risk tiering in [01-governance](../../01-governance/)._
 
 ## Key data types and classification
 
@@ -46,7 +46,7 @@ _L0 = suggest only, L1 = draft for human approval, L2 = act with approval per ac
 | Internal policies and procedures | internal | Good first RAG source |
 | Published product disclosures and rate sheets | public | Use the current approved version only |
 
-Classes are the kit's four: public, internal, confidential, restricted.
+Classes are the blueprint's four: public, internal, confidential, restricted.
 
 ## What AI must never do in this sector
 

@@ -49,4 +49,4 @@ RAG Q&A over published agency content with handoff to staff.
 
 Contact center leads collect top questions. Include multilingual and plain-language variations.
 
-Each golden line follows the kit schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.
+Each golden line follows the blueprint schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.

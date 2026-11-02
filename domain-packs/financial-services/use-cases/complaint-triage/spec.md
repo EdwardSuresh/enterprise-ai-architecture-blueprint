@@ -48,4 +48,4 @@ Classification and summarization with a human confirming each result.
 
 Use past complaints with the final analyst category as the label. Over-sample rare categories such as fair lending and elder abuse.
 
-Each golden line follows the kit schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.
+Each golden line follows the blueprint schema: `id`, `input`, `context`, `expected_keywords` (must appear in the context), `forbidden`.
