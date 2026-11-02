@@ -1,0 +1,25 @@
+# Sector guardrails for the supply chain pack.
+# Loaded by kit.guardrails. Patterns are Python regex, matched case-insensitively
+# against the user input and the draft output. type: block_topic | require_human.
+pack: supply-chain
+rules:
+  - id: SC-G01
+    description: "Require buyer approval for PO changes and payment release."
+    type: require_human
+    patterns: ['\b(cancel|change|amend|release) (the |this |a )?(po|purchase order)\b', '\b(release|approve) (the )?payment\b']
+    message: "This change needs buyer approval. It has been added to the approval queue."
+  - id: SC-G02
+    description: "Block requests to evade trade controls."
+    type: block_topic
+    patterns: ['\b(avoid|bypass|get around|evade) (the )?(export|customs|sanctions|duties|tariffs?|denied party)\b']
+    message: "I can't help with that. Please contact Trade Compliance."
+  - id: SC-G03
+    description: "Send export classification questions to trade compliance."
+    type: require_human
+    patterns: ['\beccn\b', '\bitar\b', '\busml\b', '\bexport (classification|license)\b']
+    message: "Export classification and licensing decisions are made by Trade Compliance. Your request has been routed."
+  - id: SC-G04
+    description: "Block sharing of competitor or other-supplier pricing."
+    type: block_topic
+    patterns: ['\bcompetitors? (pricing|prices|bids?|quotes?)\b', '\bother suppliers? (pricing|prices|bids?|quotes?)\b']
+    message: "Supplier and competitor pricing cannot be shared here."

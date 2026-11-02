@@ -1,0 +1,29 @@
+# Approved model aliases and the data each may receive.
+# Aliases match config/models.yaml. Read by the policy gate.
+# Data classes are defined in data/classification.yaml.
+
+models:
+  reasoning-large:
+    purpose: Complex reasoning, long documents, agents
+    allowed_data_classes: [public, internal, confidential]
+    hosting: enterprise endpoint with no-training contract terms
+    owner: AI platform team
+    review_on_version_change: true
+  reasoning-small:
+    purpose: Classification, routing, short answers, cost-sensitive volume
+    allowed_data_classes: [public, internal, confidential]
+    hosting: enterprise endpoint with no-training contract terms
+    owner: AI platform team
+    review_on_version_change: true
+  extraction:
+    purpose: Document extraction for restricted records (for example account or patient data)
+    allowed_data_classes: [public, internal, confidential, restricted]
+    hosting: private endpoint in an approved region
+    owner: AI platform team
+    review_on_version_change: true
+  public-assistant:
+    purpose: General productivity on public information only
+    allowed_data_classes: [public]
+    hosting: vendor SaaS
+    owner: IT
+    review_on_version_change: false

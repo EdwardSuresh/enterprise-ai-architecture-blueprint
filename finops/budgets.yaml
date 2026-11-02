@@ -1,0 +1,69 @@
+# Monthly AI budgets per use case.
+# Illustrative example (composite). Amounts are placeholders, not benchmarks. Set your own.
+# The LLM gateway reads these limits: warn thresholds notify; hard_limit_action applies at 100%.
+#
+# hard_limit_action:
+#   notify-only   - keep serving, escalate to owner and FinOps
+#   throttle      - reduce rate limit to protect the remaining budget
+#   block-to-human - stop AI calls for this use case and route to the human fallback
+
+currency: USD
+period: monthly
+default_alerts: [0.5, 0.8, 1.0]          # fractions of budget
+
+use_cases:
+  - use_case_id: UC-001
+    name: Policy and procedure assistant
+    owner: "Head of Branch Operations"
+    cost_centre: "CC-RB-OPS"
+    monthly_budget: 1500
+    alerts: [0.5, 0.8, 1.0]
+    hard_limit_action: throttle
+    unit: answer
+    target_cost_per_unit: 0.02
+
+  - use_case_id: UC-002
+    name: Claims document intake
+    owner: "Chief Claims Officer"
+    cost_centre: "CC-CLM"
+    monthly_budget: 4000
+    alerts: [0.6, 0.85, 1.0]
+    hard_limit_action: notify-only        # business-critical; human backlog would grow
+    unit: document
+    target_cost_per_unit: 0.15
+
+  - use_case_id: UC-004
+    name: Store stock copilot
+    owner: "VP Store Operations"
+    cost_centre: "CC-STORES"
+    monthly_budget: 800
+    alerts: [0.5, 0.8, 1.0]
+    hard_limit_action: throttle
+    unit: session
+    target_cost_per_unit: 0.05
+
+  - use_case_id: UC-005
+    name: Benefits enquiry agent
+    owner: "Director of Digital Services"
+    cost_centre: "CC-DIGITAL"
+    monthly_budget: 2500
+    alerts: [0.5, 0.8, 1.0]
+    hard_limit_action: block-to-human
+    unit: conversation
+    target_cost_per_unit: 0.10
+
+  - use_case_id: UC-006
+    name: Equipment sensor anomaly triage
+    owner: "Plant Reliability Manager"
+    cost_centre: "CC-PLANT"
+    monthly_budget: 600
+    alerts: [0.5, 0.8, 1.0]
+    hard_limit_action: throttle
+    unit: alert-triaged
+    target_cost_per_unit: 0.08
+
+platform:
+  shared_costs:                           # allocated by share of tokens unless stated
+    gateway_and_observability: 2000
+    vector_search: 1200
+    allocation: token-share

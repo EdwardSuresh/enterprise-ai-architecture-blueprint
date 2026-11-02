@@ -1,0 +1,14 @@
+# System card - ILLUSTRATIVE example
+system: meeting-notes-summarizer
+inventory_id: AIS-002
+owner: workplace-tech
+risk_tier: 1
+autonomy_level: L1
+pattern: content-generation
+models: {primary: reasoning-small}
+intended_use: Summarize internal meeting transcripts into actions and decisions.
+out_of_scope: [HR or disciplinary meetings, customer calls, board meetings]
+data_class: internal
+guardrails: [pii-redaction]
+monitoring: [user thumbs-down rate, cost per summary]
+retirement_trigger: replaced by a vendor feature that meets the same controls

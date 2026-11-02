@@ -1,0 +1,36 @@
+# Risk tiers drive every other control in the kit.
+# Read by the policy gate (platform/core/kit/policy_gate.py).
+# "requires" values the gate checks automatically: arb_id, golden_set,
+# impact_assessment, human_oversight. Other controls are checked at ARB review.
+
+tiers:
+  1:
+    name: Low
+    description: Internal use, no personal data in outputs, no decision about a person.
+    examples: [meeting summaries, internal knowledge search on public policy, marketing first drafts]
+    max_autonomy: L4          # L4 also needs an ARB approval
+    review: async ARB checklist within 2 business days
+    review_days: 365
+    requires: []
+    controls: [approved model alias, gateway logging, acceptable-use notice, system card, named owner]
+  2:
+    name: Medium
+    description: Customer-facing or uses confidential data; no final decision about a person.
+    examples: [customer service agent, claims file summary for adjusters, supplier email triage]
+    max_autonomy: L3
+    review: full AI ARB
+    review_days: 180
+    requires: [arb_id, golden_set, human_oversight]
+    controls: [all Tier 1 controls, input and output guardrails, golden eval gate in CI,
+               human escalation path, quarterly quality sampling, threat model]
+  3:
+    name: High
+    description: Supports decisions about a person's money, health, safety, job or legal rights,
+      or acts on safety-critical systems.
+    examples: [credit decision support, claim denial support, hiring screening, clinical summaries]
+    max_autonomy: L2
+    review: full AI ARB plus Risk and Legal sign-off
+    review_days: 90
+    requires: [arb_id, golden_set, impact_assessment, human_oversight]
+    controls: [all Tier 2 controls, AI impact assessment, bias testing by group,
+               human sign-off on every decision, independent validation, explanation for the person affected]

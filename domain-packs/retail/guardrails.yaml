@@ -1,0 +1,30 @@
+# Sector guardrails for the retail pack.
+# Loaded by kit.guardrails. Patterns are Python regex, matched case-insensitively
+# against the user input and the draft output. type: block_topic | require_human.
+pack: retail
+rules:
+  - id: RET-G01
+    description: "Block collection of payment card details in chat."
+    type: block_topic
+    patterns: ['\b(card number|credit card number|cvv|cvc|security code)\b', '\b(?:\d[ -]?){13,16}\b']
+    message: "Please don't share card details here. You can update payment methods safely in your account."
+  - id: RET-G02
+    description: "Route refunds, chargebacks and complaints to a human agent."
+    type: require_human
+    patterns: ['\brefund\b', '\bchargeback\b', '\b(file|make) a complaint\b']
+    message: "I'm connecting you with a team member who can help with refunds and complaints."
+  - id: RET-G03
+    description: "Block unsubstantiated health or safety claims about products."
+    type: block_topic
+    patterns: ['\b(cures?|treats?|prevents?) (cancer|covid|disease|diabetes)\b', '\b(fda[- ]approved|clinically proven)\b']
+    message: "I can't make health or medical claims about products. Please see the product label or ask a health professional."
+  - id: RET-G04
+    description: "Block requests to write fake reviews."
+    type: block_topic
+    patterns: ['\b(write|generate|create) (fake |five[- ]star |5[- ]star )?reviews?\b']
+    message: "I can't write product reviews. Reviews must come from real customers."
+  - id: RET-G05
+    description: "Block promises of price matches or discounts not in policy."
+    type: block_topic
+    patterns: ['\bguarantee(d)? (the )?(lowest price|price match|discount)\b']
+    message: "I can only share prices and offers that are in our current policy."

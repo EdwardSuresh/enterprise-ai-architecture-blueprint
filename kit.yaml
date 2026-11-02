@@ -1,0 +1,18 @@
+# Kit manifest - the first file an adopting team edits.
+kit_version: 1.0.0
+organization: Example Org          # your organization name
+mode: day0                         # day0 | plugin  (see docs/rollout-day0.md, docs/rollout-plugin.md)
+primary_cloud: azure               # azure | aws | gcp | onprem
+secondary_cloud: aws               # tested exit path; optional
+industry_packs: [financial-services, insurance]   # folders under domain-packs/
+default_model_alias: reasoning-large
+governance:
+  risk_tiers: 01-governance/risk-tiers.yaml
+  inventory: 01-governance/ai-inventory.yaml
+  approved_models: 02-architecture/standards/approved-models.yaml
+  arb_cadence: weekly
+evals:
+  suite: evals/suites/quality.yaml
+  default_threshold: 0.8
+observability:
+  trace_export: traces/traces.jsonl   # local JSONL; swap for an OpenTelemetry exporter

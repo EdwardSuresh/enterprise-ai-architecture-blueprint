@@ -1,0 +1,30 @@
+# Sector guardrails for the financial services pack.
+# Loaded by kit.guardrails. Patterns are Python regex, matched case-insensitively
+# against the user input and the draft output. type: block_topic | require_human.
+pack: financial-services
+rules:
+  - id: FS-G01
+    description: "Block personalized investment advice to customers."
+    type: block_topic
+    patterns: ['\bshould i (buy|sell|invest in)\b', '\b(which|what) (stocks?|funds?|crypto) should i\b']
+    message: "I can't give personal investment advice. A licensed advisor can help you with that."
+  - id: FS-G02
+    description: "Route account closure and disputes to a human."
+    type: require_human
+    patterns: ['\bclose (my|the|this) account\b', '\bdispute\b', '\bchargeback\b']
+    message: "I'm passing this to a team member who can help with account closures and disputes."
+  - id: FS-G03
+    description: "Block promises of approval or returns."
+    type: block_topic
+    patterns: ['\bguaranteed? (approval|returns?)\b', '\brisk[- ]free\b']
+    message: "I can't promise approval or investment results."
+  - id: FS-G04
+    description: "Route suspected fraud to a human right away."
+    type: require_human
+    patterns: ['\b(fraud|identity theft|stolen card|unauthori[sz]ed (charge|transaction))\b']
+    message: "I'm connecting you with our fraud team now. If your card is lost or stolen, you can also lock it in the app."
+  - id: FS-G05
+    description: "Block any discussion that could tip off a SAR subject."
+    type: block_topic
+    patterns: ['\b(suspicious activity report|sar)\b']
+    message: "I can't discuss that topic. Please contact the compliance team through approved channels."

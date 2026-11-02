@@ -1,0 +1,1282 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="A cloud-neutral, industry-neutral kit for governing and scaling enterprise AI: project structure, reference architecture, AI ARB, maturity check, 10 industry packs and hands-on labs.">
+<meta name="author" content="Rajaretnam Suresh Edward David">
+<meta property="og:title" content="The Architect's Enterprise AI Kit">
+<meta property="og:description" content="Move AI from scattered pilots to governed, multi-cloud production, in any industry.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://edwardsuresh.github.io/architects-enterprise-ai-kit/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231d4ed8'/%3E%3Cpath d='M8 22h16M8 16h10M8 10h16' stroke='%23e3b341' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<title>The Architect's Enterprise AI Kit</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+html{color-scheme:light}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+/* Layout: sticky two-group tab rail over a single reading column; blue = structure, gold = emphasis */
+:root{
+  --bg:#f7f8fb; --surface:#ffffff; --ink:#14213d; --muted:#53607a; --line:#d9deea;
+  --blue:#1d4ed8; --blue-deep:#0f2a6b; --blue-tint:#e8eefc;
+  --gold:#b8860b; --gold-tint:#fbf3dc; --gold-ink:#7a5600;
+  --ok:#1f7a4d; --warn:#b45309; --bad:#b91c1c;
+  --paper:#ffffff;
+  --f-display:"Archivo","Segoe UI",Arial,sans-serif;
+  --f-body:"Source Sans 3","Segoe UI",Arial,sans-serif;
+  --f-mono:"JetBrains Mono",Consolas,"Courier New",monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0c1222; --surface:#131b30; --ink:#e7ecf7; --muted:#9aa6c2; --line:#26314d;
+  --blue:#7aa2ff; --blue-deep:#c9d7ff; --blue-tint:#18264a;
+  --gold:#e3b341; --gold-tint:#2c2412; --gold-ink:#f0c95e;
+  --ok:#4ade80; --warn:#fbbf24; --bad:#f87171; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0c1222; --surface:#131b30; --ink:#e7ecf7; --muted:#9aa6c2; --line:#26314d;
+  --blue:#7aa2ff; --blue-deep:#c9d7ff; --blue-tint:#18264a;
+  --gold:#e3b341; --gold-tint:#2c2412; --gold-ink:#f0c95e;
+  --ok:#4ade80; --warn:#fbbf24; --bad:#f87171; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+.wrap{max-width:1120px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header.top{background:var(--surface);border-bottom:1px solid var(--line)}
+header.top .wrap{padding-block:28px 20px}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-ink)}
+h1{font-family:var(--f-display);font-weight:800;font-size:clamp(28px,4.4vw,44px);line-height:1.1;margin:6px 0 10px;color:var(--blue-deep);text-wrap:balance}
+.lede{max-width:70ch;color:var(--muted);margin:0}
+nav.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:2px solid var(--gold)}
+nav.tabs .wrap{display:flex;gap:18px;overflow-x:auto;padding-block:8px;align-items:center}
+.group{display:flex;gap:4px;align-items:center;flex-shrink:0}
+.glabel{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-ink);margin-right:4px;white-space:nowrap}
+.tab{font:600 14px var(--f-body);color:var(--muted);background:transparent;border:1px solid transparent;border-radius:6px;padding:6px 10px;cursor:pointer;white-space:nowrap}
+.tab:hover{color:var(--blue);background:var(--blue-tint)}
+.tab[aria-selected="true"]{color:var(--surface);background:var(--blue);border-color:var(--blue)}
+.tab:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.sep{width:1px;height:24px;background:var(--line);flex-shrink:0}
+main{position:relative}
+main .wrap{padding-block:28px 64px}
+.panel{display:flex;flex-direction:column;gap:22px}
+.panel:not(.active){position:absolute;left:-20000px;top:0;width:1080px;visibility:hidden}
+h2{font-family:var(--f-display);font-size:28px;line-height:1.2;margin:0;color:var(--blue-deep);text-wrap:balance}
+h3{font-family:var(--f-display);font-size:19px;margin:0 0 6px;color:var(--ink)}
+p{margin:0;max-width:75ch}
+.sub{color:var(--muted)}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.grid2{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.grid>*,.grid2>*{min-width:0}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px 18px}
+.w5 .card h3{display:flex;gap:8px;align-items:baseline}
+.w5 .q{font-family:var(--f-mono);font-size:12px;font-weight:600;color:var(--gold-ink);background:var(--gold-tint);padding:1px 6px;border-radius:4px}
+.callout{border-left:4px solid var(--gold);background:var(--gold-tint);padding:14px 18px;border-radius:0 8px 8px 0}
+.callout.blue{border-color:var(--blue);background:var(--blue-tint)}
+ul,ol{margin:6px 0 0;padding-left:20px}
+li{margin:3px 0}
+code,.mono{font-family:var(--f-mono);font-size:.88em}
+.tree{font-family:var(--f-mono);font-size:13px;line-height:1.55;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:18px;overflow-x:auto;white-space:pre;margin:0}
+.tree .d{color:var(--blue);font-weight:600}
+.tree .c{color:var(--muted)}
+.tree .n{color:var(--gold-ink);font-weight:600}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{font-family:var(--f-display);font-size:13px;letter-spacing:.03em;color:var(--blue-deep);background:var(--blue-tint);white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:600}
+.diagram{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:16px;overflow-x:auto}
+.diagram .cap{font-family:var(--f-mono);font-size:12px;color:#53607a;margin-bottom:8px;letter-spacing:.06em;text-transform:uppercase}
+pre.mermaid{margin:0;background:transparent;text-align:center;color:#14213d}
+.pill{display:inline-block;font:600 12px var(--f-mono);padding:2px 8px;border-radius:999px;border:1px solid currentColor}
+.pill.ok{color:var(--ok)} .pill.warn{color:var(--warn)} .pill.bad{color:var(--bad)}
+.check li{list-style:none;margin-left:-20px;padding-left:26px;position:relative}
+.check li::before{content:"";position:absolute;left:4px;top:.55em;width:10px;height:10px;border:2px solid var(--gold);border-radius:2px}
+.steps{counter-reset:s;list-style:none;padding:0;display:flex;flex-direction:column;gap:10px}
+.steps li{counter-increment:s;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 14px 12px 54px;position:relative;margin:0}
+.steps li::before{content:counter(s);position:absolute;left:14px;top:12px;width:28px;height:28px;border-radius:50%;background:var(--blue);color:var(--surface);font:700 14px var(--f-display);display:grid;place-items:center}
+.steps b{color:var(--blue-deep)}
+.ex{font-size:14.5px;color:var(--muted)}
+.ex b{color:var(--gold-ink)}
+.controls{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.controls label{font:600 14px var(--f-body);color:var(--muted)}
+select{font:600 14px var(--f-body);color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:6px 10px}
+select:focus-visible,input:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.score{font-family:var(--f-mono);text-align:center;font-variant-numeric:tabular-nums}
+.score.s5{color:var(--surface);background:var(--blue);font-weight:600}
+.score.s4{background:var(--blue-tint);color:var(--blue-deep);font-weight:600}
+.score.sort{outline:2px solid var(--gold);outline-offset:-2px}
+#labs-table td label{display:flex;gap:8px;align-items:flex-start;cursor:pointer;font-weight:400}
+#labs-table td:first-child{white-space:nowrap}
+#labs-table input{margin-top:5px;accent-color:var(--blue);flex-shrink:0}
+.bar{height:10px;background:var(--blue-tint);border-radius:999px;overflow:hidden;margin-top:8px;max-width:420px}
+.bar span{display:block;height:100%;width:0;background:var(--gold);transition:width .3s}
+footer a{color:var(--blue)}
+.links{margin-top:10px;font-size:14px}
+.links a,main a{color:var(--blue);font-weight:600}
+.mat-q label{display:block;font:600 15px var(--f-body);margin-bottom:6px}
+.mat-q select{width:100%;max-width:100%}
+.tpl-head{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
+.tpl-head h3{margin:0}
+.copy{font:600 13px var(--f-body);color:var(--blue);background:var(--blue-tint);border:1px solid var(--blue);border-radius:6px;padding:4px 12px;cursor:pointer}
+.copy:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.tpl .tree{border:0;padding:0;background:transparent;font-size:12.5px}
+footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line)}
+footer .wrap{padding-block:18px}
+@media (prefers-reduced-motion: no-preference){.panel.active{animation:fade .2s ease}}
+@keyframes fade{from{opacity:.4}to{opacity:1}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <div class="eyebrow">The Architect's Series · Cloud-neutral · Industry-neutral · Version 1.0</div>
+  <h1>The Architect's Enterprise AI Kit</h1>
+  <p class="lede">How an enterprise runs AI safely and at scale: a reusable project structure, reference architecture, governance model and Enterprise Architecture playbook. It works on AWS, Azure or Google Cloud and in any industry or services sector. Start from zero (Day 0) or plug it into AI you already run.</p>
+  <p class="links"><a href="https://github.com/EdwardSuresh/architects-enterprise-ai-kit" target="_blank" rel="noopener">GitHub repository</a> · <a href="https://edwardsuresh.github.io/architects-ml-playbook/" target="_blank" rel="noopener">The Architect's ML Playbook</a> · v1.0 · MIT + CC BY 4.0</p>
+</div></header>
+
+<nav class="tabs" aria-label="Sections"><div class="wrap" role="tablist">
+  <div class="group"><span class="glabel">The kit</span>
+    <button class="tab" role="tab" data-t="overview" aria-selected="true">Start here</button>
+    <button class="tab" role="tab" data-t="get">Get the kit</button>
+    <button class="tab" role="tab" data-t="review">Agent repo vs. kit</button>
+    <button class="tab" role="tab" data-t="tree">Project structure</button>
+    <button class="tab" role="tab" data-t="arch">Architecture</button>
+    <button class="tab" role="tab" data-t="cloud">AWS · Azure · GCP</button>
+    <button class="tab" role="tab" data-t="rollout">Rollout</button>
+    <button class="tab" role="tab" data-t="flow">End-to-end flow</button>
+    <button class="tab" role="tab" data-t="seq">Sequence</button>
+    <button class="tab" role="tab" data-t="industry">Industry packs</button>
+    <button class="tab" role="tab" data-t="rank">Pattern ranking</button>
+    <button class="tab" role="tab" data-t="when">Which pattern when</button>
+    <button class="tab" role="tab" data-t="labs">Labs (18)</button>
+    <button class="tab" role="tab" data-t="maturity">Maturity check</button>
+    <button class="tab" role="tab" data-t="anti">Anti-patterns</button>
+    <button class="tab" role="tab" data-t="templates">Templates</button>
+    <button class="tab" role="tab" data-t="controls">Control maps</button>
+  </div>
+  <span class="sep"></span>
+  <div class="group"><span class="glabel">EA must-do</span>
+    <button class="tab" role="tab" data-t="ea1">Strategy &amp; portfolio</button>
+    <button class="tab" role="tab" data-t="ea2">Governance &amp; ARB</button>
+    <button class="tab" role="tab" data-t="ea3">Reference architecture</button>
+    <button class="tab" role="tab" data-t="ea4">Data &amp; security</button>
+    <button class="tab" role="tab" data-t="ea5">Operating model &amp; FinOps</button>
+    <button class="tab" role="tab" data-t="ea7">Agent lifecycle &amp; incidents</button>
+    <button class="tab" role="tab" data-t="ea8">Vendors, ethics &amp; people</button>
+    <button class="tab" role="tab" data-t="ea6">90-day EA checklist</button>
+  </div>
+</div></nav>
+
+<main><div class="wrap">
+
+<!-- ================= GET ================= -->
+<section class="panel" id="get" role="tabpanel">
+  <h2>Get the kit</h2>
+  <p>The kit is a working repository, not just a page. It runs offline in five minutes with a built-in mock model, then plugs into Microsoft Foundry, Amazon Bedrock, Google Vertex AI or the Claude API.</p>
+  <div class="grid w5">
+    <div class="card"><h3><span class="q">WHAT</span></h3><p>Governance files, patterns, a runnable Python package, 10 industry packs, 18 labs and CI gates.</p></div>
+    <div class="card"><h3><span class="q">WHO</span></h3><p>EA teams, platform teams and delivery teams. No cloud account needed to start.</p></div>
+    <div class="card"><h3><span class="q">HOW</span></h3><p>Clone, install, run the tests and the three gates, then set <code>kit.yaml</code> for your cloud and sector.</p></div>
+    <div class="card"><h3><span class="q">COST</span></h3><p>Free under MIT (code) and CC BY 4.0 (content). Build labs aim to stay under about $50 in a sandbox; check current pricing.</p></div>
+  </div>
+  <div class="card tpl"><div class="tpl-head"><h3>Quick start</h3><button class="copy" type="button" data-copy="qs">Copy</button></div>
+<pre class="tree" id="qs">git clone https://github.com/EdwardSuresh/architects-enterprise-ai-kit.git
+cd architects-enterprise-ai-kit
+pip install -e ".[test]"
+pytest -q                                    # tests
+python labs/02-rag/concept.py                # one guarded request
+kit-evals --suite evals/suites/quality.yaml  # evals gate
+kit-policy-gate                              # governance gate</pre></div>
+  <div class="diagram"><div class="cap">Every pull request passes three gates</div>
+<pre class="mermaid">
+flowchart LR
+  PR["Pull request"] --> T["CI: tests and all Concept labs"]
+  PR --> E["Evals gate: golden sets above threshold"]
+  PR --> P["Policy gate: inventory vs tiers and approved models"]
+  T --> M{"All green?"}
+  E --> M
+  P --> M
+  M -->|Yes| OK["Merge and deploy"]
+  M -->|No| FIX["Fix before merge"]
+</pre></div>
+  <div class="tbl"><table>
+    <tr><th>Start with</th><th>Why</th><th>Link</th></tr>
+    <tr><td>Executive summary</td><td>Short brief for leaders and procurement</td><td><a href="https://github.com/EdwardSuresh/architects-enterprise-ai-kit/blob/main/docs/executive-summary.md" target="_blank" rel="noopener">docs/executive-summary.md</a></td></tr>
+    <tr><td>Kit manifest</td><td>Set cloud, sector and Day-0 or plug-in mode</td><td><a href="https://github.com/EdwardSuresh/architects-enterprise-ai-kit/blob/main/kit.yaml" target="_blank" rel="noopener">kit.yaml</a></td></tr>
+    <tr><td>AI inventory</td><td>Register every AI system with owner and tier</td><td><a href="https://github.com/EdwardSuresh/architects-enterprise-ai-kit/blob/main/01-governance/ai-inventory.yaml" target="_blank" rel="noopener">01-governance/ai-inventory.yaml</a></td></tr>
+    <tr><td>Platform core</td><td>Gateway, guardrails, retrieval, tools, evals, policy gate</td><td><a href="https://github.com/EdwardSuresh/architects-enterprise-ai-kit/tree/main/platform/core/kit" target="_blank" rel="noopener">platform/core/kit</a></td></tr>
+    <tr><td>Domain packs</td><td>Sector overlays and the method for any other sector</td><td><a href="https://github.com/EdwardSuresh/architects-enterprise-ai-kit/tree/main/domain-packs" target="_blank" rel="noopener">domain-packs/</a></td></tr>
+    <tr><td>Labs</td><td>18 hands-on labs</td><td><a href="https://github.com/EdwardSuresh/architects-enterprise-ai-kit/tree/main/labs" target="_blank" rel="noopener">labs/</a></td></tr>
+  </table></div>
+</section>
+
+<!-- ================= REVIEW ================= -->
+<section class="panel" id="review" role="tabpanel">
+  <h2>From a typical agent repo to an enterprise kit</h2>
+  <p>Most published "AI project structures" describe <b>one agent application repository</b>: agents, prompts, tools, RAG, memory, evals and a deploy folder. That is a sound start. It is not yet an <b>enterprise kit</b>. An enterprise kit has to serve many teams, several clouds and several industries, and it has to carry the governance evidence that auditors and regulators ask for.</p>
+  <div class="callout blue"><p><b>How it relates to The Architect's ML Playbook:</b> a typical agent repo covers the GenAI runtime only. The ML Playbook covers 30 classic and deep-learning algorithms with Concept, Build and Production labs. This kit puts both under one roof: the agent runtime in <code>platform/core</code>, classic models in <code>platform/ml</code>, and one governance, observability and ARB layer over both.</p></div>
+  <div class="grid2">
+    <div class="card"><h3>What a good agent repo already has <span class="pill ok">keep</span></h3>
+      <ul>
+        <li>Prompts as versioned assets in a registry.</li>
+        <li>Agents with prompt and config next to code.</li>
+        <li>A tool registry and MCP servers in one allow-listed place.</li>
+        <li>Guardrails, PII redaction and audit logs.</li>
+        <li>Golden datasets wired into CI as a quality gate.</li>
+        <li>Tracing of cost, latency and errors per agent.</li>
+        <li>Architecture decision records.</li>
+        <li>Model choice in config, with fallbacks.</li>
+      </ul></div>
+    <div class="card"><h3>What an enterprise adds <span class="pill warn">add</span></h3>
+      <ul>
+        <li><b>Cloud adapters</b>: a cloud-neutral core with AWS, Azure and Google Cloud specifics kept apart.</li>
+        <li><b>LLM gateway</b>: one place for routing, quotas, keys, cost and a kill switch.</li>
+        <li><b>Risk tiers and an AI inventory</b>: a register of every AI system and its risk level.</li>
+        <li><b>Control mapping</b>: NIST AI RMF, ISO/IEC 42001, EU AI Act, OWASP, sector rules.</li>
+        <li><b>Data contracts, classification and lineage</b> for what feeds RAG and prompts.</li>
+        <li><b>Security</b>: threat models, red-team sets, agent identities.</li>
+        <li><b>FinOps</b>: budgets, cost per transaction, chargeback.</li>
+        <li><b>Industry packs</b>: reusable use cases, guardrails and evals per sector.</li>
+        <li><b>Human approval and incident runbooks</b>.</li>
+        <li><b>System cards and model cards</b> per AI system.</li>
+      </ul></div>
+  </div>
+  <div class="card"><h3>Three structural changes <span class="pill bad">change</span></h3>
+    <ul>
+      <li>Policies are owned centrally and <i>consumed</i> by each repo, so delivery teams cannot quietly edit them.</li>
+      <li>CI runs a <b>policy gate</b> next to tests and evals: is the tier approved, the model on the approved list, the system card present?</li>
+      <li>Infrastructure code has one module per cloud behind a common interface.</li>
+    </ul></div>
+  <div class="callout"><p><b>Simple way to remember the difference:</b> an agent repo is a well-built house. The Enterprise AI Kit is the town plan: zoning rules (governance), shared utilities (gateway, observability), building codes per district (industry packs) and an inspector (the AI ARB).</p></div>
+</section>
+
+<!-- ================= OVERVIEW ================= -->
+<section class="panel active" id="overview" role="tabpanel">
+  <h2>Start here: the kit in 5W1H</h2>
+  <div class="card" id="progress-card"><h3>Your progress</h3>
+    <p><span id="prog-text" class="mono">0 of 18 labs marked complete</span></p>
+    <div class="bar" aria-hidden="true"><span id="prog-bar"></span></div>
+    <p class="sub" style="margin-top:6px">Tick labs on the Labs tab. Progress is saved in this browser only.</p></div>
+  <div class="grid w5">
+    <div class="card"><h3><span class="q">WHAT</span> A packaged starter</h3><p>Three things in one: a <b>repo template</b> (code + config), a <b>governance pack</b> (policies, ARB, templates) and an <b>EA playbook</b> (how architects run AI across the company).</p></div>
+    <div class="card"><h3><span class="q">WHY</span> Stop reinventing</h3><p>Without it, each team picks its own model, vector store and logging. Six months later nobody can say how many AI systems exist, what they cost, or which ones touch customer data.</p></div>
+    <div class="card"><h3><span class="q">WHO</span> Roles</h3><p>EA owns the kit. Platform team runs shared services. Delivery teams build use cases. Risk, Legal and Security approve. Business sponsors own value.</p></div>
+    <div class="card"><h3><span class="q">WHEN</span> Two entry points</h3><p><b>Day 0</b>: no AI in production yet. <b>Plug-in</b>: AI already running; the kit wraps and standardizes it without a rewrite.</p></div>
+    <div class="card"><h3><span class="q">WHERE</span> Any cloud, any sector</h3><p>Cloud-specific code lives only in <code>adapters/</code> and <code>deploy/terraform/&lt;cloud&gt;</code>. Sector rules live only in <code>domain-packs/</code>.</p></div>
+    <div class="card"><h3><span class="q">HOW</span> Fork, configure, gate</h3><p>Fork the template, set <code>kit.yaml</code> (cloud, industry, mode, risk tier), build, then pass the three CI gates: tests, evals and policy.</p></div>
+  </div>
+  <div class="card"><h3>Illustrative example</h3>
+    <p class="ex"><b>Regional insurer, Azure shop.</b> Claims wanted a claims-summary assistant, Underwriting wanted submission extraction, IT had already built a ChatGPT-style internal bot. With the kit in plug-in mode, the existing bot was routed through the LLM gateway and given tracing and a model card in two weeks. The two new use cases started from the <code>insurance</code> domain pack, which already included PII rules, a "no coverage decisions without a human" guardrail and golden test cases.</p></div>
+  <div class="card"><h3>Design principles</h3>
+    <ol>
+      <li><b>Cloud-neutral core, thin adapters.</b> Swap Bedrock for Foundry without touching agents.</li>
+      <li><b>Policy as code.</b> Rules are tested and versioned like software.</li>
+      <li><b>Evidence by default.</b> Every run leaves a trace an auditor can read.</li>
+      <li><b>Risk-proportionate.</b> A marketing copy tool does not get the same review as a credit decision tool.</li>
+      <li><b>Human in the loop for consequential actions.</b></li>
+      <li><b>Reuse before build.</b> Patterns and domain packs first.</li>
+    </ol></div>
+  <div class="card"><h3>Suggested learning path</h3>
+    <ol class="steps">
+      <li><b>Get the kit</b>: clone the repo and run it offline in five minutes.</li>
+      <li><b>Agent repo vs. kit</b> and <b>Project structure</b>: know where everything lives.</li>
+      <li><b>Architecture</b> and <b>Sequence</b>: trace one request end to end.</li>
+      <li><b>Which pattern when</b> and <b>Pattern ranking</b>: pick patterns for your industry.</li>
+      <li><b>Labs</b>: do the Concept level of all six building blocks first, then Build, then Production.</li>
+      <li><b>EA must-do</b> tabs: turn the build into an enterprise program.</li>
+    </ol>
+    <p class="ex" style="margin-top:10px"><b>Pairing with the ML Playbook:</b> when a lab needs a prediction (fraud score, demand forecast, failure risk), take the model from the matching ML Playbook lesson and serve it through <code>platform/ml</code>.</p></div>
+</section>
+
+<!-- ================= TREE ================= -->
+<section class="panel" id="tree" role="tabpanel">
+  <h2>Project structure</h2>
+  <p class="sub">This is the actual layout of the repository. Gold marks what an enterprise adds to a typical agent repo. Numbered folders are the governance spine and are read in order.</p>
+<pre class="tree"><span class="d">architects-enterprise-ai-kit/</span>
+├── README.md · CHANGELOG.md · CONTRIBUTING.md · SECURITY.md
+├── LICENSE (MIT, code) · LICENSE-CONTENT.md (CC BY 4.0, content)
+├── CLAUDE.md · AGENTS.md            <span class="c"># rules for AI coding assistants</span>
+├── <span class="n">kit.yaml</span>                         <span class="c"># cloud · industry packs · day0|plugin · gates</span>
+├── pyproject.toml · .env.example
+│
+├── <span class="n">00-strategy/</span>                     <span class="c"># ai-strategy · capability-map · use-case-portfolio.csv · value-scorecard · build-buy-partner</span>
+├── <span class="n">01-governance/</span>
+│   ├── charter.md · raci.md
+│   ├── <span class="n">risk-tiers.yaml</span>              <span class="c"># Tier 1-3, max autonomy, required controls</span>
+│   ├── <span class="n">ai-inventory.yaml</span>            <span class="c"># every AI system; checked by the policy gate</span>
+│   ├── policies/                    <span class="c"># acceptable use · data use · human oversight · third-party AI</span>
+│   ├── policy-as-code/              <span class="c"># how the gate works and how to add rules</span>
+│   ├── arb/                         <span class="c"># terms of reference · intake form · checklist · decision log</span>
+│   ├── control-maps/                <span class="c"># NIST AI RMF · ISO/IEC 42001 · EU AI Act · OWASP LLM Top 10</span>
+│   ├── impact-assessments/ · system-cards/
+│   └── templates/                   <span class="c"># ADR for AI · system card · model card · vendor questionnaire · case study</span>
+├── 02-architecture/
+│   ├── reference-architecture.md
+│   ├── patterns/                    <span class="c"># 10 patterns + which-pattern-when</span>
+│   ├── standards/                   <span class="c"># approved-models.yaml · integration · logging</span>
+│   └── adr/
+│
+├── <span class="d">platform/</span>
+│   ├── core/kit/                    <span class="c"># runnable Python package</span>
+│   │   ├── <span class="n">gateway.py</span>               <span class="c"># aliases · fallback · cost tags · budgets · kill switch</span>
+│   │   ├── guardrails.py            <span class="c"># PII · prompt injection · sector rules · grounding</span>
+│   │   ├── retrieval.py             <span class="c"># access filter before ranking · citations</span>
+│   │   ├── tools.py                 <span class="c"># agent identities · allow-lists · approval queue</span>
+│   │   ├── orchestrator.py · tracing.py
+│   │   ├── evals.py                 <span class="c"># CLI: kit-evals</span>
+│   │   └── <span class="n">policy_gate.py</span>           <span class="c"># CLI: kit-policy-gate</span>
+│   ├── <span class="n">adapters/kit_adapters/</span>       <span class="c"># the ONLY cloud code: azure · aws · gcp · anthropic_api</span>
+│   └── <span class="n">ml/</span>                          <span class="c"># classic ML; algorithms from The Architect's ML Playbook</span>
+├── config/models.yaml               <span class="c"># alias routing + cloud bindings</span>
+├── api/                             <span class="c"># reference FastAPI service</span>
+│
+├── <span class="n">domain-packs/</span>                    <span class="c"># _template + 10 sectors</span>
+│   └── &lt;sector&gt;/                     <span class="c"># README · regulations · guardrails.yaml · evals/golden.jsonl · use-cases/ · data-contracts/</span>
+├── <span class="n">data/</span>                            <span class="c"># classification.yaml · contracts/ · lineage/</span>
+├── <span class="n">security/</span>                        <span class="c"># threat-models/ · red-team/ · identity/</span>
+├── <span class="n">finops/</span>                          <span class="c"># budgets.yaml · cost-model.md</span>
+├── <span class="n">ops/</span>                             <span class="c"># slo.yaml · autonomy-levels.md · runbooks/</span>
+├── evals/                           <span class="c"># suites/quality.yaml · datasets/ · reports/</span>
+├── tests/                           <span class="c"># 63 tests: core, adapters, policy gate, packs, red team</span>
+├── <span class="n">labs/</span>                            <span class="c"># 6 building blocks × Concept / Build / Production</span>
+├── deploy/                          <span class="c"># docker · k8s · terraform/{{aws,azure,gcp}} module contracts</span>
+├── <span class="n">enablement/</span>                      <span class="c"># learning paths · champions · workforce impact</span>
+├── docs/                            <span class="c"># executive summary · maturity model · rollout · anti-patterns · cloud mapping · glossary · FAQ</span>
+├── <span class="n">case-studies/</span>                    <span class="c"># client-approved case studies only</span>
+├── site/                            <span class="c"># this website (GitHub Pages)</span>
+└── .github/workflows/               <span class="c"># ci.yml · evals.yml · <span class="n">policy-gate.yml</span> · pages.yml</span></pre>
+
+  <div class="tbl"><table>
+    <tr><th>Folder</th><th>Who owns it</th><th>When it changes</th><th>Illustrative example</th></tr>
+    <tr><td>00-strategy</td><td>EA + business leaders</td><td>Quarterly planning</td><td>Bank scores 140 ideas, funds the top 8.</td></tr>
+    <tr><td>01-governance</td><td>EA, Risk, Legal</td><td>When rules or laws change</td><td>EU AI Act obligation added → new control row → CI check fails apps missing it.</td></tr>
+    <tr><td>platform/core</td><td>Platform team</td><td>Every sprint</td><td>New fallback model added to gateway once; all agents benefit.</td></tr>
+    <tr><td>platform/adapters</td><td>Cloud platform team</td><td>When a cloud ships a feature</td><td>Retailer moves embeddings from Azure to Vertex by editing one adapter.</td></tr>
+    <tr><td>domain-packs</td><td>Domain architects + SMEs</td><td>Per new use case</td><td>Supply-chain pack adds "PO exception" golden set of 200 cases.</td></tr>
+    <tr><td>finops / ops</td><td>FinOps, SRE</td><td>Monthly</td><td>Cost per claim summary shown to Claims VP each month.</td></tr>
+  </table></div>
+</section>
+
+<!-- ================= ARCH ================= -->
+<section class="panel" id="arch" role="tabpanel">
+  <h2>Reference architecture</h2>
+  <p>Read it top to bottom: a request enters through a channel, passes the API gateway and input guardrails, is planned by an orchestrator, uses knowledge and tools, calls a model through the LLM gateway, and passes output guardrails before returning. The governance plane watches everything.</p>
+  <div class="diagram"><div class="cap">Layered architecture · cloud-neutral</div>
+<pre class="mermaid">
+flowchart TB
+  subgraph CH["1 · Channels"]
+    U1["Web / mobile app"]
+    U2["Teams / Slack"]
+    U3["Back-office systems"]
+  end
+  subgraph EX["2 · Experience and API"]
+    APIGW["API gateway: auth, rate limits"]
+  end
+  subgraph CTRL["3 · AI control plane"]
+    GIN["Input guardrails: PII, injection"]
+    ORCH["Orchestrator agent"]
+    SPEC["Specialist agents"]
+    HITL["Human approval queue"]
+    GOUT["Output guardrails: grounding, tone"]
+  end
+  subgraph KN["4 · Knowledge and tools"]
+    RAG["Retriever + vector index"]
+    MEM["Memory store"]
+    TOOLS["Tool registry / MCP servers"]
+  end
+  subgraph MG["5 · Model access"]
+    LLMGW["LLM gateway: routing, fallback, cost"]
+    AWS["AWS Bedrock"]
+    AZ["Microsoft Foundry"]
+    GCP["Google Vertex AI"]
+  end
+  subgraph SOR["6 · Systems of record"]
+    CORE["Core banking / policy admin / ERP / OMS"]
+  end
+  subgraph GOV["7 · Governance and operations plane"]
+    OBS["Tracing, metrics, cost"]
+    EVAL["Eval suites"]
+    AUD["Audit log + AI inventory"]
+    POL["Policy as code"]
+  end
+  U1 --> APIGW
+  U2 --> APIGW
+  U3 --> APIGW
+  APIGW --> GIN --> ORCH --> SPEC
+  SPEC --> RAG
+  SPEC --> TOOLS --> CORE
+  ORCH --> MEM
+  SPEC --> LLMGW
+  LLMGW --> AWS
+  LLMGW --> AZ
+  LLMGW --> GCP
+  SPEC --> HITL
+  ORCH --> GOUT --> APIGW
+  ORCH -.-> OBS
+  ORCH -.-> AUD
+  POL -.-> GIN
+  EVAL -.-> SPEC
+</pre></div>
+
+  <div class="tbl"><table>
+    <tr><th>Layer</th><th>What it does</th><th>Why it matters</th><th>Example</th></tr>
+    <tr><td>Channels</td><td>Where users meet AI</td><td>Same backend serves every channel</td><td>Agent in mobile app and in Teams share one orchestrator.</td></tr>
+    <tr><td>API gateway</td><td>Identity, throttling, versioning</td><td>No anonymous or runaway traffic</td><td>Customer can make 20 chat calls a minute.</td></tr>
+    <tr><td>Control plane</td><td>Plan, delegate, guard, hand off</td><td>Business logic lives here, not in prompts</td><td>Refund above $500 goes to a human queue.</td></tr>
+    <tr><td>Knowledge &amp; tools</td><td>RAG, memory, actions</td><td>Grounded answers and safe actions</td><td>Read-only tool for claims; write tool needs approval.</td></tr>
+    <tr><td>Model access</td><td>One gateway to every model</td><td>Swap or fall back without code changes</td><td>Primary model times out → fallback model answers.</td></tr>
+    <tr><td>Governance plane</td><td>Trace, evaluate, audit, enforce</td><td>Evidence for regulators and incidents</td><td>Examiner asks "why this answer on 3 March?" Trace replays it.</td></tr>
+  </table></div>
+</section>
+
+<!-- ================= CLOUD ================= -->
+<section class="panel" id="cloud" role="tabpanel">
+  <h2>Same kit, three clouds</h2>
+  <p>The <code>platform/core</code> interfaces stay the same. Only the adapter changes. Service names change often, so confirm current names in each provider's docs before a design review.</p>
+  <div class="tbl"><table>
+    <tr><th>Kit capability</th><th>AWS</th><th>Azure</th><th>Google Cloud</th></tr>
+    <tr><td>Foundation models</td><td>Amazon Bedrock</td><td>Microsoft Foundry (formerly Azure AI Foundry) / Azure OpenAI</td><td>Vertex AI Model Garden</td></tr>
+    <tr><td>Agent runtime</td><td>Bedrock AgentCore / Bedrock Agents</td><td>Foundry Agent Service</td><td>Vertex AI Agent Engine / Agent Builder</td></tr>
+    <tr><td>LLM gateway</td><td>API Gateway with a custom gateway service (inference profiles help with routing and cost tagging)</td><td>API Management (AI gateway policies)</td><td>Apigee (AI gateway policies)</td></tr>
+    <tr><td>Guardrails</td><td>Bedrock Guardrails</td><td>Azure AI Content Safety, Prompt Shields</td><td>Model Armor</td></tr>
+    <tr><td>Vector / RAG</td><td>Bedrock Knowledge Bases, OpenSearch Serverless</td><td>Azure AI Search</td><td>Vertex AI Search, RAG Engine, Vector Search</td></tr>
+    <tr><td>Classic ML</td><td>SageMaker AI</td><td>Azure Machine Learning</td><td>Vertex AI Training / Pipelines</td></tr>
+    <tr><td>Observability</td><td>CloudWatch, X-Ray</td><td>Azure Monitor, Application Insights</td><td>Cloud Trace, Cloud Monitoring</td></tr>
+    <tr><td>Identity &amp; secrets</td><td>IAM, Secrets Manager, KMS</td><td>Entra ID, Key Vault</td><td>Cloud IAM, Secret Manager, Cloud KMS</td></tr>
+    <tr><td>Data governance</td><td>Lake Formation, SageMaker Unified Studio (formerly DataZone)</td><td>Microsoft Purview</td><td>Dataplex Universal Catalog</td></tr>
+    <tr><td>Containers</td><td>EKS / ECS</td><td>AKS / Container Apps</td><td>GKE / Cloud Run</td></tr>
+  </table></div>
+  <div class="grid">
+    <div class="card"><h3>How the adapter works</h3><p>Agents call <code>gateway.complete(model="reasoning-large", ...)</code>. The adapter reads <code>models.yaml</code> and maps that alias to a real model on the chosen cloud. Agents never import a cloud SDK directly.</p></div>
+    <div class="card"><h3>Same model, any cloud</h3><p>Several model families are offered on more than one cloud (for example, Claude is available on Bedrock, Foundry and Vertex AI). Choosing a cross-cloud model for an alias keeps one prompt library portable, which makes the exit test cheaper.</p></div>
+    <div class="card"><h3>Illustrative example</h3><p class="ex"><b>Distributor on AWS</b> acquires a company on Azure. Both run the kit. Year one: each keeps its cloud; reports, ARB and AI inventory are shared because the governance layer is identical.</p></div>
+  </div>
+</section>
+
+<!-- ================= ROLLOUT ================= -->
+<section class="panel" id="rollout" role="tabpanel">
+  <h2>Rollout: Day 0 or plug-in</h2>
+  <div class="diagram"><div class="cap">Choose your entry point</div>
+<pre class="mermaid">
+flowchart TB
+  S{"Is AI already running in production?"}
+  S -->|No| D0["Day-0 mode"]
+  S -->|Yes| PI["Plug-in mode"]
+  D0 --> D0a["Weeks 0-2: charter, risk tiers, cloud choice"]
+  D0a --> D0b["Weeks 3-6: landing zone, LLM gateway, guardrails, tracing"]
+  D0b --> D0c["Weeks 7-12: two lighthouse use cases"]
+  PI --> P1["Weeks 0-2: inventory all AI incl. shadow AI"]
+  P1 --> P2["Weeks 2-4: gap map against the kit"]
+  P2 --> P3["Weeks 4-8: route through gateway, add tracing and guardrails"]
+  P3 --> P4["Weeks 8-12: back-fill model cards, evals, ARB records"]
+  D0c --> SC["Scale: domain packs, CoE, chargeback"]
+  P4 --> SC
+</pre></div>
+  <div class="grid2">
+    <div class="card"><h3>Day-0 steps</h3>
+      <ol class="steps">
+        <li><b>Charter and sponsor.</b> One page: purpose, scope, decision rights. Signed by a C-level sponsor.</li>
+        <li><b>Risk tiers.</b> Define Tier 1–3 and the controls each requires.</li>
+        <li><b>Pick one primary cloud.</b> Use the existing enterprise agreement and landing zone.</li>
+        <li><b>Stand up the shared platform.</b> Gateway, guardrails, tracing, prompt registry.</li>
+        <li><b>Run two lighthouses.</b> One internal (low risk), one customer-facing (medium).</li>
+        <li><b>Publish results.</b> Cost, quality, time saved. Use them to fund scale.</li>
+      </ol></div>
+    <div class="card"><h3>Plug-in steps</h3>
+      <ol class="steps">
+        <li><b>Discover.</b> Survey teams, scan expense reports and network logs for AI SaaS.</li>
+        <li><b>Register.</b> Put every system in <code>ai-inventory.yaml</code> with an owner.</li>
+        <li><b>Tier.</b> Assign each a risk tier; high-risk first.</li>
+        <li><b>Wrap, don't rewrite.</b> Point existing apps at the LLM gateway; add tracing and output guardrails.</li>
+        <li><b>Back-fill evidence.</b> Model card, golden eval set, ARB record.</li>
+        <li><b>Retire duplicates.</b> Three chatbots doing the same job become one.</li>
+      </ol></div>
+  </div>
+  <div class="card"><h3>Illustrative example (plug-in)</h3><p class="ex"><b>Mid-size bank.</b> Discovery found 23 AI tools, 9 unknown to IT. Four touched customer data with no logging. Within 8 weeks those four were behind the gateway with PII redaction; two were retired; the rest got model cards. When examiners next asked what AI the bank ran, the inventory gave them a single starting document.</p></div>
+</section>
+
+<!-- ================= FLOW ================= -->
+<section class="panel" id="flow" role="tabpanel">
+  <h2>End-to-end use-case lifecycle</h2>
+  <p>From idea to retirement. Every use case, in any industry, follows the same path. Only the depth of review changes with the risk tier.</p>
+  <div class="diagram"><div class="cap">Idea → production → value review</div>
+<pre class="mermaid">
+flowchart LR
+  A["1 Idea intake"] --> B["2 Score value, feasibility, risk"]
+  B --> C{"3 Risk tier"}
+  C -->|"Tier 1"| D1["Fast track: reuse pattern"]
+  C -->|"Tier 2 or 3"| D2["AI ARB + impact assessment"]
+  D1 --> E["4 Build from kit template"]
+  D2 --> E
+  E --> F{"5 Eval gate"}
+  F -->|fail| E
+  F -->|pass| G["6 Security + red team"]
+  G --> H["7 Pilot with human in loop"]
+  H --> I["8 Production + monitoring"]
+  I --> J["9 Value review: scale, fix, retire"]
+  J -.-> A
+</pre></div>
+  <div class="tbl"><table>
+    <tr><th>Step</th><th>Who</th><th>Output / evidence</th><th>Retail example: product description writer</th></tr>
+    <tr><td>1 Intake</td><td>Business sponsor</td><td>Intake form</td><td>Merchandising wants 40,000 descriptions rewritten.</td></tr>
+    <tr><td>2 Score</td><td>EA</td><td>Portfolio row</td><td>Value high, feasibility high, risk low.</td></tr>
+    <tr><td>3 Tier</td><td>EA + Risk</td><td>Tier in inventory</td><td>Tier 1: no personal data, human reviews before publish.</td></tr>
+    <tr><td>4 Build</td><td>Delivery team</td><td>Repo from template</td><td>Uses <code>retail</code> pack brand-voice guardrail.</td></tr>
+    <tr><td>5 Eval</td><td>QA + SMEs</td><td>Eval report</td><td>200 golden items; 95% pass factual-attribute check.</td></tr>
+    <tr><td>6 Security</td><td>Security</td><td>Threat model</td><td>Checks no supplier cost data leaks into copy.</td></tr>
+    <tr><td>7 Pilot</td><td>Business</td><td>Pilot metrics</td><td>One category, 2,000 items, copywriter approves each.</td></tr>
+    <tr><td>8 Production</td><td>SRE</td><td>Dashboards, SLOs</td><td>Cost per description tracked.</td></tr>
+    <tr><td>9 Review</td><td>EA + sponsor</td><td>Value scorecard</td><td>Conversion up on pilot category → scale to all.</td></tr>
+  </table></div>
+</section>
+
+<!-- ================= SEQUENCE ================= -->
+<section class="panel" id="seq" role="tabpanel">
+  <h2>Runtime sequence: one request, end to end</h2>
+  <p>Use case: an insurance customer asks why a claim payment was reduced. The same sequence applies to a bank customer asking about a fee, or a buyer asking about a late shipment.</p>
+  <div class="diagram"><div class="cap">Guarded agent request with human fallback</div>
+<pre class="mermaid">
+sequenceDiagram
+  autonumber
+  actor C as Customer
+  participant API as API gateway
+  participant GI as Input guardrail
+  participant O as Orchestrator
+  participant R as Retrieval agent
+  participant T as Claims tool (MCP)
+  participant L as LLM gateway
+  participant GO as Output guardrail
+  participant A as Audit and tracing
+  C->>API: Why was my claim reduced?
+  API->>GI: request + verified identity
+  GI->>GI: redact PII, check prompt injection
+  GI->>O: clean request
+  O->>R: find policy clauses for this policy
+  R-->>O: top 5 chunks with sources
+  O->>T: get_claim(claim_id) read-only
+  T-->>O: claim record and adjustments
+  O->>L: prompt v3.2 + context
+  L-->>O: draft answer
+  O->>GO: draft
+  GO->>GO: grounding, tone, required disclosure
+  alt passes checks
+    GO-->>API: answer with policy citations
+  else fails or low confidence
+    GO-->>API: hand off to human adjuster
+  end
+  API-->>C: response
+  O--)A: trace, tokens, cost, guardrail results
+</pre></div>
+  <div class="grid w5">
+    <div class="card"><h3><span class="q">WHO</span></h3><p>Customer, 6 platform components, and a human adjuster as fallback.</p></div>
+    <div class="card"><h3><span class="q">WHAT</span></h3><p>A grounded explanation with citations, or a clean hand-off.</p></div>
+    <div class="card"><h3><span class="q">WHY</span></h3><p>Insurance regulators expect explainable outcomes and human oversight on adverse decisions.</p></div>
+    <div class="card"><h3><span class="q">HOW</span></h3><p>Tool is read-only; the agent can explain, never change, the claim.</p></div>
+  </div>
+</section>
+
+<!-- ================= INDUSTRY ================= -->
+<section class="panel" id="industry" role="tabpanel">
+  <h2>Industry domain packs</h2>
+  <p>Each pack is a folder copied from <code>domain-packs/_template/</code>. The platform stays the same; only use cases, data contracts, guardrails, golden evals and regulations change. The six-step overlay method below works for any industry or services sector, including ones not listed.</p>
+  <div class="card"><h3>Industry overlay method · any sector</h3>
+    <ol class="steps">
+      <li><b>Name the regulated decisions.</b> Which outcomes affect a person's money, health, safety, job or rights? Those are Tier 3 by default.</li>
+      <li><b>List sector regulators and rules</b> with Legal. Map each to a kit control in <code>control-maps/</code>.</li>
+      <li><b>Classify sector data</b> (account, policy, patient, citizen, OT telemetry) into the kit's four data classes.</li>
+      <li><b>Write sector guardrails</b>: what AI must never say or do here.</li>
+      <li><b>Collect golden examples</b> from front-line experts, 100–300 per use case.</li>
+      <li><b>Pick 3–5 starter use cases</b> from the Pattern ranking and publish the pack.</li>
+    </ol></div>
+  <div class="tbl"><table>
+    <tr><th>Industry</th><th>Starter use cases</th><th>Key regulations / frameworks</th><th>Pack-specific guardrails</th><th>Typical tier</th></tr>
+    <tr><td>Financial services</td><td>KYC document review; AML alert triage; advisor meeting notes; fee dispute explanations</td><td>SR 11-7 model risk; fair lending (ECOA); GLBA; DORA (EU); SEC/FINRA communications</td><td>No investment advice; no credit decision without human; account numbers masked</td><td>2–3</td></tr>
+    <tr><td>Insurance</td><td>FNOL intake; claims summary; underwriting submission extraction; subrogation spotting</td><td>NAIC AI model bulletin; state unfair-practice rules; Colorado SB21-169 (life)</td><td>No coverage or denial decision by AI; disclose AI use; medical data restricted</td><td>2–3</td></tr>
+    <tr><td>Supply chain</td><td>PO exception handling; supplier risk monitor; demand-forecast explainer; carrier email triage</td><td>Export controls; contract terms; customs data rules</td><td>Write actions to ERP need approval; supplier pricing confidential</td><td>1–2</td></tr>
+    <tr><td>Oil &amp; gas</td><td>Daily drilling report summaries; predictive maintenance alert → work order agent; HSE incident triage; pipeline inspection report extraction</td><td>PHMSA pipeline safety; OSHA process safety management; EPA emissions reporting; API standards</td><td>AI never controls operational technology; safety-critical advice needs engineer sign-off; OT data stays segmented</td><td>2–3</td></tr>
+    <tr><td>Retail</td><td>Product descriptions; customer service agent; search and recommendations; store ops copilot</td><td>PCI DSS; FTC consumer protection; CCPA/CPRA; accessibility</td><td>Brand voice; no price promises; no card data in prompts</td><td>1–2</td></tr>
+    <tr><td>Healthcare</td><td>Prior-auth packet prep; clinical note summary; patient FAQs</td><td>HIPAA; FDA software guidance; state AI disclosure laws</td><td>No diagnosis; PHI only on BAA-covered services</td><td>2–3</td></tr>
+    <tr><td>Public sector</td><td>Citizen service assistant; benefits case summaries; FOIA request triage</td><td>OMB AI memos (US federal); state AI laws; records retention; accessibility (Section 508)</td><td>No eligibility decision by AI; plain-language disclosure; public records retained</td><td>2–3</td></tr>
+    <tr><td>Telecom &amp; utilities</td><td>Outage communication; field-tech copilot; billing dispute agent</td><td>Customer privacy (CPNI); critical infrastructure security; utility commission rules</td><td>No disconnect or credit decision by AI; OT segmented</td><td>2</td></tr>
+    <tr><td>Manufacturing</td><td>Quality defect vision; maintenance copilot; supplier quality reports</td><td>Product safety; ISO 9001 records; export controls</td><td>No release of product by AI; engineer sign-off on safety items</td><td>1–2</td></tr>
+    <tr><td>Professional services</td><td>Proposal drafting; contract review; knowledge search across engagements</td><td>Client confidentiality; professional conduct rules; IP ownership</td><td>Client data walls between engagements; human sign-off on client advice</td><td>1–2</td></tr>
+  </table></div>
+  <div class="grid">
+    <div class="card"><h3>Inside every pack</h3>
+<pre class="tree" style="border:0;padding:0">domain-packs/insurance/
+├── use-cases/claims-summary/
+│   ├── spec.md · prompt.md
+│   └── system-card.md
+├── data-contracts/
+├── guardrails/no-coverage-decision.yaml
+├── evals/golden/claims-200.jsonl
+└── regulations.md</pre></div>
+    <div class="card"><h3>How to create a new pack</h3><ol>
+      <li>Copy <code>_template/</code>.</li>
+      <li>List top 5 use cases with sponsors.</li>
+      <li>Write regulations.md with Legal.</li>
+      <li>Add 2+ sector guardrails.</li>
+      <li>Collect 100–300 golden examples from SMEs.</li>
+      <li>EA reviews and publishes to the catalog.</li>
+    </ol></div>
+    <div class="card"><h3>Illustrative example</h3><p class="ex"><b>Multi-category retailer.</b> Uses the <b>retail</b> pack for loyalty-app support and the <b>supply-chain</b> pack for merchandise replenishment exceptions, on the same platform and the same ARB.</p></div>
+  </div>
+</section>
+
+<!-- ================= RANK ================= -->
+<section class="panel" id="rank" role="tabpanel">
+  <h2>Pattern ranking by industry</h2>
+  <p>Twelve enterprise AI patterns, scored 1–5 for how often each one shows up in real programs in each sector. Sort by a sector to see its top patterns. Scores are architect judgment from field experience, not survey data, so treat them as a starting point for your own portfolio review.</p>
+  <div class="controls">
+    <label for="rank-sort">Sort by</label>
+    <select id="rank-sort">
+      <option value="all">Overall</option>
+      <option value="fs">Financial services</option>
+      <option value="ins">Insurance</option>
+      <option value="sc">Supply chain</option>
+      <option value="og">Oil &amp; gas</option>
+      <option value="ret">Retail</option>
+    </select>
+  </div>
+  <div class="tbl"><table id="rank-table">
+    <thead><tr><th>#</th><th>Pattern</th><th>FS</th><th>Ins</th><th>SC</th><th>O&amp;G</th><th>Retail</th><th>Avg</th><th>Illustrative example</th></tr></thead>
+    <tbody></tbody>
+  </table></div>
+  <div class="grid">
+    <div class="card"><h3>Why document patterns lead</h3><p>Banks, insurers and shippers still run on PDFs, emails and forms. Turning them into data or answers is the fastest, lowest-risk win.</p></div>
+    <div class="card"><h3>Why classic ML stays high</h3><p>Fraud scores, reserves, demand and failure risk are tabular problems. GenAI explains the result; the model from the ML Playbook makes it.</p></div>
+    <div class="card"><h3>Why multi-agent ranks lower</h3><p>It is powerful but harder to test and govern. Most firms start with one agent and a few tools, then split later.</p></div>
+  </div>
+</section>
+
+<!-- ================= WHEN ================= -->
+<section class="panel" id="when" role="tabpanel">
+  <h2>Which pattern when</h2>
+  <p>Start from the business question, not the technology. Follow the arrows to the pattern, then open its template in <code>02-architecture/patterns/</code>.</p>
+  <div class="diagram"><div class="cap">Decision flow · business question → pattern</div>
+<pre class="mermaid">
+flowchart TD
+  Q{"What does the business need?"}
+  Q -->|"Answers from documents"| RAG["RAG assistant"]
+  Q -->|"Turn documents into data"| IDP["Document extraction"]
+  Q -->|"Predict a number or class"| ML["Classic ML: see ML Playbook"]
+  Q -->|"Spot unusual events"| AN["Anomaly detection + agent triage"]
+  Q -->|"Act in business systems"| AG["Tool-using agent"]
+  Q -->|"Help a worker inside an app"| CP["Copilot in app"]
+  Q -->|"Create content"| GEN["Content generation"]
+  Q -->|"Images, video or sensors"| VIS["Vision + LLM report"]
+  ML --> EXP["Add GenAI explanation"]
+  AN --> AG
+  AG --> M{"More than 3 distinct steps or skills?"}
+  M -->|Yes| MA["Multi-agent orchestration"]
+  M -->|No| ONE["Single agent + tools"]
+  RAG --> T{"Decision affects a customer?"}
+  AG --> T2{"Writes to a system of record?"}
+  T -->|Yes| H["Tier 2-3: human review"]
+  T2 -->|Yes| H
+</pre></div>
+  <div class="tbl"><table>
+    <tr><th>Business question</th><th>Pattern</th><th>FS example</th><th>Oil &amp; gas example</th></tr>
+    <tr><td>"What does our policy say about…?"</td><td>RAG assistant</td><td>Credit policy Q&amp;A for loan officers</td><td>Drilling procedures Q&amp;A on the rig</td></tr>
+    <tr><td>"Key these forms for me"</td><td>Document extraction</td><td>Bank statements → income figures</td><td>Inspection reports → integrity database</td></tr>
+    <tr><td>"Which ones will default / fail?"</td><td>Classic ML + explain</td><td>Probability of default with reason codes</td><td>Pump failure risk in 30 days</td></tr>
+    <tr><td>"Is this normal?"</td><td>Anomaly + triage</td><td>Card fraud alert triage</td><td>Pressure anomaly → draft work order</td></tr>
+    <tr><td>"Do this task in the system"</td><td>Tool-using agent</td><td>Open a dispute case</td><td>Create a maintenance notification (with approval)</td></tr>
+  </table></div>
+</section>
+
+<!-- ================= LABS ================= -->
+<section class="panel" id="labs" role="tabpanel">
+  <h2>Labs: six building blocks × three levels</h2>
+  <p class="sub">Each building block has a runnable Concept script in the repo, plus Build and Production steps in its lab guide: 18 lab levels in all.</p>
+  <p>Same structure as the ML Playbook. <b>Concept</b> runs in plain Python with no cloud. <b>Build</b> uses Azure free or low-cost tiers. <b>Production</b> adds governance, CI and evidence. Each lab uses one business case through all three levels.</p>
+  <div class="callout blue"><p><b>Reference implementation:</b> Build labs are written for Azure. The same steps map to AWS and Google Cloud using the services on the AWS · Azure · GCP tab, so an organization can run them on its own cloud.</p></div>
+  <div class="callout"><p><b>Sandbox budget guard:</b> the labs aim to stay under about $50 in total if you use free tiers (for example Azure AI Search Free and Content Safety F0), small pay-per-token deployments, a budget alert, and delete resource groups after each session. Some services, such as API Management tiers, bill by the hour, and prices change, so check current pricing first.</p></div>
+  <div class="tbl"><table id="labs-table">
+    <tr><th>Building block</th><th>Business case</th><th>Concept · no cloud</th><th>Build · Azure</th><th>Production · governed</th></tr>
+    <tr><td>1 · LLM gateway</td><td>Bank: route all model calls</td>
+      <td><label><input type="checkbox" id="lab-1c"> One <code>complete(alias)</code> function with alias map and fallback, mocked models</label></td>
+      <td><label><input type="checkbox" id="lab-1b"> API Management AI gateway in front of a Foundry deployment with token limits</label></td>
+      <td><label><input type="checkbox" id="lab-1p"> Cost tags per use case, fallback across two deployments, OpenTelemetry traces</label></td></tr>
+    <tr><td>2 · RAG</td><td>Insurer: underwriting manual Q&amp;A</td>
+      <td><label><input type="checkbox" id="lab-2c"> TF-IDF retrieval over 20 sample pages, answer with citation</label></td>
+      <td><label><input type="checkbox" id="lab-2b"> Azure AI Search (Free) index + Foundry model, hybrid search</label></td>
+      <td><label><input type="checkbox" id="lab-2p"> Document-level access filter, groundedness eval, freshness data contract</label></td></tr>
+    <tr><td>3 · Guardrails</td><td>Retail: customer chat</td>
+      <td><label><input type="checkbox" id="lab-3c"> Regex PII redaction + banned-topic list in Python</label></td>
+      <td><label><input type="checkbox" id="lab-3b"> Azure AI Content Safety + Prompt Shields on input and output</label></td>
+      <td><label><input type="checkbox" id="lab-3p"> Guardrail rules as versioned YAML, red-team suite in CI</label></td></tr>
+    <tr><td>4 · Tool agent + MCP</td><td>Supply chain: PO exceptions</td>
+      <td><label><input type="checkbox" id="lab-4c"> Function calling with two mocked tools (get_po, get_supplier)</label></td>
+      <td><label><input type="checkbox" id="lab-4b"> MCP server over a mock ERP API, used by a Foundry or Claude agent</label></td>
+      <td><label><input type="checkbox" id="lab-4p"> Scoped agent identity, write tool behind human approval queue</label></td></tr>
+    <tr><td>5 · Evals</td><td>Oil &amp; gas: drilling report summary</td>
+      <td><label><input type="checkbox" id="lab-5c"> 20-item golden set, keyword and fact checks in Python</label></td>
+      <td><label><input type="checkbox" id="lab-5b"> Foundry evaluations: groundedness, relevance, fluency</label></td>
+      <td><label><input type="checkbox" id="lab-5p"> Eval gate in GitHub Actions blocks merge below threshold</label></td></tr>
+    <tr><td>6 · Governance</td><td>Any: AI inventory and ARB</td>
+      <td><label><input type="checkbox" id="lab-6c"> Fill risk-tiers.yaml and one model card by hand</label></td>
+      <td><label><input type="checkbox" id="lab-6b"> ai-inventory.yaml + Python validator for required fields</label></td>
+      <td><label><input type="checkbox" id="lab-6p"> policy-gate.yml fails builds without model card, tier or ARB ID</label></td></tr>
+  </table></div>
+  <div class="diagram"><div class="cap">Lab sequence · from Concept to Production</div>
+<pre class="mermaid">
+sequenceDiagram
+  autonumber
+  participant You as You
+  participant Py as Local Python
+  participant Az as Azure resources
+  participant GH as GitHub repo + Actions
+  You->>Py: Concept: build it with mocks
+  Py-->>You: works, you understand the idea
+  You->>Az: Build: swap mocks for real services
+  Az-->>You: real answers, real cost
+  You->>GH: Production: push with model card, evals, policy
+  GH->>GH: tests, eval gate, policy gate
+  GH-->>You: pass, or a clear reason it failed
+  You->>Az: delete resource group to stop cost
+</pre></div>
+</section>
+
+<!-- ================= MATURITY ================= -->
+<section class="panel" id="maturity" role="tabpanel">
+  <h2>AI maturity check</h2>
+  <p>Eight dimensions, five levels. Pick the statement that best matches your organization today. The result shows your overall level and the three weakest dimensions, which are where to start. It takes about five minutes.</p>
+  <div class="grid2" id="mat-form"></div>
+  <div class="card" id="mat-result" aria-live="polite">
+    <h3>Your result</h3>
+    <p><span class="mono" id="mat-score">Average 1.0 of 5</span> · <b id="mat-level">Level 1 · Ad hoc</b></p>
+    <div class="bar" aria-hidden="true"><span id="mat-bar"></span></div>
+    <p class="sub" style="margin-top:10px">Start with these three:</p>
+    <ol id="mat-next"></ol>
+  </div>
+  <div class="tbl"><table>
+    <tr><th>Level</th><th>What it looks like</th><th>Kit entry point</th></tr>
+    <tr><td>1 · Ad hoc</td><td>Individuals use public AI tools; no inventory or rules</td><td>Day-0 rollout, charter, acceptable-use policy</td></tr>
+    <tr><td>2 · Experimenting</td><td>Several pilots, each built differently; spend unknown</td><td>Plug-in mode: inventory, gateway, risk tiers</td></tr>
+    <tr><td>3 · Defined</td><td>Shared platform, ARB, patterns and evals exist</td><td>Domain packs, CI gates, FinOps</td></tr>
+    <tr><td>4 · Managed</td><td>Every system tiered, traced, costed and reviewed</td><td>Value scorecards, multi-cloud exit tests</td></tr>
+    <tr><td>5 · Optimized</td><td>AI portfolio managed like capital; continuous improvement</td><td>Agent autonomy upgrades, external assurance</td></tr>
+  </table></div>
+</section>
+
+<!-- ================= ANTI-PATTERNS ================= -->
+<section class="panel" id="anti" role="tabpanel">
+  <h2>Anti-patterns and the kit control that stops each one</h2>
+  <p>Named failure modes make risks easy to discuss in an ARB. Each row names the pattern, shows how it appears in real programs, and points to the part of the kit that prevents it. The first two are from the FS-AI anti-pattern series.</p>
+  <div class="tbl"><table>
+    <tr><th>Anti-pattern</th><th>What it looks like</th><th>Illustrative example</th><th>Kit control</th></tr>
+    <tr><td>Silent vendor update</td><td>Provider changes the model behind the same name; behavior shifts</td><td>Claims summaries suddenly drop deductible amounts after a model refresh</td><td>Pinned model versions in <code>models.yaml</code>; eval suite reruns on any version change</td></tr>
+    <tr><td>Helpful hallucination</td><td>Confident, plausible, wrong answer that tries to please</td><td>Agent invents a fee waiver policy that does not exist</td><td>Grounding check, mandatory citations, "I don't know" path, output guardrail</td></tr>
+    <tr><td>Pilot purgatory</td><td>Dozens of pilots, none in production</td><td>18 proofs of concept, zero scaled after a year</td><td>Value scorecard with exit criteria set at intake</td></tr>
+    <tr><td>Shadow AI sprawl</td><td>Teams buy AI SaaS on credit cards</td><td>Nine AI tools found only through expense reports</td><td>AI inventory, discovery step in plug-in mode, procurement gate</td></tr>
+    <tr><td>Business logic in prompts</td><td>Rules buried in prompt text no one can test</td><td>Refund limit stated only inside a prompt</td><td>Rules in orchestrator and tools; prompts in versioned registry</td></tr>
+    <tr><td>Over-privileged agent</td><td>Agent uses a human's or admin's credentials</td><td>Support agent could delete customer records</td><td>Per-agent identity, least-privilege scopes, approval for writes</td></tr>
+    <tr><td>Permission-blind RAG</td><td>Retrieval ignores document access rights</td><td>Branch staff see executive compensation files</td><td>Identity passed to retriever; ACL filter</td></tr>
+    <tr><td>Eval-free release</td><td>Changes ship on "looks good to me"</td><td>Prompt tweak breaks 15% of answers unnoticed</td><td>Golden sets and CI eval gate</td></tr>
+    <tr><td>Single-model lock-in</td><td>One provider hard-coded everywhere</td><td>Regional outage stops all AI services for a day</td><td>LLM gateway, model aliases, tested fallback</td></tr>
+    <tr><td>Governance theater</td><td>Policies exist only as PDFs</td><td>ARB approves, but nothing checks the build matches</td><td>Policy as code in <code>policy-gate.yml</code></td></tr>
+    <tr><td>Rubber-stamp human in the loop</td><td>Reviewer approves everything in seconds</td><td>99.8% approval rate, 4-second average review</td><td>Track override rate and review time; sample audits</td></tr>
+    <tr><td>Token blind spend</td><td>No one knows cost per use case</td><td>Monthly AI bill triples with no owner</td><td>Cost tags at gateway, budgets, chargeback</td></tr>
+    <tr><td>Orphaned bot</td><td>Owner leaves; system keeps running</td><td>Old HR bot still answers with last year's policy</td><td>Owner field in inventory, quarterly attestation, retirement runbook</td></tr>
+  </table></div>
+</section>
+
+<!-- ================= TEMPLATES ================= -->
+<section class="panel" id="templates" role="tabpanel">
+  <h2>Templates</h2>
+  <p>Copy these into <code>01-governance/templates/</code>. They are the minimum evidence an ARB, auditor or regulator will ask for.</p>
+  <div class="grid2">
+    <div class="card tpl"><div class="tpl-head"><h3>Use-case intake</h3><button class="copy" type="button" data-copy="tpl1">Copy</button></div>
+<pre class="tree" id="tpl1">use_case_id: UC-2026-014
+name: Claims summary assistant
+sponsor: VP Claims
+business_problem: Adjusters spend 40 min reading each file
+users: 220 claims adjusters (internal)
+decision_supported: none; summary only
+data_used: [claim file, policy docs]
+data_class: confidential
+personal_data: yes
+pattern: rag-assistant + copilot
+proposed_tier: 2
+success_metric: review time -30%, accuracy &gt;= 95%
+human_oversight: adjuster reads every summary
+target_date: 2027-Q1</pre></div>
+    <div class="card tpl"><div class="tpl-head"><h3>ADR for AI</h3><button class="copy" type="button" data-copy="tpl2">Copy</button></div>
+<pre class="tree" id="tpl2"># ADR-AI-007: Model for claims summaries
+Status: Accepted · Date: 2026-11-01 · Tier: 2
+## Context
+Need long-document summaries with citations.
+## Options considered
+1. Large reasoning model via gateway
+2. Smaller model + chunked summaries
+3. Vendor claims-platform feature
+## Decision
+Option 1 via alias "reasoning-large", fallback option 2.
+## Consequences
++ quality; - cost ~$0.06 per file
+## Controls
+Grounding check, PII redaction, eval gate &gt;= 95%
+## Review
+Re-evaluate on any model version change.</pre></div>
+    <div class="card tpl"><div class="tpl-head"><h3>System card</h3><button class="copy" type="button" data-copy="tpl3">Copy</button></div>
+<pre class="tree" id="tpl3">system: claims-summary-assistant
+owner: claims-ai-team
+arb_id: ARB-2026-031
+risk_tier: 2
+models: {primary: reasoning-large@pinned, fallback: reasoning-small}
+intended_use: summarize claim files for adjusters
+out_of_scope: coverage decisions, customer-facing use
+known_limits: handwritten notes, non-English docs
+evals: {golden_set: claims-200, last_score: 0.96}
+guardrails: [pii, grounding, no-coverage-decision]
+monitoring: [quality sample 2%/week, cost, latency]
+autonomy_level: L1 (draft only)
+review_cycle: quarterly
+retirement_trigger: score &lt; 0.90 for 2 weeks</pre></div>
+    <div class="card tpl"><div class="tpl-head"><h3>Vendor AI questionnaire</h3><button class="copy" type="button" data-copy="tpl4">Copy</button></div>
+<pre class="tree" id="tpl4">1. Which models power the product, and who hosts them?
+2. Is our data used to train or improve any model?
+3. How much notice do we get before a model change?
+4. Where is data processed and stored (regions)?
+5. What logs can we export for audit?
+6. How are prompt injection and data leaks tested?
+7. Do you indemnify us for IP claims on outputs?
+8. What is the AI incident notification time?
+9. Which subprocessors touch our data?
+10. Can we disable AI features per user or tenant?</pre></div>
+  </div>
+</section>
+
+<!-- ================= CONTROLS ================= -->
+<section class="panel" id="controls" role="tabpanel">
+  <h2>Control maps</h2>
+  <p>Auditors and regulators ask how your AI program lines up with recognised frameworks. The repo maps every kit artifact to four of them; this tab is the summary. Mappings are at category level, so verify wording against the official texts before audit use.</p>
+  <div class="tbl"><table>
+    <tr><th>NIST AI RMF function</th><th>What it asks for</th><th>Kit artifacts</th></tr>
+    <tr><td>GOVERN</td><td>Policies, roles, accountability, culture</td><td>Charter, RACI, policies, AI ARB, risk tiers, enablement</td></tr>
+    <tr><td>MAP</td><td>Context, purpose and risks of each system</td><td>Use-case intake, portfolio, system cards, impact assessments, threat models</td></tr>
+    <tr><td>MEASURE</td><td>Test, evaluate and track risks</td><td>Golden evals, red-team set, bias tests, tracing, SLOs</td></tr>
+    <tr><td>MANAGE</td><td>Prioritise, respond and recover</td><td>Kill switch, incident runbook, model-change runbook, retirement, FinOps</td></tr>
+  </table></div>
+  <div class="tbl"><table>
+    <tr><th>ISO/IEC 42001 Annex A area</th><th>Kit artifacts</th></tr>
+    <tr><td>A.2 Policies related to AI</td><td>01-governance/policies</td></tr>
+    <tr><td>A.3 Internal organization</td><td>Charter, RACI, AI ARB terms of reference</td></tr>
+    <tr><td>A.4 Resources for AI systems</td><td>Approved models, data classification, platform, enablement</td></tr>
+    <tr><td>A.5 Assessing impacts of AI systems</td><td>Impact assessment template, risk tiers</td></tr>
+    <tr><td>A.6 AI system life cycle</td><td>Patterns, CI gates, autonomy levels, model-change and retirement runbooks</td></tr>
+    <tr><td>A.7 Data for AI systems</td><td>Data contracts, classification, lineage</td></tr>
+    <tr><td>A.8 Information for interested parties</td><td>System cards, AI disclosure, case-study approvals</td></tr>
+    <tr><td>A.9 Use of AI systems</td><td>Acceptable-use and human-oversight policies</td></tr>
+    <tr><td>A.10 Third-party and customer relationships</td><td>Third-party AI policy, vendor questionnaire</td></tr>
+  </table></div>
+  <div class="grid2">
+    <div class="card"><h3>EU AI Act → kit tiers</h3><ul>
+      <li><b>Prohibited practices:</b> rejected at intake, never tiered</li>
+      <li><b>High-risk:</b> Tier 3 with impact assessment, human oversight and logging</li>
+      <li><b>Transparency obligations:</b> AI disclosure in channels; system card</li>
+      <li><b>Minimal risk:</b> Tier 1 with standard controls</li>
+    </ul><p class="sub" style="margin-top:8px">Obligations apply in phases. Not legal advice.</p></div>
+    <div class="card"><h3>OWASP Top 10 for LLM apps → kit controls</h3><ul>
+      <li>Prompt injection → input guardrail, retrieved-content handling</li>
+      <li>Sensitive information disclosure → PII redaction, data-class matrix</li>
+      <li>Excessive agency → agent identities, allow-lists, approval queue</li>
+      <li>Vector and embedding weaknesses → access filter before ranking</li>
+      <li>Misinformation → grounding check, citations, golden evals</li>
+      <li>Unbounded consumption → gateway budgets and rate limits</li>
+    </ul></div>
+  </div>
+</section>
+
+<!-- ================= EA1 ================= -->
+<section class="panel" id="ea1" role="tabpanel">
+  <h2>EA must-do 1 · AI strategy and portfolio</h2>
+  <div class="grid w5">
+    <div class="card"><h3><span class="q">WHAT</span></h3><p>Link AI to business capabilities, then run AI ideas as a scored portfolio.</p></div>
+    <div class="card"><h3><span class="q">WHY</span></h3><p>Most AI spend fails because it chases demos, not capabilities with measurable outcomes.</p></div>
+    <div class="card"><h3><span class="q">WHO</span></h3><p>EA leads; business unit heads, CFO office and CIO decide.</p></div>
+    <div class="card"><h3><span class="q">WHEN</span></h3><p>Before the first build; refreshed every quarter.</p></div>
+    <div class="card"><h3><span class="q">WHERE</span></h3><p><code>00-strategy/</code> and the EA repository tool (e.g. LeanIX, Ardoq, Sparx).</p></div>
+    <div class="card"><h3><span class="q">HOW</span></h3><p>Capability heat map → idea scoring → build / buy / partner decision → funding.</p></div>
+  </div>
+  <ol class="steps">
+    <li><b>Map capabilities.</b> Mark which business capabilities AI can lift (e.g. "Claims adjudication", "Supplier onboarding").</li>
+    <li><b>Collect ideas</b> through one intake form, not email.</li>
+    <li><b>Score each idea</b> 1–5 on value, feasibility (data ready? pattern exists?), and risk.</li>
+    <li><b>Decide build, buy or partner.</b> Copilot features in SaaS you already own often beat a custom build.</li>
+    <li><b>Rationalize.</b> Find duplicate AI tools in the application portfolio and retire them (TIME model: Tolerate, Invest, Migrate, Eliminate).</li>
+    <li><b>Publish a roadmap</b> with lighthouse, scale and retire waves.</li>
+  </ol>
+  <div class="card"><h3>Illustrative example</h3><p class="ex"><b>Capital-markets firm</b> received 140 AI requests in one quarter. Scoring cut that to 8 funded items. Three were met by switching on features in existing vendor platforms, saving a custom build.</p></div>
+</section>
+
+<!-- ================= EA2 ================= -->
+<section class="panel" id="ea2" role="tabpanel">
+  <h2>EA must-do 2 · Governance and the AI ARB</h2>
+  <div class="grid w5">
+    <div class="card"><h3><span class="q">WHAT</span></h3><p>Risk tiers, an AI Architecture Review Board, ADRs for AI, policy as code and an AI inventory.</p></div>
+    <div class="card"><h3><span class="q">WHY</span></h3><p>Regulators and auditors ask: what AI do you run, who approved it, on what evidence?</p></div>
+    <div class="card"><h3><span class="q">WHO</span></h3><p>EA chairs; Risk, Security, Privacy, Legal, Data and a business rep vote.</p></div>
+    <div class="card"><h3><span class="q">WHEN</span></h3><p>Tier 1: async review in 48 hours. Tier 2–3: full board, weekly slot.</p></div>
+    <div class="card"><h3><span class="q">WHERE</span></h3><p>Plug into the existing ARB as a sub-board. Don't create a parallel bureaucracy.</p></div>
+    <div class="card"><h3><span class="q">HOW</span></h3><p>Standard evidence pack, controls mapped to frameworks, checks automated in CI.</p></div>
+  </div>
+  <div class="diagram"><div class="cap">AI ARB review sequence</div>
+<pre class="mermaid">
+sequenceDiagram
+  autonumber
+  participant BU as Business sponsor
+  participant EA as Enterprise architect
+  participant RISK as Risk and compliance
+  participant SEC as Security
+  participant ARB as AI ARB
+  BU->>EA: submit use-case intake form
+  EA->>EA: assign risk tier, map to approved pattern
+  alt Tier 1
+    EA->>ARB: async approval with checklist
+  else Tier 2 or 3
+    EA->>RISK: impact assessment
+    EA->>SEC: threat model review
+    RISK-->>EA: conditions
+    SEC-->>EA: required controls
+    EA->>ARB: ADR + evidence pack
+  end
+  ARB-->>BU: approve, approve with conditions, or reject
+  ARB->>EA: record decision in AI inventory
+</pre></div>
+  <div class="tbl"><table>
+    <tr><th>Tier</th><th>Example</th><th>Required controls</th></tr>
+    <tr><td>Tier 1 · Low</td><td>Internal meeting summaries; marketing draft copy</td><td>Approved model, logging, acceptable-use notice</td></tr>
+    <tr><td>Tier 2 · Medium</td><td>Customer service agent; supplier email triage</td><td>+ guardrails, golden evals, human escalation, model card, quarterly review</td></tr>
+    <tr><td>Tier 3 · High</td><td>Credit, claims, hiring or medical decision support</td><td>+ impact assessment, bias testing, human sign-off on every decision, independent validation, explainability</td></tr>
+  </table></div>
+  <div class="card"><h3>Frameworks to map controls to</h3><p>NIST AI RMF (Govern, Map, Measure, Manage) · ISO/IEC 42001 AI management system · EU AI Act risk classes · OWASP Top 10 for LLM Applications · sector rules from the Industry tab.</p></div>
+</section>
+
+<!-- ================= EA3 ================= -->
+<section class="panel" id="ea3" role="tabpanel">
+  <h2>EA must-do 3 · Reference architecture and standards</h2>
+  <div class="grid w5">
+    <div class="card"><h3><span class="q">WHAT</span></h3><p>Approved patterns, approved model list, integration standards and an exit strategy.</p></div>
+    <div class="card"><h3><span class="q">WHY</span></h3><p>Patterns make the safe path the easy path. Teams reuse instead of inventing.</p></div>
+    <div class="card"><h3><span class="q">WHO</span></h3><p>EA writes; platform and solution architects contribute; ARB ratifies.</p></div>
+    <div class="card"><h3><span class="q">HOW</span></h3><p>Each pattern = diagram + ADR + code template + eval template.</p></div>
+  </div>
+  <div class="tbl"><table>
+    <tr><th>Pattern</th><th>Use when</th><th>Illustrative example</th></tr>
+    <tr><td>RAG assistant</td><td>Answers from internal documents</td><td>Underwriting manual Q&amp;A for new underwriters</td></tr>
+    <tr><td>Tool-using agent</td><td>Needs to read or act on systems</td><td>Order-status agent calling OMS via MCP</td></tr>
+    <tr><td>Document extraction</td><td>Turn PDFs/emails into structured data</td><td>Bills of lading → ERP fields</td></tr>
+    <tr><td>Copilot in existing app</td><td>Assist a user inside a workflow</td><td>Claims adjuster sidebar summarizing the file</td></tr>
+    <tr><td>Multi-agent orchestration</td><td>Several specialist steps</td><td>KYC: extract → screen → summarize → route</td></tr>
+    <tr><td>Classic ML + GenAI explain</td><td>Numeric prediction plus narrative</td><td>Demand forecast with plain-English driver summary</td></tr>
+  </table></div>
+  <div class="card"><h3>Standards EA must publish</h3><ul class="check">
+    <li>All model calls go through the LLM gateway. No direct keys in apps.</li>
+    <li>Approved model list with allowed data classifications per model.</li>
+    <li>Tools exposed via MCP with allow-lists and scoped identities.</li>
+    <li>OpenTelemetry tracing with GenAI semantic conventions.</li>
+    <li>Prompts versioned in the registry; no prompts hard-coded.</li>
+    <li>Exit plan: second model and second cloud tested at least yearly.</li>
+  </ul></div>
+</section>
+
+<!-- ================= EA4 ================= -->
+<section class="panel" id="ea4" role="tabpanel">
+  <h2>EA must-do 4 · Data and security architecture for AI</h2>
+  <div class="grid w5">
+    <div class="card"><h3><span class="q">WHAT</span></h3><p>Decide which data may reach which model, and how agents are identified and limited.</p></div>
+    <div class="card"><h3><span class="q">WHY</span></h3><p>AI turns data leaks into conversation leaks, and agents can act, not just read.</p></div>
+    <div class="card"><h3><span class="q">WHO</span></h3><p>EA with CDO, CISO and Privacy.</p></div>
+    <div class="card"><h3><span class="q">WHEN</span></h3><p>Before any RAG index or tool goes live.</p></div>
+  </div>
+  <div class="grid2">
+    <div class="card"><h3>Data checklist</h3><ul class="check">
+      <li>Classification → model matrix (restricted data only to private endpoints).</li>
+      <li>Data contract per RAG source: owner, freshness, quality rules.</li>
+      <li>Document-level access control carried into retrieval.</li>
+      <li>Lineage from source document to answer citation.</li>
+      <li>Retention rules for prompts, outputs and memory.</li>
+      <li>Data residency and sovereignty: which regions each model endpoint may run in.</li>
+      <li>Synthetic or masked data for dev and test; no production data in sandboxes.</li>
+    </ul></div>
+    <div class="card"><h3>Security checklist</h3><ul class="check">
+      <li>Threat model each use case against OWASP LLM Top 10.</li>
+      <li>Prompt-injection defenses on all retrieved and tool content.</li>
+      <li>Each agent has its own non-human identity and least-privilege scopes.</li>
+      <li>Write or payment actions require human approval.</li>
+      <li>Red-team suite runs in CI and before each major release.</li>
+    </ul></div>
+  </div>
+  <div class="card"><h3>Illustrative example</h3><p class="ex"><b>Bank HR-policy bot</b> answered a branch employee's question using an executive compensation document, because retrieval ignored SharePoint permissions. Fix: carry user identity into the retriever and filter by document ACL. Now a standard in the kit's <code>knowledge/retrievers</code>.</p></div>
+</section>
+
+<!-- ================= EA5 ================= -->
+<section class="panel" id="ea5" role="tabpanel">
+  <h2>EA must-do 5 · Operating model, FinOps and value</h2>
+  <div class="grid w5">
+    <div class="card"><h3><span class="q">WHAT</span></h3><p>Who does what, how AI is paid for, and how value is proven.</p></div>
+    <div class="card"><h3><span class="q">WHY</span></h3><p>Token costs scale silently; unclear ownership leaves orphaned bots.</p></div>
+    <div class="card"><h3><span class="q">WHO</span></h3><p>AI CoE (hub) + embedded AI leads in each business unit (spokes).</p></div>
+    <div class="card"><h3><span class="q">HOW</span></h3><p>Hub owns platform and standards; spokes own use cases and value.</p></div>
+  </div>
+  <div class="tbl"><table>
+    <tr><th>Activity</th><th>EA</th><th>Platform</th><th>Delivery team</th><th>Risk / Security</th><th>Business</th></tr>
+    <tr><td>Standards &amp; patterns</td><td>A/R</td><td>C</td><td>C</td><td>C</td><td>I</td></tr>
+    <tr><td>Shared platform</td><td>C</td><td>A/R</td><td>I</td><td>C</td><td>I</td></tr>
+    <tr><td>Use-case build</td><td>C</td><td>C</td><td>A/R</td><td>C</td><td>C</td></tr>
+    <tr><td>Approval (ARB)</td><td>R</td><td>C</td><td>I</td><td>A</td><td>C</td></tr>
+    <tr><td>Value realization</td><td>C</td><td>I</td><td>R</td><td>I</td><td>A</td></tr>
+  </table></div>
+  <div class="grid">
+    <div class="card"><h3>FinOps metrics</h3><ul><li>Cost per transaction (per claim, per order, per chat)</li><li>Tokens per request trend</li><li>Cache hit rate</li><li>Budget vs actual per use case</li></ul></div>
+    <div class="card"><h3>Value metrics</h3><ul><li>Hours saved, verified by time studies</li><li>Quality: error rate, rework</li><li>Customer: CSAT, resolution time</li><li>Revenue: conversion, retention</li></ul></div>
+    <div class="card"><h3>Illustrative example</h3><p class="ex"><b>Retailer</b> found its support agent cost $0.42 per chat. Routing simple intents to a smaller model and caching FAQs brought it to $0.11 with no CSAT drop.</p></div>
+  </div>
+</section>
+
+<!-- ================= EA7 ================= -->
+<section class="panel" id="ea7" role="tabpanel">
+  <h2>EA must-do 7 · Agent lifecycle, autonomy and incidents</h2>
+  <div class="grid w5">
+    <div class="card"><h3><span class="q">WHAT</span></h3><p>Set how much an agent may do on its own, how it changes over time, and how it is stopped.</p></div>
+    <div class="card"><h3><span class="q">WHY</span></h3><p>Agents act. A wrong action costs more than a wrong answer, and models drift.</p></div>
+    <div class="card"><h3><span class="q">WHO</span></h3><p>EA sets autonomy rules; SRE runs incidents; owner and ARB approve level changes.</p></div>
+    <div class="card"><h3><span class="q">HOW</span></h3><p>Autonomy levels, versioned releases, a kill switch at the gateway, and a tested runbook.</p></div>
+  </div>
+  <div class="tbl"><table>
+    <tr><th>Autonomy level</th><th>Agent may</th><th>Example</th><th>Allowed tiers</th></tr>
+    <tr><td>L0 · Suggest</td><td>Recommend only; human does everything</td><td>Next-best-action hint for a banker</td><td>All</td></tr>
+    <tr><td>L1 · Draft</td><td>Prepare output; human sends or saves</td><td>Draft reply to a customer complaint</td><td>All</td></tr>
+    <tr><td>L2 · Act with approval</td><td>Execute after a human clicks approve</td><td>Create a maintenance work order</td><td>1–3</td></tr>
+    <tr><td>L3 · Act within limits</td><td>Execute alone under caps; humans sample</td><td>Refunds under $50; reorder under safety stock</td><td>1–2</td></tr>
+    <tr><td>L4 · Autonomous</td><td>Plan and act across systems</td><td>Rare; internal IT ops tasks</td><td>1, with ARB approval</td></tr>
+  </table></div>
+  <div class="diagram"><div class="cap">Agent lifecycle</div>
+<pre class="mermaid">
+flowchart LR
+  A["Design + tier"] --> B["Register in inventory"]
+  B --> C["Evaluate: golden + red team"]
+  C --> D["Canary release 5%"]
+  D --> E["Monitor quality, drift, cost"]
+  E -->|"model or prompt change"| C
+  E -->|"stable 90 days + ARB"| F["Raise autonomy level"]
+  F --> E
+  E -->|"value or quality below threshold"| G["Retire + archive evidence"]
+</pre></div>
+  <div class="diagram"><div class="cap">AI incident response sequence</div>
+<pre class="mermaid">
+sequenceDiagram
+  autonumber
+  participant M as Monitoring
+  participant S as SRE on call
+  participant G as LLM gateway
+  participant H as Human team
+  participant O as System owner
+  participant R as Risk and ARB
+  M->>S: alert: hallucination rate above threshold
+  S->>G: kill switch: disable agent alias
+  G-->>H: route all traffic to human queue
+  S->>O: page owner, open incident
+  O->>R: notify, assess customer impact
+  R-->>O: regulator or customer notice if required
+  O->>O: root cause, fix, re-run evals
+  O->>R: evidence for re-enable
+  R-->>S: approve
+  S->>G: re-enable at canary 5%
+</pre></div>
+  <div class="card"><h3>Illustrative example</h3><p class="ex"><b>Logistics firm.</b> A carrier-email agent began promising delivery dates after a prompt change. Monitoring caught a spike in "guarantee" phrases within an hour; the gateway kill switch routed emails to the human desk; the fix and re-eval took one day. Without the switch, the only option would have been a code rollback across three apps.</p></div>
+</section>
+
+<!-- ================= EA8 ================= -->
+<section class="panel" id="ea8" role="tabpanel">
+  <h2>EA must-do 8 · Vendors, responsible AI and people</h2>
+  <div class="grid w5">
+    <div class="card"><h3><span class="q">WHAT</span></h3><p>Govern AI you buy, turn ethics principles into controls, and prepare people.</p></div>
+    <div class="card"><h3><span class="q">WHY</span></h3><p>Most enterprise AI arrives inside SaaS. Principles without controls do nothing. Adoption fails without trust.</p></div>
+    <div class="card"><h3><span class="q">WHO</span></h3><p>EA with Procurement, Legal, HR, Communications and the ethics or risk committee.</p></div>
+    <div class="card"><h3><span class="q">WHEN</span></h3><p>At every SaaS renewal, at intake, and before any rollout that changes jobs.</p></div>
+  </div>
+  <div class="tbl"><table>
+    <tr><th>Principle</th><th>Control in the kit</th><th>Evidence</th></tr>
+    <tr><td>Fairness</td><td>Bias tests by group in <code>evals/suites/bias</code></td><td>Disparity report per release</td></tr>
+    <tr><td>Transparency</td><td>AI disclosure in channels; system card</td><td>Screenshot of disclosure; published card</td></tr>
+    <tr><td>Explainability</td><td>Citations for GenAI; reason codes for ML</td><td>Sample explanations in eval report</td></tr>
+    <tr><td>Accountability</td><td>Named owner; ARB decision</td><td>Inventory record; decision log</td></tr>
+    <tr><td>Privacy</td><td>PII redaction; data class → model matrix</td><td>Guardrail logs; DPIA</td></tr>
+    <tr><td>Safety</td><td>Guardrails; autonomy limits; kill switch</td><td>Red-team results; incident drills</td></tr>
+    <tr><td>Sustainability</td><td>Right-size models; caching</td><td>Tokens and estimated energy per use case</td></tr>
+  </table></div>
+  <div class="grid2">
+    <div class="card"><h3>Third-party AI checklist</h3><ul class="check">
+      <li>Vendor questionnaire (Templates tab) at purchase and renewal</li>
+      <li>Contract: no training on your data; advance notice of model changes</li>
+      <li>Contract: data residency, audit log export, incident notice time</li>
+      <li>IP indemnity for generated output; model license terms reviewed</li>
+      <li>Vendor AI features registered in the inventory with a tier</li>
+      <li>Admin switch to disable AI features per tenant or user</li>
+    </ul></div>
+    <div class="card"><h3>People and change checklist</h3><ul class="check">
+      <li>AI literacy for all staff: safe use, what not to paste</li>
+      <li>Builder track: patterns, evals, guardrails</li>
+      <li>Reviewer track: how to check AI output, when to override</li>
+      <li>Leader track: value, risk, portfolio decisions</li>
+      <li>Workforce impact assessment before roles change</li>
+      <li>Champions network in each business unit</li>
+    </ul></div>
+  </div>
+  <div class="card"><h3>Illustrative example</h3><p class="ex"><b>Insurer</b> discovered its CRM vendor had switched on generative email drafting for all agents at a release. Because vendor AI features were in the inventory and the contract required notice, the change was caught in testing and enabled only after a Tier 2 review.</p></div>
+</section>
+
+<!-- ================= EA6 ================= -->
+<section class="panel" id="ea6" role="tabpanel">
+  <h2>EA must-do 6 · The first 90 days</h2>
+  <p>A practical checklist for the Enterprise Architect leading the rollout. Works for Day-0 and plug-in.</p>
+  <div class="grid">
+    <div class="card"><h3>Days 1–30 · Frame</h3><ul class="check">
+      <li>Charter signed by executive sponsor</li>
+      <li>AI inventory started (including shadow AI)</li>
+      <li>Risk tiers and AI ARB terms of reference</li>
+      <li>Capability map with AI heat map</li>
+      <li>Cloud and primary model decision as ADRs</li>
+    </ul></div>
+    <div class="card"><h3>Days 31–60 · Build the rails</h3><ul class="check">
+      <li>Kit repo forked; <code>kit.yaml</code> set</li>
+      <li>LLM gateway, guardrails, tracing live in dev</li>
+      <li>Approved model list and data matrix published</li>
+      <li>First domain pack drafted</li>
+      <li>CI gates: tests, evals and policy</li>
+    </ul></div>
+    <div class="card"><h3>Days 61–90 · Prove value</h3><ul class="check">
+      <li>Two lighthouse use cases in pilot</li>
+      <li>First ARB decisions recorded</li>
+      <li>Cost and value dashboard live</li>
+      <li>Enablement: training for builders and reviewers</li>
+      <li>Scale roadmap for next two quarters</li>
+    </ul></div>
+  </div>
+  <div class="callout"><p><b>One-line test of success at day 90:</b> the CIO can answer "How many AI systems do we run, what do they cost, who approved them, and what value did they deliver?" from one dashboard.</p></div>
+</section>
+
+</div></main>
+
+<footer><div class="wrap">The Architect's Series by Rajaretnam Suresh Edward David · Also in the series: <a href="https://edwardsuresh.github.io/architects-ml-playbook/" target="_blank" rel="noopener">The Architect's ML Playbook</a>. Organization examples are illustrative composites based on common patterns, not specific client case studies. Service names and regulatory references change frequently. Verify against current provider documentation and your Legal team before use in a design review.</div></footer>
+
+<script>
+(function(){
+  var tabs=document.querySelectorAll('.tab');
+  function show(id){
+    var found=document.getElementById(id); if(!found) return;
+    tabs.forEach(function(t){t.setAttribute('aria-selected',t.dataset.t===id?'true':'false')});
+    document.querySelectorAll('.panel').forEach(function(p){p.classList.toggle('active',p.id===id)});
+    var a=document.querySelector('.tab[aria-selected="true"]'); if(a&&a.scrollIntoView){try{a.scrollIntoView({block:'nearest',inline:'nearest'})}catch(e){}}
+  }
+  tabs.forEach(function(t){t.addEventListener('click',function(){
+    show(t.dataset.t);
+    try{history.replaceState(null,'','#'+t.dataset.t)}catch(e){}
+    window.scrollTo({top:0});
+  })});
+  var h=(location.hash||'').slice(1); if(h) show(h);
+  window.addEventListener('hashchange',function(){show((location.hash||'').slice(1)||'overview')});
+
+  // Pattern ranking
+  var P=[
+    ["RAG assistant",5,5,4,4,4,"Underwriting manual Q&A for new underwriters"],
+    ["Document extraction",5,5,5,4,3,"Bills of lading and invoices into ERP fields"],
+    ["Classic ML + GenAI explanation",5,4,5,5,4,"Probability of default with plain-English reason codes"],
+    ["Copilot in existing app",4,5,4,4,4,"Claims adjuster sidebar summarizing the file"],
+    ["Tool-using agent",4,4,5,3,5,"Order-status agent calling the OMS"],
+    ["Anomaly detection + agent triage",5,4,3,5,3,"Pressure anomaly drafts a maintenance work order"],
+    ["Summarization of long records",4,5,3,4,2,"Medical records summary for bodily-injury claims"],
+    ["Conversational customer agent",4,4,2,1,5,"Retail returns and delivery questions"],
+    ["IT and code copilot",4,3,3,3,4,"Legacy COBOL explanation for modernization"],
+    ["Vision + LLM report",1,4,4,5,3,"Drone pipeline imagery to inspection report"],
+    ["Multi-agent orchestration",3,3,4,3,3,"KYC: extract, screen, summarize, route"],
+    ["Content generation",2,2,2,1,5,"Product descriptions in brand voice"]
+  ];
+  var key={fs:1,ins:2,sc:3,og:4,ret:5};
+  var sel=document.getElementById('rank-sort');
+  function avg(r){return (r[1]+r[2]+r[3]+r[4]+r[5])/5}
+  function render(){
+    var k=sel.value, rows=P.slice();
+    rows.sort(function(a,b){return k==='all'?avg(b)-avg(a):(b[key[k]]-a[key[k]])||(avg(b)-avg(a))});
+    var tb=document.querySelector('#rank-table tbody'); tb.innerHTML='';
+    rows.forEach(function(r,i){
+      var tr=document.createElement('tr');
+      var html='<td class="score">'+(i+1)+'</td><td>'+r[0]+'</td>';
+      for(var c=1;c<=5;c++){var cls='score s'+r[c]+(key[k]===c?' sort':'');html+='<td class="'+cls+'">'+r[c]+'</td>'}
+      html+='<td class="score">'+avg(r).toFixed(1)+'</td><td class="ex">'+r[6]+'</td>';
+      tr.innerHTML=html; tb.appendChild(tr);
+    });
+  }
+  sel.addEventListener('change',render); render();
+
+  // Lab progress
+  var boxes=document.querySelectorAll('#labs-table input[type=checkbox]');
+  var saved={}; try{saved=JSON.parse(localStorage.getItem('eaikit-labs')||'{}')}catch(e){}
+  function update(){
+    var n=0; boxes.forEach(function(b){if(b.checked)n++});
+    document.getElementById('prog-text').textContent=n+' of '+boxes.length+' labs marked complete';
+    document.getElementById('prog-bar').style.width=(n/boxes.length*100)+'%';
+  }
+  boxes.forEach(function(b){
+    if(saved[b.id]) b.checked=true;
+    b.addEventListener('change',function(){saved[b.id]=b.checked;try{localStorage.setItem('eaikit-labs',JSON.stringify(saved))}catch(e){} update();});
+  });
+  update();
+
+  // Maturity check
+  var D=[
+    ["Strategy","No AI strategy","Pilots chosen ad hoc","Portfolio scored against capabilities","Roadmap funded and reviewed quarterly","AI portfolio managed like capital investments"],
+    ["Governance","No rules","Acceptable-use policy only","Risk tiers and AI ARB working","Every system tiered and attested","Controls automated and externally assured"],
+    ["Architecture & platform","Each team builds its own","Some shared components","Shared gateway, patterns, templates","Multi-cloud adapters, reuse measured","Platform self-service with exit tested"],
+    ["Data","Unknown what data reaches AI","Some classification","Data class to model matrix enforced","Contracts and lineage for all AI sources","Data quality monitored in real time"],
+    ["Security","No AI-specific security","Ad hoc reviews","Threat model per use case","Red team in CI, agent identities","Continuous adversarial testing"],
+    ["Operations","No monitoring","Logs only","Tracing and evals in CI","SLOs, drift alerts, kill switch","Automated rollback and canary"],
+    ["People & change","Self-taught users","Some training","Role-based learning tracks","Champions in every unit","AI skills built into every role"],
+    ["Value & FinOps","Costs unknown","Total bill known","Cost per use case tracked","Value scorecards drive funding","Chargeback and unit economics optimized"]
+  ];
+  var LV=["Ad hoc","Experimenting","Defined","Managed","Optimized"];
+  var form=document.getElementById('mat-form'); var mat={};
+  try{mat=JSON.parse(localStorage.getItem('eaikit-mat')||'{}')}catch(e){}
+  D.forEach(function(d,i){
+    var c=document.createElement('div'); c.className='card mat-q';
+    var id='mat-'+i; var html='<label for="'+id+'">'+d[0]+'</label><select id="'+id+'">';
+    for(var l=1;l<=5;l++){html+='<option value="'+l+'">'+l+' · '+d[l]+'</option>'}
+    c.innerHTML=html+'</select>'; form.appendChild(c);
+    var s=c.querySelector('select'); if(mat[id]) s.value=mat[id];
+    s.addEventListener('change',function(){mat[id]=s.value;try{localStorage.setItem('eaikit-mat',JSON.stringify(mat))}catch(e){} score();});
+  });
+  function score(){
+    var vals=D.map(function(d,i){return {n:d[0],v:+document.getElementById('mat-'+i).value,i:i}});
+    var a=vals.reduce(function(s,x){return s+x.v},0)/vals.length;
+    document.getElementById('mat-score').textContent='Average '+a.toFixed(1)+' of 5';
+    var lvl=Math.max(1,Math.min(5,Math.floor(a+0.0001)));
+    document.getElementById('mat-level').textContent='Level '+lvl+' · '+LV[lvl-1];
+    document.getElementById('mat-bar').style.width=(a/5*100)+'%';
+    var low=vals.slice().sort(function(x,y){return x.v-y.v}).slice(0,3);
+    var ol=document.getElementById('mat-next'); ol.innerHTML='';
+    low.forEach(function(x){var li=document.createElement('li');
+      li.textContent=x.n+': move from "'+D[x.i][x.v]+'" to "'+(x.v<5?D[x.i][x.v+1]:'sustain')+'"';ol.appendChild(li)});
+  }
+  score();
+
+  // Copy buttons
+  document.querySelectorAll('.copy').forEach(function(b){
+    b.addEventListener('click',function(){
+      var el=document.getElementById(b.dataset.copy); var txt=el.textContent;
+      function sel(){var r=document.createRange();r.selectNodeContents(el);var s=window.getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selected';}
+      try{navigator.clipboard.writeText(txt).then(function(){b.textContent='Copied';setTimeout(function(){b.textContent='Copy'},1500)},sel)}catch(e){sel()}
+    });
+  });
+})();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script>mermaid.initialize({startOnLoad:true,securityLevel:"strict",theme:"default"});</script>
+</body>
+</html>

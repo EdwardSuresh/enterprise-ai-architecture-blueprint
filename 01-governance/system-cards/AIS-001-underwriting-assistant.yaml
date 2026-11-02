@@ -1,0 +1,19 @@
+# System card - ILLUSTRATIVE example
+system: underwriting-manual-assistant
+inventory_id: AIS-001
+owner: underwriting-ai-team
+arb_id: ARB-2026-012
+risk_tier: 2
+autonomy_level: L1          # drafts answers; underwriter decides
+pattern: rag-assistant
+models: {primary: reasoning-large, fallback: reasoning-small}
+intended_use: Answer underwriters' questions from the commercial underwriting manual, with citations.
+out_of_scope: [binding coverage, pricing decisions, customer-facing use]
+users: Commercial underwriters (internal)
+data_sources: [underwriting manual, appetite guide]
+data_class: confidential
+known_limits: [tables in scanned PDFs, state-specific endorsements not yet indexed]
+guardrails: [pii-redaction, prompt-injection, insurance pack rules, grounding >= 0.6]
+evals: {golden_set: domain-packs/insurance/evals/golden.jsonl, threshold: 0.8}
+monitoring: [weekly 2% answer sample reviewed by senior underwriter, cost per answer, latency p95]
+retirement_trigger: eval pass rate below threshold for two consecutive weeks

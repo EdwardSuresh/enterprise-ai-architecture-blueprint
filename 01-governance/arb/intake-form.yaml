@@ -1,0 +1,64 @@
+# AI Use-Case Intake Form
+# Copy this file to intake/<use_case_id>.yaml and submit as a pull request.
+# Keep answers short and plain. The ARB will ask for detail if needed.
+# Allowed values are listed in comments. Fields marked REQUIRED must be filled.
+
+use_case_id: UC-000            # REQUIRED. Matches the id in 00-strategy/use-case-portfolio.csv
+name: ""                       # REQUIRED. Short descriptive name, e.g. "Claims document intake"
+sponsor:                       # REQUIRED. Accountable business owner
+  name: ""
+  title: ""
+  business_unit: ""
+
+business_problem: >            # REQUIRED. What problem, for whom, and what it costs today.
+  Describe the problem in two to four sentences. Avoid naming a technology.
+
+users:                         # REQUIRED. Who uses the system directly
+  - group: ""                  # e.g. "claims handlers", "customers", "clinicians"
+    approx_count: 0
+    internal: true             # false if customers or the public use it
+
+decision_supported: >          # REQUIRED. What decision or action the output feeds.
+  e.g. "Handler decides whether a claim needs a site visit."
+  State if the decision materially affects an individual.
+
+data_used:                     # REQUIRED. Every source the system reads, indexes or is trained on
+  - source: ""                 # system or dataset name
+    owner: ""                  # data owner
+    contract: ""               # path to data contract, if one exists
+
+data_class: internal           # REQUIRED. Highest class across all data. public | internal | confidential | restricted
+                               # See data/classification.yaml. Derived data inherits the highest class.
+
+personal_data:                 # REQUIRED
+  present: false               # true if any personal data is processed
+  special_category: false      # true for health, biometric or other sensitive categories
+  subjects: []                 # e.g. ["customers", "employees", "patients"]
+
+pattern: rag-assistant         # REQUIRED. One of the patterns in 02-architecture/patterns:
+                               # rag-assistant | document-extraction | tool-using-agent | copilot-in-app |
+                               # multi-agent-orchestration | classic-ml-with-genai-explanation |
+                               # anomaly-detection-agent-triage | conversational-customer-agent |
+                               # content-generation | vision-llm-report | other (explain in notes)
+
+proposed_tier: 1               # REQUIRED. 1 | 2 | 3 (same integers as risk_tier in ai-inventory.yaml). Proposed by the team; confirmed by EA and risk.
+
+autonomy_level: L0             # REQUIRED. L0 Suggest | L1 Draft | L2 Act with approval | L3 Act within limits | L4 Autonomous
+                               # Max by tier: Tier 1 up to L4 with ARB approval, Tier 2 up to L3, Tier 3 up to L2.
+
+success_metric:                # REQUIRED. How value will be measured. Baseline must be known before build.
+  measure: ""                  # e.g. "minutes per claim intake"
+  baseline: ""
+  target: ""
+
+human_oversight: >             # REQUIRED. Who reviews outputs, when, and with what authority.
+  e.g. "Handler reviews every extracted field before submission. Can edit or reject."
+  Describe the fallback when the AI is switched off.
+
+target_date: 2027-01-31        # REQUIRED. Target production date (YYYY-MM-DD)
+
+# Optional fields
+sourcing: build                # build | buy-embedded | buy-standalone | partner
+vendor: ""                     # if bought or partnered
+regions: []                    # where users and data are located
+notes: ""

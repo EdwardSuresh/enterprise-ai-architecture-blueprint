@@ -1,0 +1,18 @@
+# Sector guardrails template. Loaded by kit.guardrails.
+# Schema (do not change the keys):
+#   pack: <pack-slug>
+#   rules:
+#     - id: <SECTOR-G01>
+#       description: <text>
+#       type: block_topic | require_human
+#       patterns: ['regex1', 'regex2']   # Python regex, case-insensitive, checked on input and draft output
+#       message: <what the user sees>
+# Use single-quoted YAML strings for regex so \b needs no extra escaping.
+# Write 3-5 rules. Test each pattern against your golden set so it does not fire on normal answers.
+pack: template
+rules:
+  - id: TPL-G01
+    description: "Example: route requests that need a qualified human to a person."
+    type: require_human
+    patterns: ['\b(cancel|close) my account\b', '\bspeak to a (person|human)\b']
+    message: "A team member will help you with this request."

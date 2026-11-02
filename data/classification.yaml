@@ -1,0 +1,81 @@
+# Data classification for AI use.
+# Used by: data contracts (data/contracts/), the AI inventory (data_class field),
+# approved-models.yaml (allowed_data_classes per alias) and the LLM gateway routing rules.
+# Derived data (chunks, embeddings, summaries, prompt logs, eval sets) inherits the
+# HIGHEST class of its sources.
+#
+# allowed_model_hosting values, from least to most restrictive:
+#   any                         - any approved model endpoint, including shared public SaaS endpoints
+#   enterprise-endpoint         - endpoints under an enterprise contract: no training on our data,
+#                                 defined retention, enterprise authentication
+#   private-endpoint            - enterprise endpoint reached over private networking, our tenancy,
+#                                 zero or minimal provider retention
+#   private-endpoint-in-region  - private endpoint in an approved region (data residency), zero retention,
+#                                 customer-managed keys where available
+#
+# Retention values are defaults for AI-derived copies. Legal and records rules take precedence.
+
+classes:
+  public:
+    level: 1
+    description: Information approved for public release. Disclosure causes no harm.
+    examples:
+      - Published product pages and brochures
+      - Public annual reports
+      - Published regulations and standards summaries
+    allowed_model_hosting: any
+    retention:
+      prompt_logs: 90d
+      indexes: while source is published
+    handling:
+      - Check accuracy before reuse; public does not mean correct.
+
+  internal:
+    level: 2
+    description: Everyday business information for staff. Disclosure causes limited harm.
+    examples:
+      - Internal procedures and policies
+      - Org charts and internal announcements
+      - Non-sensitive project documents
+    allowed_model_hosting: enterprise-endpoint
+    retention:
+      prompt_logs: 90d
+      indexes: while source is current
+    handling:
+      - Enterprise-approved tools only.
+      - Not to be pasted into unapproved public AI services.
+
+  confidential:
+    level: 3
+    description: Sensitive business or personal information. Disclosure causes significant harm to people or the organization.
+    examples:
+      - Customer records and account details
+      - Employee records
+      - Contracts, pricing, unpublished financials
+      - Claims, case and incident files
+    allowed_model_hosting: private-endpoint
+    retention:
+      prompt_logs: 30d, redacted
+      indexes: while source is current; deleted with source
+    handling:
+      - Retrieval must enforce source permissions per user.
+      - Redact identifiers not needed for the task.
+      - Content logs restricted to named roles.
+
+  restricted:
+    level: 4
+    description: Highest sensitivity. Disclosure causes severe harm or breaches law. Includes special-category personal data, payment card data, authentication secrets and regulated data with residency rules.
+    examples:
+      - Health and medical records
+      - Payment card and bank account numbers
+      - National identifiers
+      - Security keys and credentials (never sent to models)
+      - Legally privileged material
+    allowed_model_hosting: private-endpoint-in-region
+    retention:
+      prompt_logs: off by default; if ARB and privacy approve, 7d in a restricted store
+      indexes: only with ARB approval; deleted with source
+    handling:
+      - ARB approval required for any AI use.
+      - Customer-managed encryption keys where available.
+      - Credentials and secrets are never sent to any model.

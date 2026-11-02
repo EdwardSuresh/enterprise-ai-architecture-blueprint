@@ -1,0 +1,25 @@
+# Sector guardrails for the insurance pack.
+# Loaded by kit.guardrails. Patterns are Python regex, matched case-insensitively
+# against the user input and the draft output. type: block_topic | require_human.
+pack: insurance
+rules:
+  - id: INS-G01
+    description: "Block coverage or payment promises before a decision."
+    type: block_topic
+    patterns: ['\bwill (my|this|the) claim be (paid|approved|covered)\b', '\bguaranteed? (coverage|payment|payout)\b']
+    message: "I can't confirm coverage or payment. A claims professional will review your claim and explain the decision."
+  - id: INS-G02
+    description: "Route claim denials and policy cancellations to a licensed human."
+    type: require_human
+    patterns: ['\b(deny|denial of|reject) (the|my|this) claim\b', '\bcancel (my|the|this) policy\b', '\brescind\w*\b']
+    message: "A licensed team member must handle this request. It has been routed for review."
+  - id: INS-G03
+    description: "Block use of protected classes in rating or underwriting."
+    type: block_topic
+    patterns: ['\b(rate|price|underwrite|decline)\w* .*\b(race|religion|national origin|ethnicity)\b']
+    message: "Protected characteristics cannot be used in rating or underwriting."
+  - id: INS-G04
+    description: "Route legal threats and regulator complaints to a human."
+    type: require_human
+    patterns: ['\b(attorney|lawyer|lawsuit|sue)\b', '\bbad faith\b', '\b(department|commissioner) of insurance\b']
+    message: "I'm sending this to a team member who will contact you."

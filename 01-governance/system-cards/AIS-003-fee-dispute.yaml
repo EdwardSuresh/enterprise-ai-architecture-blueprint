@@ -1,0 +1,17 @@
+# System card - ILLUSTRATIVE example
+system: fee-dispute-explainer
+inventory_id: AIS-003
+owner: retail-banking-ai
+arb_id: ARB-2026-019
+risk_tier: 2
+autonomy_level: L2          # may propose a refund; a person approves it
+pattern: conversational-customer-agent
+models: {primary: reasoning-large, router: reasoning-small}
+intended_use: Explain account fees to customers from the published fee schedule and open a refund request.
+out_of_scope: [investment advice, credit decisions, closing accounts]
+tools: {read: [get_fee_history], write_with_approval: [request_fee_refund]}
+data_class: confidential
+guardrails: [pii-redaction, prompt-injection, financial-services pack rules, grounding >= 0.6, AI disclosure]
+evals: {golden_set: domain-packs/financial-services/evals/golden.jsonl, threshold: 0.8}
+monitoring: [hand-off rate, refund approval override rate, complaint rate, cost per conversation]
+retirement_trigger: complaint rate above baseline for 30 days

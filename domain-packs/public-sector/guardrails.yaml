@@ -1,0 +1,25 @@
+# Sector guardrails for the public sector pack.
+# Loaded by kit.guardrails. Patterns are Python regex, matched case-insensitively
+# against the user input and the draft output. type: block_topic | require_human.
+pack: public-sector
+rules:
+  - id: PUB-G01
+    description: "Route eligibility and benefit decisions to staff."
+    type: require_human
+    patterns: ['\bam i (eligible|approved|qualified)\b', '\b(approve|deny|terminate) (my )?(benefits?|application|license|permit)\b']
+    message: "A caseworker must review your case. Your request has been routed to staff."
+  - id: PUB-G02
+    description: "Block legal advice to the public."
+    type: block_topic
+    patterns: ['\bshould i (sue|appeal|plead)\b', '\b(legal advice|is it legal for me to)\b']
+    message: "I can't give legal advice. You may contact a legal aid office or an attorney."
+  - id: PUB-G03
+    description: "Route records requests to the records office."
+    type: require_human
+    patterns: ['\b(submit|file|make) an? (foia|public records|open records) request\b']
+    message: "Records requests are handled by the records office. Your request has been routed."
+  - id: PUB-G04
+    description: "Block surveillance or profiling of protected activity."
+    type: block_topic
+    patterns: ['\b(track|monitor|profile|identify) (the )?(protesters?|journalists?|activists?)\b']
+    message: "This request is not permitted under agency AI policy."

@@ -1,0 +1,7 @@
+id,name,business_unit,sponsor,capability,pattern,value_score,feasibility_score,risk_tier,status,next_review
+UC-001,Policy and procedure assistant for branch staff,Retail Banking,Head of Branch Operations,Customer enquiry handling,rag-assistant,4,4,1,production,2027-01-15
+UC-002,Claims document intake and extraction,Claims,Chief Claims Officer,Order or case intake,document-extraction,5,3,2,pilot,2026-12-10
+UC-003,Discharge summary drafting for clinicians,Clinical Services,Chief Medical Information Officer,Product and service delivery,content-generation,4,3,3,assessment,2026-12-01
+UC-004,Store associate product and stock copilot,Store Operations,VP Store Operations,Sales enablement,copilot-in-app,3,4,1,build,2027-01-20
+UC-005,Benefits enquiry agent for citizens,Citizen Services,Director of Digital Services,Customer enquiry handling,conversational-customer-agent,4,3,2,intake,2026-11-30
+UC-006,Equipment sensor anomaly triage,Plant Operations,Plant Reliability Manager,Asset maintenance,anomaly-detection-agent-triage,4,2,2,idea,2027-02-01

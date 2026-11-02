@@ -1,0 +1,25 @@
+# Sector guardrails for the oil and gas pack.
+# Loaded by kit.guardrails. Patterns are Python regex, matched case-insensitively
+# against the user input and the draft output. type: block_topic | require_human.
+pack: oil-and-gas
+rules:
+  - id: OG-G01
+    description: "Block any request to control or change OT equipment."
+    type: block_topic
+    patterns: ['\b(change|adjust|set|override) (the )?(setpoint|valve|pump|choke|alarm|interlock)\b', '\b(bypass|disable) (the )?(sis|esd|shutdown|safety system|interlock)\b']
+    message: "AI cannot control equipment or bypass safety systems. Follow the approved operating procedure and contact the control room."
+  - id: OG-G02
+    description: "Route emergencies and well control events to people."
+    type: require_human
+    patterns: ['\b(blowout|gas release|h2s alarm|explosion)\b', '\b(taking a kick|well control event|rig fire|there is a fire)\b', '\b(someone|worker|crew member) (is |was )?(hurt|injured)\b']
+    message: "This may be an emergency. Follow your emergency response plan and contact the control room or site supervisor now."
+  - id: OG-G03
+    description: "Route reportability decisions to compliance."
+    type: require_human
+    patterns: ['\b(is|does) (this|it) (reportable|need to be reported)\b', '\breport (this|it) to (phmsa|epa|bsee|osha)\b']
+    message: "Reportability decisions are made by the regulatory compliance team. Your request has been routed."
+  - id: OG-G04
+    description: "Block approval of permits to work."
+    type: block_topic
+    patterns: ['\bapprove (the |this |my )?(permit|hot work|confined space)\b']
+    message: "Permits to work must be approved by an authorized person on site."

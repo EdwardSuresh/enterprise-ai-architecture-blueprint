@@ -1,0 +1,16 @@
+# System card - ILLUSTRATIVE example
+system: small-business-credit-memo-drafter
+inventory_id: AIS-004
+owner: credit-risk-ai
+risk_tier: 3
+autonomy_level: L1          # drafts only; the credit officer decides
+pattern: classic-ml-with-genai-explanation
+models: {extraction: extraction, scoring: "probability-of-default model (see platform/ml)"}
+intended_use: Draft the credit memo and plain-English reason codes from the approved scoring model.
+out_of_scope: [approving or declining credit, setting price or limit]
+data_class: restricted
+impact_assessment: 01-governance/impact-assessments/AIS-004-credit-memo.md
+guardrails: [pii-redaction, grounding >= 0.7, no-decision language rule]
+evals: {golden_set: domain-packs/financial-services/evals/golden.jsonl, threshold: 0.9, bias_tests: required}
+monitoring: [officer edit rate, reason-code accuracy sample, disparity report per release]
+retirement_trigger: model validation finding rated high

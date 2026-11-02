@@ -1,0 +1,63 @@
+# AI System Card
+# One per AI system in production. Describes the whole system, not just the model.
+# Keep it current: update on every material change. Link from the AI inventory entry.
+
+system_id: AIS-000                 # Inventory id
+use_case_id: UC-000
+name: ""
+version: "1.0.0"
+last_updated: 2026-11-01
+owner:                             # Accountable system owner
+  name: ""
+  role: ""
+technical_contact: ""
+risk_tier: 1                       # 1 | 2 | 3 (matches ai-inventory.yaml)
+autonomy_level: L0                 # L0 | L1 | L2 | L3 | L4
+pattern: ""                        # pattern from 02-architecture/patterns
+
+purpose: >
+  What the system does and the decision it supports, in plain words.
+
+intended_users: []                 # e.g. ["claims handlers"]
+out_of_scope_uses: []              # Uses the system is not designed or approved for
+
+components:
+  model_aliases: []                # e.g. ["reasoning-small", "extraction"] resolved by the gateway
+  knowledge_sources: []            # indexes and their data contracts
+  tools: []                        # tool names on the allow-list (agents)
+  guardrails: []                   # e.g. ["prompt-injection-shield", "pii-redaction-output"]
+  prompts: []                      # prompt registry ids and versions
+
+data:
+  highest_class: internal          # public | internal | confidential | restricted
+  personal_data: false
+  retention: ""                    # prompts, responses, indexes
+
+human_oversight:
+  reviewer_role: ""
+  review_point: ""                 # where in the flow a human reviews
+  fallback: ""                     # what happens when AI is off
+  kill_switch: ""                  # gateway route or flag name
+
+evaluation:
+  last_run: 2026-11-01
+  datasets: []
+  metrics:                         # metric: threshold / latest
+    groundedness: { threshold: 0.0, latest: 0.0 }
+    task_accuracy: { threshold: 0.0, latest: 0.0 }
+    safety_violations: { threshold: 0, latest: 0 }
+  fairness_tested: false
+
+known_limitations: []
+transparency_notice: ""            # what users or affected people are told
+
+operations:
+  slo_ref: ops/slo.yaml#<id>
+  budget_ref: finops/budgets.yaml#<id>
+  runbook: ops/runbooks/ai-incident.md
+
+governance:
+  arb_decisions: []                # e.g. ["ARB-2026-041"]
+  impact_assessment: ""            # path, Tier 3
+  threat_model: ""                 # path, Tier 2+
+  next_review: 2027-05-01

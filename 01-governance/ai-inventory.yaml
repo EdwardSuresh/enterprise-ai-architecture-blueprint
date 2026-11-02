@@ -1,0 +1,64 @@
+# AI inventory: every AI system the organization runs or is building.
+# Validated by `kit-policy-gate` in CI. The entries below are ILLUSTRATIVE
+# examples for a fictitious organization; replace them with your own.
+
+systems:
+  - id: AIS-001
+    name: Underwriting manual assistant
+    owner: underwriting-ai-team
+    business_unit: Commercial Underwriting
+    risk_tier: 2
+    pattern: rag-assistant
+    autonomy_level: L1
+    models: [reasoning-large]
+    data_class: confidential
+    status: pilot
+    arb_id: ARB-2026-012
+    system_card: 01-governance/system-cards/AIS-001-underwriting-assistant.yaml
+    golden_set: domain-packs/insurance/evals/golden.jsonl
+    human_oversight: Underwriter reviews every answer; answers cite manual sections.
+    last_review: 2026-10-15
+
+  - id: AIS-002
+    name: Meeting notes summarizer
+    owner: workplace-tech
+    business_unit: IT
+    risk_tier: 1
+    pattern: content-generation
+    autonomy_level: L1
+    models: [reasoning-small]
+    data_class: internal
+    status: production
+    system_card: 01-governance/system-cards/AIS-002-meeting-notes.yaml
+    last_review: 2026-09-01
+
+  - id: AIS-003
+    name: Fee dispute explainer
+    owner: retail-banking-ai
+    business_unit: Retail Banking
+    risk_tier: 2
+    pattern: conversational-customer-agent
+    autonomy_level: L2
+    models: [reasoning-large, reasoning-small]
+    data_class: confidential
+    status: production
+    arb_id: ARB-2026-019
+    system_card: 01-governance/system-cards/AIS-003-fee-dispute.yaml
+    golden_set: domain-packs/financial-services/evals/golden.jsonl
+    human_oversight: Refund actions go to the agent approval queue; disputes over a set amount go to staff.
+    last_review: 2026-10-20
+
+  - id: AIS-004
+    name: Small-business credit memo drafter
+    owner: credit-risk-ai
+    business_unit: Business Lending
+    risk_tier: 3
+    pattern: classic-ml-with-genai-explanation
+    autonomy_level: L1
+    models: [extraction]
+    data_class: restricted
+    status: proposed
+    system_card: 01-governance/system-cards/AIS-004-credit-memo.yaml
+    golden_set: domain-packs/financial-services/evals/golden.jsonl
+    impact_assessment: 01-governance/impact-assessments/AIS-004-credit-memo.md
+    human_oversight: Credit officer writes the decision; AI drafts the memo and reason codes only.

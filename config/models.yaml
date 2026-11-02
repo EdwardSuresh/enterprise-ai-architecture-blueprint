@@ -1,0 +1,40 @@
+# Runtime model routing for the LLM gateway (platform/core/kit/gateway.py).
+# Agents use ALIASES only. Change a provider here, not in agent code.
+#
+# Providers named "mock-*" are offline and used by labs and CI.
+# Real bindings per cloud are in cloud_bindings below; the adapter for the
+# chosen cloud (platform/adapters/kit_adapters) reads them.
+# Prices are placeholders per 1,000 tokens for cost tagging. Set your contract prices.
+
+aliases:
+  reasoning-large:
+    primary:   {provider: mock-primary,  model: large-v1, price_in_per_1k: 0.003,  price_out_per_1k: 0.015}
+    fallbacks:
+      - {provider: mock-secondary, model: large-v1, price_in_per_1k: 0.003,  price_out_per_1k: 0.015}
+      - {provider: mock-primary,   model: small-v1, price_in_per_1k: 0.0008, price_out_per_1k: 0.004}
+  reasoning-small:
+    primary:   {provider: mock-primary,  model: small-v1, price_in_per_1k: 0.0008, price_out_per_1k: 0.004}
+    fallbacks:
+      - {provider: mock-secondary, model: small-v1, price_in_per_1k: 0.0008, price_out_per_1k: 0.004}
+  extraction:
+    primary:   {provider: mock-primary,  model: small-v1, price_in_per_1k: 0.0008, price_out_per_1k: 0.004}
+
+# Fill these with your own deployment names / model IDs. Model IDs change often;
+# copy them from your provider's console rather than from documentation examples.
+cloud_bindings:
+  azure:   # Microsoft Foundry / Azure OpenAI deployments
+    reasoning-large: "<your-foundry-deployment-large>"
+    reasoning-small: "<your-foundry-deployment-small>"
+    extraction:      "<your-foundry-deployment-small>"
+  aws:     # Amazon Bedrock model IDs or inference profile ARNs
+    reasoning-large: "<bedrock-model-id-or-inference-profile>"
+    reasoning-small: "<bedrock-model-id>"
+    extraction:      "<bedrock-model-id>"
+  gcp:     # Vertex AI model names
+    reasoning-large: "<vertex-model-name>"
+    reasoning-small: "<vertex-model-name>"
+    extraction:      "<vertex-model-name>"
+  anthropic:   # Claude API directly (also available via Bedrock, Foundry and Vertex AI)
+    reasoning-large: "<claude-model-id>"
+    reasoning-small: "<claude-model-id>"
+    extraction:      "<claude-model-id>"

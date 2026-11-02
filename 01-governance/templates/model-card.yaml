@@ -1,0 +1,60 @@
+# Model Card (classic machine learning models)
+# Use for trained ML models: classifiers, regressors, forecasters, anomaly detectors.
+# For generative AI systems, use system-card.yaml. A system card can reference model cards.
+# Algorithm background: The Architect's ML Playbook https://edwardsuresh.github.io/architects-ml-playbook/
+
+model_id: ML-000
+name: ""
+version: "1.0.0"
+owner: ""
+system_id: AIS-000                 # system that uses this model
+date_trained: 2026-11-01
+
+model_details:
+  task: ""                         # classification | regression | forecasting | clustering | anomaly-detection | ranking
+  algorithm: ""                    # e.g. "gradient boosted trees"
+  framework: ""
+  features_count: 0
+  explainability_method: ""        # e.g. "SHAP values", "feature importance", "reason codes"
+
+intended_use:
+  primary_use: ""
+  primary_users: []
+  out_of_scope: []
+
+training_data:
+  sources: []                      # data contracts
+  period: ""                       # e.g. "2022-01 to 2025-12"
+  rows: 0
+  label_definition: ""
+  known_gaps: []
+  data_class: internal
+
+evaluation:
+  holdout_method: ""               # e.g. "time-based split"
+  metrics:                         # metric: value
+    primary: { name: "", value: 0.0, threshold: 0.0 }
+    secondary: []
+  segments_tested: []              # groups or segments evaluated separately
+  fairness:
+    tested: false
+    measures: []
+    results: ""
+
+limitations: []
+ethical_considerations: []
+
+monitoring:
+  drift_metrics: []                # e.g. "population stability index on top features"
+  performance_check_frequency: "monthly"
+  retrain_trigger: ""
+  champion_challenger: false
+
+genai_explanation:                 # if an LLM explains this model's output (see pattern classic-ml-with-genai-explanation)
+  used: false
+  model_alias: ""
+  constraints: "LLM explains model output and reason codes only; it does not change the score."
+
+approvals:
+  model_risk_review: ""            # reference to model risk validation, if your organization has one
+  arb_decision: ""

@@ -1,0 +1,78 @@
+# Data contract: internal policy and procedure documents
+# Illustrative example (composite). Replace values with your own.
+
+contract_id: DC-001
+name: policy-documents
+version: "1.2.0"
+status: active                      # proposed | active | deprecated | retired
+last_reviewed: 2026-10-01
+
+owner:
+  name: "<Head of Policy Management>"
+  team: "Policy Office"
+  contact: "policy-office@example.org"
+
+source:
+  system: "Document management system, Policies library"
+  location: "policies/ library, published folder only"
+  extraction: incremental           # full | incremental | event
+  method: "Connector reads published versions via API; drafts are excluded"
+
+schema:
+  document_types: [policy, procedure, standard, guideline]
+  required_metadata:
+    - {name: doc_id, type: string}
+    - {name: title, type: string}
+    - {name: version, type: string}
+    - {name: effective_date, type: date}
+    - {name: owner_team, type: string}
+    - {name: region, type: string}          # e.g. "global", "country-a"
+    - {name: audience_groups, type: list}    # used for access control
+  chunking:
+    strategy: by-heading
+    max_tokens: 800
+    overlap_tokens: 80
+
+freshness:
+  update_frequency: daily
+  max_lag: 24h
+  stale_after: 30d after superseded     # superseded versions removed from index within 30 days
+
+quality_rules:
+  - id: q1
+    rule: "Every document has doc_id, version and effective_date"
+    on_fail: reject-document
+  - id: q2
+    rule: "Only status = published is ingested"
+    on_fail: reject-document
+  - id: q3
+    rule: "Only one current version per doc_id"
+    on_fail: keep-latest-and-alert
+  - id: q4
+    rule: "Extracted text length > 200 characters (catches scanned images without OCR)"
+    on_fail: route-to-ocr-and-alert
+  - id: q5
+    rule: "audience_groups is not empty"
+    on_fail: reject-document
+
+classification: internal              # public | internal | confidential | restricted
+contains_personal_data: false
+
+acl_source:
+  system: "Document management system permissions"
+  mapping: "audience_groups metadata mirrors the library's read groups"
+  sync_frequency: hourly
+  enforcement: "Retrieval filters chunks to those whose audience_groups intersect the caller's groups"
+  on_sync_failure: deny-affected-documents
+
+consumers:
+  - system_id: AIS-101                  # Policy assistant (illustrative)
+    use_case_id: UC-001
+
+retention:
+  index: "While source document is current"
+  deletion_trigger: "Source document withdrawn or superseded beyond stale_after"
+  derived_copies: [chunks, embeddings, cached answers]
+
+lineage:
+  emits: true                           # writes ingestion lineage events (see data/lineage/README.md)

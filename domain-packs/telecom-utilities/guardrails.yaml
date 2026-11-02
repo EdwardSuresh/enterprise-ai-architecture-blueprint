@@ -1,0 +1,25 @@
+# Sector guardrails for the telecom and utilities pack.
+# Loaded by kit.guardrails. Patterns are Python regex, matched case-insensitively
+# against the user input and the draft output. type: block_topic | require_human.
+pack: telecom-utilities
+rules:
+  - id: TU-G01
+    description: "Block requests to operate network or grid equipment."
+    type: block_topic
+    patterns: ['\b(open|close|trip|reset|reboot) (the )?(breaker|switch|recloser|feeder|cell site|router)\b', '\b(change|push) (the )?(config|configuration)\b']
+    message: "AI cannot operate network or grid equipment. Follow the operations procedure and contact the control center."
+  - id: TU-G02
+    description: "Route disconnection and payment arrangement requests to a human."
+    type: require_human
+    patterns: ['\b(disconnect|shut off|shutoff|cut off) (my |the )?(service|power|gas|water)\b', '\bpayment (plan|arrangement)\b', '\bmedical certificate\b']
+    message: "A customer service representative will help with this request."
+  - id: TU-G03
+    description: "Route CPNI requests to authenticated channels."
+    type: require_human
+    patterns: ['\b(call (log|history|records)|who (did|have) i call)\b']
+    message: "For your privacy, call detail requests require identity verification. A representative will assist you."
+  - id: TU-G04
+    description: "Route safety hazards to emergency response."
+    type: require_human
+    patterns: ['\b(downed|down) (power )?lines?\b', '\bsmell (gas|of gas)\b', '\bgas leak\b', '\bsparking\b']
+    message: "Leave the area now and call 911 and our emergency line. Do not touch or approach the hazard."

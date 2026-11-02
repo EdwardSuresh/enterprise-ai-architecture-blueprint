@@ -1,0 +1,55 @@
+# Service level objectives for the AI platform and use cases.
+# Illustrative example (composite). Targets are starting points; set your own from measured baselines.
+# Quality SLOs are measured from sampled production evaluation and human review data.
+
+window: 30d
+
+platform:
+  - id: gateway-availability
+    description: LLM gateway accepts and routes requests
+    sli: successful_requests / total_requests (excluding client errors)
+    target: 0.999
+    alert_burn_rate: {fast: 14.4, slow: 6}
+  - id: gateway-overhead-latency
+    description: Latency added by the gateway itself (not model time)
+    sli: p95 gateway_overhead_ms
+    target_ms: 50
+  - id: kill-switch-effect
+    description: Time from kill switch activation to traffic stopped
+    sli: max seconds to zero model calls for the use case
+    target_seconds: 60
+  - id: trace-completeness
+    description: Requests with a full trace (all required attributes present)
+    sli: complete_traces / total_requests
+    target: 0.99
+
+use_cases:
+  - use_case_id: UC-001
+    tier: 1
+    slos:
+      - {id: availability, sli: "answers served / requests", target: 0.995}
+      - {id: latency, sli: "p95 end-to-end ms", target_ms: 6000}
+      - {id: groundedness, sli: "sampled answers rated grounded / sampled", target: 0.9}
+      - {id: refusal-when-unknown, sli: "out-of-scope questions correctly declined", target: 0.9}
+
+  - use_case_id: UC-002
+    tier: 2
+    slos:
+      - {id: availability, sli: "documents processed / received (business hours)", target: 0.99}
+      - {id: throughput-latency, sli: "p95 minutes from receipt to draft", target_minutes: 15}
+      - {id: field-accuracy, sli: "fields accepted without correction / fields extracted", target: 0.95}
+      - {id: straight-through-rate, sli: "documents with no human correction", target: 0.6}
+      - {id: human-queue-age, sli: "p95 hours in human review queue", target_hours: 4}
+
+  - use_case_id: UC-005
+    tier: 2
+    slos:
+      - {id: availability, sli: "conversations started / attempted", target: 0.995}
+      - {id: latency, sli: "p95 seconds to first response", target_seconds: 4}
+      - {id: handoff-success, sli: "handoff requests reaching a human within 5 minutes", target: 0.95}
+      - {id: policy-violation-rate, sli: "sampled conversations with a policy violation", target_max: 0.005}
+
+error_budget_policy:
+  - When a quality SLO error budget is exhausted, freeze prompt and model changes except fixes, and raise sampling.
+  - When a Tier 2 or Tier 3 quality SLO is breached for 2 consecutive windows, report to the ARB.
+  - When the policy-violation SLO is breached, open an AI incident.

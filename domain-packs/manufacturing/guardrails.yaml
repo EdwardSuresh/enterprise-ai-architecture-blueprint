@@ -1,0 +1,25 @@
+# Sector guardrails for the manufacturing pack.
+# Loaded by kit.guardrails. Patterns are Python regex, matched case-insensitively
+# against the user input and the draft output. type: block_topic | require_human.
+pack: manufacturing
+rules:
+  - id: MFG-G01
+    description: "Block requests to control machines or change setpoints."
+    type: block_topic
+    patterns: ['\b(change|set|write|override) (the )?(setpoint|plc|recipe|speed|temperature limit)\b', '\b(start|stop|jog) (the )?(line|machine|robot|press)\b']
+    message: "AI cannot control equipment. Use the approved operating procedure and contact the area supervisor."
+  - id: MFG-G02
+    description: "Block advice to skip safety steps."
+    type: block_topic
+    patterns: ['\b(skip|bypass|without) (the )?(lockout|tagout|loto|guard|interlock|ppe)\b']
+    message: "Safety steps cannot be skipped. Follow the lockout/tagout procedure and ask your supervisor."
+  - id: MFG-G03
+    description: "Route product release and safety reportability to quality."
+    type: require_human
+    patterns: ['\b(release|ship|accept) (the )?(lot|batch|product|nonconforming)\b', '\b(safety|reportable) (defect|issue|recall)\b', '\brecall\b']
+    message: "Product release and safety decisions are made by Quality. Your request has been routed."
+  - id: MFG-G04
+    description: "Route export-controlled data requests to trade compliance."
+    type: require_human
+    patterns: ['\b(itar|eccn|export[- ]controlled)\b']
+    message: "Export-controlled data requests are reviewed by Trade Compliance."

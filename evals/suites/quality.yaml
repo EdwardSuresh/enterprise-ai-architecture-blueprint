@@ -1,0 +1,15 @@
+# Quality suite run by .github/workflows/evals.yml.
+# Starter golden sets are small (6 cases per pack). Grow each to 100-300
+# cases written by front-line experts before production use.
+default_threshold: 0.8
+sets:
+  - {golden: domain-packs/financial-services/evals/golden.jsonl}
+  - {golden: domain-packs/insurance/evals/golden.jsonl}
+  - {golden: domain-packs/supply-chain/evals/golden.jsonl}
+  - {golden: domain-packs/oil-and-gas/evals/golden.jsonl}
+  - {golden: domain-packs/retail/evals/golden.jsonl}
+  - {golden: domain-packs/healthcare/evals/golden.jsonl}
+  - {golden: domain-packs/public-sector/evals/golden.jsonl}
+  - {golden: domain-packs/telecom-utilities/evals/golden.jsonl}
+  - {golden: domain-packs/manufacturing/evals/golden.jsonl}
+  - {golden: domain-packs/professional-services/evals/golden.jsonl}

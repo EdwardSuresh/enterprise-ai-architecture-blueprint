@@ -1,0 +1,137 @@
+# Non-human identities and least-privilege scopes for AI agents.
+# One identity per agent. Never share identities between agents or with humans.
+# Scopes follow <system>.<resource>.<action>. Write scopes require the approval queue
+# unless approval_mode says otherwise and the ARB has approved it.
+#
+# Fields:
+#   id                 - identity name registered in your identity provider (workload identity / service principal / service account)
+#   system_id          - AI inventory id of the system that runs this agent
+#   risk_tier          - 1 | 2 | 3 (from the AI inventory)
+#   autonomy_level     - L0..L4, must not exceed tier maximum
+#   owner              - accountable human owner
+#   credential         - how the agent authenticates (no long-lived secrets in code)
+#   acts_on_behalf_of_user - true if the agent passes the end user's identity to tools (preferred for reads of user data)
+#   tools              - allow-list; any tool not listed is denied
+#   approval_mode      - per write tool: human-approval | within-limits (L3, ARB-approved) | none (read tools only)
+#   limits             - hard limits enforced by the tool or runtime, not by the prompt
+#   review             - when scopes are re-certified
+#
+# Illustrative example (composite). Replace with your own agents.
+
+agents:
+  - id: agent-policy-assistant
+    system_id: AIS-101
+    risk_tier: 1
+    autonomy_level: L0
+    owner: "Head of Branch Operations"
+    credential: workload-identity
+    acts_on_behalf_of_user: true
+    tools:
+      - name: search_policies
+        scope: dms.policies.read
+        approval_mode: none
+    limits:
+      max_steps: 3
+      max_tokens_per_request: 6000
+    review: every 12 months
+
+  - id: agent-claims-intake
+    system_id: AIS-114
+    risk_tier: 2
+    autonomy_level: L3
+    owner: "Chief Claims Officer"
+    credential: workload-identity
+    acts_on_behalf_of_user: false
+    tools:
+      - name: read_inbox_document
+        scope: claims.inbox.read
+        approval_mode: none
+      - name: lookup_policy
+        scope: policyadmin.policy.read
+        approval_mode: none
+      - name: create_claim_draft
+        scope: claims.claim.create_draft
+        approval_mode: within-limits      # ARB-2026-041: drafts only; handler submits
+      - name: submit_claim
+        scope: claims.claim.submit
+        approval_mode: human-approval
+    limits:
+      max_steps: 10
+      max_tokens_per_request: 20000
+      max_drafts_per_hour: 500
+    review: every 6 months
+
+  - id: agent-stock-copilot
+    system_id: AIS-121
+    risk_tier: 1
+    autonomy_level: L2
+    owner: "VP Store Operations"
+    credential: workload-identity
+    acts_on_behalf_of_user: true
+    tools:
+      - name: get_stock_level
+        scope: inventory.stock.read
+        approval_mode: none
+      - name: get_transfers_in_transit
+        scope: logistics.transfers.read
+        approval_mode: none
+      - name: propose_stock_transfer
+        scope: inventory.transfer.request
+        approval_mode: human-approval     # store manager approves
+    limits:
+      max_steps: 6
+      max_transfer_units: 200
+    review: every 12 months
+
+  - id: agent-sensor-triage
+    system_id: AIS-130
+    risk_tier: 2
+    autonomy_level: L2
+    owner: "Plant Reliability Manager"
+    credential: workload-identity
+    acts_on_behalf_of_user: false
+    tools:
+      - name: get_sensor_history
+        scope: historian.sensor.read
+        approval_mode: none
+      - name: get_maintenance_history
+        scope: eam.workorder.read
+        approval_mode: none
+      - name: create_inspection_request
+        scope: eam.workorder.create
+        approval_mode: human-approval     # reliability engineer approves
+    limits:
+      max_steps: 8
+      max_requests_per_day: 50
+    review: every 6 months
+
+  - id: agent-benefits-enquiry
+    system_id: AIS-140
+    risk_tier: 2
+    autonomy_level: L1
+    owner: "Director of Digital Services"
+    credential: workload-identity
+    acts_on_behalf_of_user: true          # citizen identity after login
+    tools:
+      - name: search_public_guidance
+        scope: web.guidance.read
+        approval_mode: none
+      - name: get_my_application_status
+        scope: benefits.application.read_own
+        approval_mode: none
+      - name: book_appointment
+        scope: scheduling.appointment.create_own
+        approval_mode: within-limits      # citizen confirms on screen; only own appointments
+      - name: handoff_to_caseworker
+        scope: contactcentre.handoff.create
+        approval_mode: none
+    limits:
+      max_steps: 6
+      max_conversation_turns: 30
+    review: every 6 months
+
+denied_by_default:
+  - Any tool not listed for the agent
+  - Any scope ending in .delete
+  - Dynamic tool discovery in production
+  - Shared identities between agents
