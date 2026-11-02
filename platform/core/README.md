@@ -12,6 +12,9 @@ The blueprint's reference code is the Python package `kit` (install with `pip in
 | `kit.policy_gate` | AI inventory validator and CI gate | 06 |
 | `kit.prompts` | Versioned prompt registry: approved versions only, hash in every trace | 02 |
 | `kit.memory` | Short-term conversation memory and long-term facts with retention, export and forget | 02 |
+| `kit.contracts` | Agent contracts: load, validate, narrow on delegation, revoke | 07 |
+| `kit.enforcer` | Independent execution layer: approves plans, authorizes each step against the live contract | 07 |
+| `kit.evidence` | Hash-chained provenance, verification, authorization and execution records | 07 |
 | `kit.orchestrator` | One guarded request end to end | all |
 | `kit.tracing` | Spans with OpenTelemetry GenAI attribute names | all |
 

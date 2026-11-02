@@ -47,6 +47,7 @@ systems:
     system_card: 01-governance/system-cards/AIS-003-fee-dispute.yaml
     golden_set: domain-packs/financial-services/evals/golden.jsonl
     prompts: [rag-answer]
+    contracts: [contracts/fee-dispute-agent.yaml, contracts/fee-lookup-agent.yaml]
     human_oversight: Refund actions go to the agent approval queue; disputes over a set amount go to staff.
     last_review: 2026-10-20
 

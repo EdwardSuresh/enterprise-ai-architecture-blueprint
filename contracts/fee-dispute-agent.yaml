@@ -1,0 +1,37 @@
+# Agent contract - ILLUSTRATIVE example for AIS-003 (fee dispute explainer).
+# One executable definition of what this agent may do across the whole stack.
+# Enforced by kit.enforcer.ContractEnforcer; checked in CI by kit-policy-gate.
+contract_id: CT-AIS-003-A
+version: 1.0.0
+agent: fee-dispute-agent
+inventory_id: AIS-003
+owner: retail-banking-ai
+approved_by: ARB-2026-019          # must match the inventory entry's arb_id
+status: active                      # active | revoked
+valid_until: 2027-06-30             # contracts expire and must be re-approved
+autonomy_level: L2                  # act with approval: writes wait for a human
+
+planning:
+  allowed_intents: [explain_fee, check_history, request_refund, remember_preference, recall_context, delegate_lookup]
+  max_steps: 6
+
+models: [reasoning-large, reasoning-small]
+data_classes: [public, internal, confidential]
+
+memory:
+  short_term: {read: true, write: true}
+  long_term:
+    read_keys: [preferred_language]
+    write_keys: [preferred_language]
+
+tools:
+  get_fee_history:   {mode: read}
+  request_fee_refund: {mode: write, approval: human, max_amount: 50}
+
+delegation:
+  allowed_delegates: [fee-lookup-agent]
+  max_depth: 1
+
+execution:
+  max_cost_usd_per_task: 0.05
+  max_tool_calls_per_task: 6

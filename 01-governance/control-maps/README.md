@@ -40,3 +40,11 @@ flowchart LR
 - These maps are aids, not certifications or legal opinions.
 - Verify every row against the current official or licensed text before using it in an audit or regulatory submission.
 - Your legal team decides how regulation applies to you.
+
+## v1.1 additions: agent contracts
+
+Executable agent contracts (`contracts/`, `platform/core/kit/enforcer.py`, `evidence.py`) add evidence for:
+- **NIST AI RMF:** GOVERN (approved, expiring contracts with ARB ids), MEASURE (failure-mode tests), MANAGE (per-step enforcement, revocation, four-part evidence).
+- **ISO/IEC 42001 Annex A:** A.6 AI system life cycle (contract approval, expiry, revocation), A.9 Use of AI systems (bounded use enforced at run time).
+- **EU AI Act (high-risk):** human oversight and record-keeping obligations, through approval queues and the hash-chained evidence ledger.
+- **OWASP LLM06 Excessive Agency:** see `owasp-llm-top10.md`.

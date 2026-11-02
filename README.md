@@ -40,14 +40,15 @@ Everything runs offline with a deterministic mock model. Real models plug in thr
 | `00-strategy/` | AI strategy, capability map, use-case portfolio, value scorecard |
 | `01-governance/` | Charter, RACI, risk tiers, **AI inventory**, policies, AI ARB, control maps (NIST AI RMF, ISO/IEC 42001, EU AI Act, OWASP LLM Top 10), templates |
 | `02-architecture/` | Reference architecture, 10 patterns, which-pattern-when, standards, approved models, ADRs |
-| `platform/core/` | Runnable Python package `kit`: LLM gateway, guardrails, permission-aware retrieval, prompt registry, conversation memory, tools with approval queue, orchestrator, tracing, evals, policy gate |
+| `platform/core/` | Runnable Python package `kit`: LLM gateway, guardrails, permission-aware retrieval, prompt registry, conversation memory, tools with approval queue, **contract enforcer and evidence ledger**, orchestrator, tracing, evals, policy gate |
 | `prompts/` | Prompt registry: versioned prompts with owner, linked eval set and change history |
+| `contracts/` | **Agent contracts**: one executable contract per agent covering planning, models, data, memory, tools, delegation and limits, enforced outside the agent |
 | `platform/adapters/` | The only cloud-specific code |
 | `platform/ml/` | Classic ML, linked to the 30 algorithms in The Architect's ML Playbook |
 | `domain-packs/` | Overlays for 10 sectors plus a template for any other |
 | `data/`, `security/` | Classification, data contracts, lineage; threat models, red-team set, agent identities |
 | `finops/`, `ops/` | Budgets and cost model; SLOs, autonomy levels, incident and model-change runbooks |
-| `labs/` | 6 building blocks × Concept / Build / Production (18 lab levels). Each block has a runnable `concept.py`; Build and Production steps are in its guide |
+| `labs/` | 7 building blocks × Concept / Build / Production (21 lab levels), including Lab 07 agent contracts. Each block has a runnable `concept.py`; Build and Production steps are in its guide |
 | `evals/`, `tests/` | Quality and safety suites; automated tests |
 | `deploy/` | Docker, Kubernetes and Terraform module contracts per cloud |
 | `enablement/` | Learning paths, champions network, workforce impact |
