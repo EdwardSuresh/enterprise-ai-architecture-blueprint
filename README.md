@@ -77,7 +77,7 @@ Cloud service names and regulatory references change often. Verify against curre
 
 ## About the author
 
-**Rajaretnam Suresh Edward David** · Enterprise Architect · Oklahoma, USA · [GitHub](https://github.com/EdwardSuresh)
+**Rajaretnam Suresh Edward David** · Enterprise Architect · Oklahoma, USA · [LinkedIn](https://www.linkedin.com/in/sureshedward) · [GitHub](https://github.com/EdwardSuresh)
 
 - TOGAF-certified Enterprise Architect with **25+ years in financial services**: banking, capital markets, insurance and energy.
 - Depth in **architecture review boards and governance**, TOGAF ADM, reference architecture and application portfolio rationalization.
@@ -85,4 +85,4 @@ Cloud service names and regulatory references change often. Verify against curre
 
 I built this kit to show how I would stand up AI governance and a governed AI platform in a real enterprise, end to end: from the ARB and risk tiers down to running code and CI gates. Every design decision is recorded in `02-architecture/adr/`.
 
-**Open to Enterprise Architect and Enterprise AI Architect roles.** I'm happy to walk through the kit with your team.
+**Open to Enterprise Architect and Enterprise AI Architect roles.** I'm happy to walk through the kit with your team; [connect on LinkedIn](https://www.linkedin.com/in/sureshedward).
