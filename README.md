@@ -39,7 +39,8 @@ Everything runs offline with a deterministic mock model. Real models plug in thr
 | `00-strategy/` | AI strategy, capability map, use-case portfolio, value scorecard |
 | `01-governance/` | Charter, RACI, risk tiers, **AI inventory**, policies, AI ARB, control maps (NIST AI RMF, ISO/IEC 42001, EU AI Act, OWASP LLM Top 10), templates |
 | `02-architecture/` | Reference architecture, 10 patterns, which-pattern-when, standards, approved models, ADRs |
-| `platform/core/` | Runnable Python package `kit`: LLM gateway, guardrails, permission-aware retrieval, tools with approval queue, orchestrator, tracing, evals, policy gate |
+| `platform/core/` | Runnable Python package `kit`: LLM gateway, guardrails, permission-aware retrieval, prompt registry, conversation memory, tools with approval queue, orchestrator, tracing, evals, policy gate |
+| `prompts/` | Prompt registry: versioned prompts with owner, linked eval set and change history |
 | `platform/adapters/` | The only cloud-specific code |
 | `platform/ml/` | Classic ML, linked to the 30 algorithms in The Architect's ML Playbook |
 | `domain-packs/` | Overlays for 10 sectors plus a template for any other |

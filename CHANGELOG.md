@@ -3,6 +3,16 @@
 All notable changes to the kit. Versions follow semantic versioning: a major
 version changes the governance schemas (`ai-inventory.yaml`, `risk-tiers.yaml`).
 
+## [1.0.1] - 2026-11-01
+### Added
+- Prompt registry: `prompts/registry.yaml`, versioned prompt library, `kit.prompts` (approved-only loading, required variables, content hash in traces, registry validation).
+- Conversation memory: `kit.memory` with short-term memory per conversation (turn limit, idle expiry) and long-term facts per user (allowed keys, retention, export, forget); PII redacted before storing.
+- Orchestrator uses the registry prompt and conversation memory; responses carry the prompt reference.
+- Policy gate checks that prompts listed in the AI inventory exist and are approved.
+- Acknowledgements file; disclaimer note on how the kit was built.
+### Changed
+- Lab 02 demonstrates the prompt registry and memory. Test suite: 74 tests.
+
 ## [1.0.0] - 2026-11-01
 ### Added
 - Governance spine: charter, RACI, risk tiers, AI inventory, AI ARB, policies, templates.

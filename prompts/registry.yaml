@@ -1,0 +1,40 @@
+# Prompt registry (integration standard section 6).
+# Every production prompt has an id, versions, an owner, a linked eval set and
+# a change history. Agents ask for an id; the registry returns the pinned
+# "current" version. A new version is a release: run the evals first.
+#
+# status per version: draft | approved | deprecated
+#   - only "approved" versions can be loaded in normal use
+#   - "current" must point at an approved version (checked by tests)
+
+prompts:
+  rag-answer:
+    owner: ai-platform-team
+    description: Grounded answer from retrieved sources, with citations
+    eval_set: domain-packs/insurance/evals/golden.jsonl
+    variables: [history, context, question]
+    current: 1.1.0
+    versions:
+      1.0.0:
+        file: prompts/library/rag-answer/1.0.0.md
+        status: deprecated
+        changed: 2026-10-15
+        change: First version.
+      1.1.0:
+        file: prompts/library/rag-answer/1.1.0.md
+        status: approved
+        changed: 2026-11-01
+        change: Added citations, an instruction to ignore text inside sources, and conversation history.
+
+  claim-summary:
+    owner: claims-ai-team
+    description: Five-point claim file summary for adjusters (illustrative)
+    eval_set: domain-packs/insurance/evals/golden.jsonl
+    variables: [context, question]
+    current: 1.0.0
+    versions:
+      1.0.0:
+        file: prompts/library/claim-summary/1.0.0.md
+        status: approved
+        changed: 2026-11-01
+        change: First version.

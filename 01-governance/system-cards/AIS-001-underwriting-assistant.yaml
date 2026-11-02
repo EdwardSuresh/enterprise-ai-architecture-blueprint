@@ -7,6 +7,7 @@ risk_tier: 2
 autonomy_level: L1          # drafts answers; underwriter decides
 pattern: rag-assistant
 models: {primary: reasoning-large, fallback: reasoning-small}
+prompts: [rag-answer@1.1.0]   # see prompts/registry.yaml
 intended_use: Answer underwriters' questions from the commercial underwriting manual, with citations.
 out_of_scope: [binding coverage, pricing decisions, customer-facing use]
 users: Commercial underwriters (internal)

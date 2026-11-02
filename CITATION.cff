@@ -3,7 +3,7 @@ message: "If you use this kit, please cite it as below."
 title: "The Architect's Enterprise AI Kit"
 authors:
   - name: "Rajaretnam Suresh Edward David"
-version: 1.0.0
+version: 1.0.1
 date-released: 2026-11-01
 url: "https://github.com/EdwardSuresh/architects-enterprise-ai-kit"
 license: MIT

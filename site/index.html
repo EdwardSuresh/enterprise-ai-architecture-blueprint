@@ -133,10 +133,10 @@ footer .wrap{padding-block:18px}
 </head>
 <body>
 <header class="top"><div class="wrap">
-  <div class="eyebrow">The Architect's Series · Cloud-neutral · Industry-neutral · Version 1.0</div>
+  <div class="eyebrow">The Architect's Series · Cloud-neutral · Industry-neutral · Version 1.0.1</div>
   <h1>The Architect's Enterprise AI Kit</h1>
   <p class="lede">How an enterprise runs AI safely and at scale: a reusable project structure, reference architecture, governance model and Enterprise Architecture playbook. It works on AWS, Azure or Google Cloud and in any industry or services sector. Start from zero (Day 0) or plug it into AI you already run.</p>
-  <p class="links"><a href="https://github.com/EdwardSuresh/architects-enterprise-ai-kit" target="_blank" rel="noopener">GitHub repository</a> · <a href="https://www.linkedin.com/in/sureshedward" target="_blank" rel="noopener">Author on LinkedIn</a> · <a href="https://edwardsuresh.github.io/architects-ml-playbook/" target="_blank" rel="noopener">The Architect's ML Playbook</a> · v1.0 · MIT + CC BY 4.0</p>
+  <p class="links"><a href="https://github.com/EdwardSuresh/architects-enterprise-ai-kit" target="_blank" rel="noopener">GitHub repository</a> · <a href="https://www.linkedin.com/in/sureshedward" target="_blank" rel="noopener">Author on LinkedIn</a> · <a href="https://edwardsuresh.github.io/architects-ml-playbook/" target="_blank" rel="noopener">The Architect's ML Playbook</a> · v1.0.1 · MIT + CC BY 4.0</p>
 </div></header>
 
 <nav class="tabs" aria-label="Sections"><div class="wrap" role="tablist">
@@ -328,12 +328,15 @@ flowchart LR
 │   │   ├── guardrails.py            <span class="c"># PII · prompt injection · sector rules · grounding</span>
 │   │   ├── retrieval.py             <span class="c"># access filter before ranking · citations</span>
 │   │   ├── tools.py                 <span class="c"># agent identities · allow-lists · approval queue</span>
+│   │   ├── <span class="n">prompts.py</span>               <span class="c"># versioned prompt registry, approved-only</span>
+│   │   ├── <span class="n">memory.py</span>                <span class="c"># conversation memory with retention · export · forget</span>
 │   │   ├── orchestrator.py · tracing.py
 │   │   ├── evals.py                 <span class="c"># CLI: kit-evals</span>
 │   │   └── <span class="n">policy_gate.py</span>           <span class="c"># CLI: kit-policy-gate</span>
 │   ├── <span class="n">adapters/kit_adapters/</span>       <span class="c"># the ONLY cloud code: azure · aws · gcp · anthropic_api</span>
 │   └── <span class="n">ml/</span>                          <span class="c"># classic ML; algorithms from The Architect's ML Playbook</span>
 ├── config/models.yaml               <span class="c"># alias routing + cloud bindings</span>
+├── <span class="n">prompts/</span>                         <span class="c"># registry.yaml + library/&lt;id&gt;/&lt;version&gt;.md</span>
 ├── api/                             <span class="c"># reference FastAPI service</span>
 │
 ├── <span class="n">domain-packs/</span>                    <span class="c"># _template + 10 sectors</span>
@@ -343,7 +346,7 @@ flowchart LR
 ├── <span class="n">finops/</span>                          <span class="c"># budgets.yaml · cost-model.md</span>
 ├── <span class="n">ops/</span>                             <span class="c"># slo.yaml · autonomy-levels.md · runbooks/</span>
 ├── evals/                           <span class="c"># suites/quality.yaml · datasets/ · reports/</span>
-├── tests/                           <span class="c"># 63 tests: core, adapters, policy gate, packs, red team</span>
+├── tests/                           <span class="c"># 74 tests: core, prompts, memory, adapters, policy gate, packs, red team</span>
 ├── <span class="n">labs/</span>                            <span class="c"># 6 building blocks × Concept / Build / Production</span>
 ├── deploy/                          <span class="c"># docker · k8s · terraform/{{aws,azure,gcp}} module contracts</span>
 ├── <span class="n">enablement/</span>                      <span class="c"># learning paths · champions · workforce impact</span>
@@ -915,7 +918,7 @@ retirement_trigger: score &lt; 0.90 for 2 weeks</pre></div>
     <tr><th>If you are hiring for…</th><th>Look at</th></tr>
     <tr><td>AI governance and the ARB</td><td>Governance &amp; ARB tab, <code>01-governance/</code>, the policy gate</td></tr>
     <tr><td>Reference architecture</td><td>Architecture and Reference architecture tabs, <code>02-architecture/</code>, ADRs</td></tr>
-    <tr><td>Hands-on platform engineering</td><td><code>platform/core/kit</code>, the 63 tests, the three CI gates</td></tr>
+    <tr><td>Hands-on platform engineering</td><td><code>platform/core/kit</code>, the 74 tests, the three CI gates</td></tr>
     <tr><td>Multi-cloud strategy</td><td>AWS · Azure · GCP tab, <code>platform/adapters</code></td></tr>
     <tr><td>Industry depth</td><td>Industry packs, especially financial services and insurance</td></tr>
   </table></div>

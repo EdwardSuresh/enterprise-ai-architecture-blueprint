@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "architects-enterprise-ai-kit"
-version = "1.0.0"
+version = "1.0.1"
 description = "The Architect's Enterprise AI Kit: cloud-neutral, industry-neutral reference implementation for governed enterprise AI."
 readme = "README.md"
 requires-python = ">=3.10"

@@ -10,6 +10,8 @@ Python package `kit` (install with `pip install -e .` from the repo root). Only 
 | `kit.tools` | Agent identities, tool allow-lists, human approval queue | 04 |
 | `kit.evals` | Golden-set runner and CI gate | 05 |
 | `kit.policy_gate` | AI inventory validator and CI gate | 06 |
+| `kit.prompts` | Versioned prompt registry: approved versions only, hash in every trace | 02 |
+| `kit.memory` | Short-term conversation memory and long-term facts with retention, export and forget | 02 |
 | `kit.orchestrator` | One guarded request end to end | all |
 | `kit.tracing` | Spans with OpenTelemetry GenAI attribute names | all |
 

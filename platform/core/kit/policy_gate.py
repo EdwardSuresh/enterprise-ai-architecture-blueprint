@@ -16,6 +16,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 from .config import load_yaml, repo_root
+from .prompts import PromptError, PromptRegistry
 
 AUTONOMY = ["L0", "L1", "L2", "L3", "L4"]
 REQUIRED = ["id", "name", "owner", "risk_tier", "pattern", "autonomy_level", "models",
@@ -37,7 +38,8 @@ def _exists(rel: str | None) -> bool:
     return bool(rel) and (repo_root() / rel).exists()
 
 
-def check_system(s: dict, tiers: dict, models: dict, today: dt.date) -> Findings:
+def check_system(s: dict, tiers: dict, models: dict, today: dt.date,
+                 prompts: PromptRegistry | None = None) -> Findings:
     f = Findings()
     sid = s.get("id", "<no id>")
     for key in REQUIRED:
@@ -84,6 +86,15 @@ def check_system(s: dict, tiers: dict, models: dict, today: dt.date) -> Findings
         elif s["data_class"] not in m.get("allowed_data_classes", []):
             f.errors.append(f"{sid}: data class '{s['data_class']}' not allowed for '{alias}'")
 
+    for ref in s.get("prompts", []) or []:
+        if prompts is None:
+            f.errors.append(f"{sid}: lists prompts but no prompt registry was found")
+            break
+        try:
+            prompts.resolve(str(ref))
+        except PromptError as exc:
+            f.errors.append(f"{sid}: prompt {ref}: {exc}")
+
     if s["status"] == "production":
         last = s.get("last_review")
         if not last:
@@ -100,13 +111,14 @@ def run(inventory: str, tiers_path: str, models_path: str, today: dt.date | None
     tiers = {int(k): v for k, v in load_yaml(tiers_path)["tiers"].items()}
     models = load_yaml(models_path)["models"]
     inv = load_yaml(inventory)
+    prompts = PromptRegistry.load() if (repo_root() / "prompts" / "registry.yaml").is_file() else None
     total = Findings()
     seen: set[str] = set()
     for s in inv.get("systems", []):
         if s.get("id") in seen:
             total.errors.append(f"{s['id']}: duplicate id")
         seen.add(s.get("id"))
-        r = check_system(s, tiers, models, today)
+        r = check_system(s, tiers, models, today, prompts)
         total.errors += r.errors
         total.warnings += r.warnings
     return total

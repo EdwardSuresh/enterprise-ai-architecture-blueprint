@@ -3,11 +3,13 @@ import datetime as dt
 
 from kit.config import load_yaml
 from kit.policy_gate import check_system, run
+from kit.prompts import PromptRegistry
 
 TIERS = {int(k): v for k, v in load_yaml("01-governance/risk-tiers.yaml")["tiers"].items()}
 MODELS = load_yaml("02-architecture/standards/approved-models.yaml")["models"]
 BASE = load_yaml("01-governance/ai-inventory.yaml")["systems"][0]
 TODAY = dt.date(2026, 11, 1)
+PROMPTS = PromptRegistry.load()
 
 
 def errors(**changes):
@@ -17,7 +19,7 @@ def errors(**changes):
             s.pop(k, None)
         else:
             s[k] = v
-    return check_system(s, TIERS, MODELS, TODAY).errors
+    return check_system(s, TIERS, MODELS, TODAY, PROMPTS).errors
 
 
 def test_committed_inventory_passes():

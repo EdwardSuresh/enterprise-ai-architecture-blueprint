@@ -16,6 +16,7 @@ systems:
     arb_id: ARB-2026-012
     system_card: 01-governance/system-cards/AIS-001-underwriting-assistant.yaml
     golden_set: domain-packs/insurance/evals/golden.jsonl
+    prompts: [rag-answer@1.1.0]
     human_oversight: Underwriter reviews every answer; answers cite manual sections.
     last_review: 2026-10-15
 
@@ -45,6 +46,7 @@ systems:
     arb_id: ARB-2026-019
     system_card: 01-governance/system-cards/AIS-003-fee-dispute.yaml
     golden_set: domain-packs/financial-services/evals/golden.jsonl
+    prompts: [rag-answer]
     human_oversight: Refund actions go to the agent approval queue; disputes over a set amount go to staff.
     last_review: 2026-10-20
 

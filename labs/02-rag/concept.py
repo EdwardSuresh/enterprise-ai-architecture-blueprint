@@ -1,10 +1,13 @@
 """Lab 02 Concept: permission-aware RAG (business case: insurer underwriting manual Q&A).
 
 Shows: retrieval filtered by access rights BEFORE ranking, answers with citations,
+a versioned prompt from prompts/registry.yaml, short-term conversation memory,
 and a hand-off when the user may not see any relevant source.
 Run:  python labs/02-rag/concept.py
 """
 from kit.gateway import Gateway, MockProvider
+from kit.memory import ShortTermMemory
+from kit.prompts import PromptRegistry
 from kit.orchestrator import Orchestrator
 from kit.retrieval import Document, Index
 
@@ -20,7 +23,9 @@ docs = [
              {"executives"}),
 ]
 gw = Gateway.from_config({"mock-primary": MockProvider("mock-primary")})
-bot = Orchestrator(gw, Index(docs), use_case="underwriting-assistant")
+memory = ShortTermMemory()
+bot = Orchestrator(gw, Index(docs), use_case="underwriting-assistant",
+                   prompts=PromptRegistry.load(), memory=memory)
 
 print("Underwriters cannot see EX-1.0, so their answers come only from documents they may read.")
 for who, groups, q in [
@@ -28,5 +33,8 @@ for who, groups, q in [
     ("Underwriter", {"underwriters"}, "Who may approve limits above 50 million dollars?"),
     ("Executive", {"executives"}, "Who may approve limits above 50 million dollars?"),
 ]:
-    r = bot.answer(q, groups)
-    print(f"\n{who}: {q}\n  status={r.status}\n  answer={r.text}\n  citations={r.citations} reasons={r.reasons}")
+    r = bot.answer(q, groups, conversation_id=who)
+    print(f"\n{who}: {q}\n  status={r.status}  prompt={r.prompt_ref}\n  answer={r.text}\n  citations={r.citations} reasons={r.reasons}")
+
+print("\nUnderwriter conversation memory (PII redacted, expires when idle):")
+print(memory.as_text("Underwriter"))
