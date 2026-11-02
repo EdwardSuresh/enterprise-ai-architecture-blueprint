@@ -73,7 +73,7 @@ Organization examples throughout the kit (banks, insurers, retailers and so on) 
 - Code: [MIT](LICENSE)
 - Documentation and content: [CC BY 4.0](LICENSE-CONTENT.md)
 
-Cloud service names and regulatory references change often. Verify against current provider documentation and your own legal counsel. Nothing here is legal advice. Please read the full [disclaimer](DISCLAIMER.md), including the notes on trademarks and non-affiliation.
+Cloud service names and regulatory references change often. Verify against current provider documentation and your own legal counsel. Nothing here is legal advice. Please read the full [disclaimer](DISCLAIMER.md) and the [trademark note](TRADEMARKS.md).
 
 ## Author
 
