@@ -16,14 +16,14 @@ from dataclasses import dataclass, field
 from pathlib import Path
 
 from .config import load_yaml, repo_root
-from .contracts import AgentContract, ContractError
+from .contracts import AUTONOMY, AgentContract, ContractError
 from .prompts import PromptError, PromptRegistry
 
-AUTONOMY = ["L0", "L1", "L2", "L3", "L4"]
 REQUIRED = ["id", "name", "owner", "risk_tier", "pattern", "autonomy_level", "models",
             "data_class", "status", "system_card"]
 STATUSES = {"proposed", "pilot", "production", "retired"}
 AGENTIC_PATTERNS = {"tool-using-agent", "multi-agent-orchestration", "conversational-customer-agent"}
+DATA_ORDER = ["public", "internal", "confidential", "restricted"]
 
 
 def check_contracts(s: dict, models: dict, today: dt.date) -> Findings:
@@ -66,6 +66,10 @@ def check_contracts(s: dict, models: dict, today: dt.date) -> Findings:
                 bad = c.data_classes - set(m.get("allowed_data_classes", []))
                 if bad:
                     f.errors.append(f"{tag}: data classes {sorted(bad)} not allowed for '{alias}'")
+        sys_level = DATA_ORDER.index(s["data_class"]) if s["data_class"] in DATA_ORDER else -1
+        above = sorted(d for d in c.data_classes if d not in DATA_ORDER or DATA_ORDER.index(d) > sys_level)
+        if above:
+            f.errors.append(f"{tag}: data classes {above} exceed the system's '{s['data_class']}'")
         if s.get("arb_id") and c.approved_by != s["arb_id"]:
             f.errors.append(f"{tag}: approved_by {c.approved_by or '(none)'} does not match ARB {s['arb_id']}")
     for c in loaded.values():
@@ -168,6 +172,22 @@ def run(inventory: str, tiers_path: str, models_path: str, today: dt.date | None
     inv = load_yaml(inventory)
     prompts = PromptRegistry.load() if (repo_root() / "prompts" / "registry.yaml").is_file() else None
     total = Findings()
+    # Contracts the runtime could load must be exactly the ones the inventory references.
+    referenced = {str((repo_root() / r).resolve()) for s in inv.get("systems", []) for r in (s.get("contracts") or [])}
+    agents_seen: dict[str, str] = {}
+    cdir = repo_root() / "contracts"
+    for fpath in sorted(cdir.glob("*.yaml")) if cdir.is_dir() else []:
+        rel = fpath.relative_to(repo_root())
+        if str(fpath.resolve()) not in referenced:
+            total.errors.append(f"{rel}: not referenced by any inventory entry (orphan contract)")
+        try:
+            agent = AgentContract.load(fpath).agent
+        except ContractError as exc:
+            total.errors.append(f"{rel}: {exc}")
+            continue
+        if agent in agents_seen:
+            total.errors.append(f"{rel}: second contract for agent '{agent}' (also {agents_seen[agent]})")
+        agents_seen[agent] = str(rel)
     seen: set[str] = set()
     for s in inv.get("systems", []):
         if s.get("id") in seen:

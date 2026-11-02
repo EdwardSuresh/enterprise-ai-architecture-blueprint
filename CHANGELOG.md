@@ -5,12 +5,13 @@ version changes the governance schemas (`ai-inventory.yaml`, `risk-tiers.yaml`).
 
 ## [1.1.0] - 2026-11-02
 ### Added: executable agent contracts
-- `contracts/`: one machine-readable contract per agent covering planning (allowed intents, step count), models, data classes, short- and long-term memory, tools (read/write, approval, amount limits), delegation and execution limits (cost, tool calls). Approved by ARB id, versioned, expiring, revocable.
-- `kit.enforcer`: independent execution layer. The model only proposes plans; the enforcer approves the plan, executes only approved steps, and re-checks the live contract on every step, so revocation stops running tasks.
+- `contracts/`: one machine-readable contract per agent covering planning (intents mapped to the exact tools, models, memory or delegates each may use; step count), models, data classes, short- and long-term memory, tools (read/write, approval, amount limits), delegation and execution limits (cost, tool calls). Approved by ARB id, versioned, expiring, revocable.
+- `kit.enforcer`: independent execution layer. The model only proposes plans; the enforcer approves one plan per task, runs each approved step at most once, and re-checks the live contract on every step, so revocation stops running tasks. Human approvals go through the enforcer, which records the approver. Malformed steps are recorded as denials. Memory is bound to the task's subject; delegates share the parent's budget.
 - `kit.contracts.narrow()`: delegation only narrows authority (intersection of permissions, tighter of every limit, lower autonomy, depth minus one).
-- `kit.evidence`: four linked records per step (provenance, verification, authorization, execution), including denials, in a hash-chained ledger that detects edits, deletions and reordering.
-- Policy gate: L2+ and agentic systems must list contracts; contracts must match the inventory (ARB id, autonomy, models, data classes, delegates) and be unexpired.
-- 22 failure-mode tests: conflicting instructions, plan deviation, delegate overreach, depth and loop limits, revocation, expiry, cost and tool-call limits, memory keys, tampering. Test suite: 96 tests.
+- `kit.evidence`: four linked records per step (provenance, verification, authorization, execution), including denials, in a hash-chained ledger that detects edits, deletions and reordering, plus an external anchor (`anchor()`) that detects truncation.
+- Policy gate: L2+ and agentic systems must list contracts; contracts must match the inventory (ARB id, autonomy, models, data classes, delegates) and be unexpired; the data class may not exceed the system's; orphan and duplicate contracts fail the gate.
+- 42 failure-mode tests: conflicting instructions, plan deviation and replay, intent-action mismatch, malformed steps, amount validation, delegate overreach and shared budgets, depth limits, revocation (including pending approvals), expiry, cost and tool-call limits, memory keys and subject binding, tampering and truncation, orphan and duplicate contracts. Test suite: 116 tests.
+- Hardened after an independent adversarial review of the first v1.1 draft (eight must-fix findings, each now covered by a test).
 - Lab 07, `02-architecture/agent-contracts.md`, ADR-AI-003, control-map updates.
 ### Thanks
 - To the LinkedIn reviewer who asked whether the blueprint's contracts are documented or executable across the whole stack.

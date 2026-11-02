@@ -13,8 +13,12 @@ and need different evidence:
 
 Each record carries the action id that links the four, and the hash of the
 previous record, so any edit, deletion or reordering breaks the chain and is
-detected by verify(). In production, write the same records to append-only
-(WORM) storage; the hash chain stays the same.
+detected by verify().
+
+A chain alone cannot show that records were cut off the END. So publish an
+anchor (record count + head hash, from anchor()) somewhere the agent runtime
+cannot write - append-only (WORM) storage, a separate log, or a periodic
+signed checkpoint - and pass it to verify(anchor=...).
 """
 from __future__ import annotations
 
@@ -72,8 +76,12 @@ class EvidenceLedger:
                 out[r.kind].append(r)
         return out
 
-    def verify(self) -> tuple[bool, str]:
-        """Recompute the chain. Returns (ok, reason)."""
+    def anchor(self) -> dict:
+        """Count and head hash to store outside the ledger (detects truncation)."""
+        return {"count": len(self.records), "head": self.records[-1].hash if self.records else GENESIS}
+
+    def verify(self, anchor: dict | None = None) -> tuple[bool, str]:
+        """Recompute the chain; with an anchor, also detect records removed from the end."""
         prev = GENESIS
         for i, r in enumerate(self.records):
             if r.seq != i:
@@ -83,7 +91,12 @@ class EvidenceLedger:
             if _digest(r.body()) != r.hash:
                 return False, f"record {i}: content changed after it was written"
             prev = r.hash
-        return True, f"{len(self.records)} records verified"
+        if anchor is not None:
+            if len(self.records) < anchor["count"]:
+                return False, f"ledger has {len(self.records)} records; anchor says {anchor['count']} (truncated)"
+            if anchor["count"] and self.records[anchor["count"] - 1].hash != anchor["head"]:
+                return False, "record at the anchored position does not match the anchor"
+        return True, f"{len(self.records)} records verified" + (" against anchor" if anchor else "")
 
     def export_jsonl(self, path: str | Path) -> None:
         p = Path(path)

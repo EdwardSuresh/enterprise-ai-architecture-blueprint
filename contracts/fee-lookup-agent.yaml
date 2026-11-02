@@ -13,7 +13,10 @@ valid_until: 2027-06-30
 autonomy_level: L2
 
 planning:
-  allowed_intents: [check_history, request_refund, close_account]
+  intents:
+    check_history:  {tools: [get_fee_history]}
+    request_refund: {tools: [request_fee_refund]}
+    close_account:  {tools: [close_account]}
   max_steps: 4
 
 models: [reasoning-small]

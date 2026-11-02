@@ -356,7 +356,7 @@ flowchart LR
 ├── <span class="n">finops/</span>                          <span class="c"># budgets.yaml · cost-model.md</span>
 ├── <span class="n">ops/</span>                             <span class="c"># slo.yaml · autonomy-levels.md · runbooks/</span>
 ├── evals/                           <span class="c"># suites/quality.yaml · datasets/ · reports/</span>
-├── tests/                           <span class="c"># 96 tests: core, contracts, prompts, memory, adapters, policy gate, packs, red team</span>
+├── tests/                           <span class="c"># 116 tests: core, contracts, prompts, memory, adapters, policy gate, packs, red team</span>
 ├── <span class="n">labs/</span>                            <span class="c"># 7 building blocks × Concept / Build / Production</span>
 ├── deploy/                          <span class="c"># docker · k8s · terraform/{{aws,azure,gcp}} module contracts</span>
 ├── <span class="n">enablement/</span>                      <span class="c"># learning paths · champions · workforce impact</span>
@@ -879,7 +879,7 @@ retirement_trigger: score &lt; 0.90 for 2 weeks</pre></div>
     <div class="card"><h3><span class="q">WHAT</span></h3><p>One contract per agent: planning, models, data classes, memory, tools, delegation and execution limits.</p></div>
     <div class="card"><h3><span class="q">WHY</span></h3><p>An agent cannot enforce its own boundaries. The architecture must block and audit unauthorized actions when models fail or instructions conflict.</p></div>
     <div class="card"><h3><span class="q">WHO</span></h3><p>Owner drafts, AI ARB approves (ARB id in the contract), platform runs the enforcer, audit reads the evidence.</p></div>
-    <div class="card"><h3><span class="q">HOW</span></h3><p>Approve the plan first; authorize every step against the live contract; narrow on delegation; record four kinds of evidence.</p></div>
+    <div class="card"><h3><span class="q">HOW</span></h3><p>Approve one plan per task; run each approved step once; authorize every step against the live contract; narrow and share one budget on delegation; record four kinds of evidence.</p></div>
   </div>
   <div class="diagram"><div class="cap">Independent execution layer</div>
 <pre class="mermaid">
@@ -915,16 +915,20 @@ sequenceDiagram
   participant E as Contract enforcer
   participant C as Contract store
   participant T as Tool
+  participant H as Human approver
   participant L as Evidence ledger
   A->>E: propose plan
   E->>C: load live contract
   E->>L: plan evidence
   A->>E: execute step: refund 500
   E->>C: re-check status and expiry
-  E->>E: in approved plan? tool allowed? within limit?
+  E->>E: unused approved step? intent allows tool? amount 0..limit? budget left?
   alt within contract
     E->>T: call (writes queue for a human)
     E->>L: provenance, verification, authorization, execution
+    H->>E: approve, with approver id
+    E->>C: re-check contract still live
+    E->>L: four records naming the approver
   else outside contract
     E->>L: four records, decision deny
     E-->>A: refused with reason
@@ -943,9 +947,14 @@ sequenceDiagram
     <tr><td>The model acts outside its approved plan</td><td>Each step must match an approved step</td></tr>
     <tr><td>A sub-agent asks for more than its parent has</td><td>Delegation only narrows: intersection of permissions, tighter limits</td></tr>
     <tr><td>An incident needs one agent stopped now</td><td>Revoke the contract; running tasks stop at their next step</td></tr>
-    <tr><td>Someone edits the audit trail later</td><td>The hash chain fails verification</td></tr>
+    <tr><td>The model replays an approved refund, or re-plans mid-task</td><td>Each approved step runs once; one plan per task</td></tr>
+    <tr><td>A step labelled "explain fee" tries to delegate</td><td>Each intent lists exactly which tools, models, memory or delegates it may use</td></tr>
+    <tr><td>Sub-agents fan out to multiply limits</td><td>Cost and tool calls are counted once across the delegation chain</td></tr>
+    <tr><td>A queued refund is approved after the contract is revoked</td><td>Approvals go through the enforcer, which re-checks the contract and records the approver</td></tr>
+    <tr><td>Amount is NaN, negative or missing</td><td>Refused; malformed steps are recorded as denials, never as allows</td></tr>
+    <tr><td>Someone edits, deletes or cuts off audit records</td><td>The hash chain fails; an anchor stored outside the runtime detects truncation</td></tr>
   </table></div>
-  <div class="callout blue"><p><b>Honest limit:</b> the reference enforcer runs in-process so the lab works anywhere. In production, run it as its own service in front of tools, models and memory, so agents have no path around it.</p></div>
+  <div class="callout blue"><p><b>Honest limit:</b> the reference enforcer runs in-process so the lab works anywhere. In production, run it as its own service in front of tools, models and memory, so agents have no path around it. 42 tests cover these failure modes (<code>tests/test_contracts.py</code>); they were added after an independent adversarial review of the first draft.</p></div>
 </section>
 
 <!-- ================= CONTROLS ================= -->
@@ -1009,7 +1018,7 @@ sequenceDiagram
     <tr><th>If you are hiring for…</th><th>Look at</th></tr>
     <tr><td>AI governance and the ARB</td><td>Governance &amp; ARB tab, <code>01-governance/</code>, the policy gate</td></tr>
     <tr><td>Reference architecture</td><td>Architecture and Reference architecture tabs, <code>02-architecture/</code>, ADRs</td></tr>
-    <tr><td>Hands-on platform engineering</td><td><code>platform/core/kit</code>, the 96 tests, the three CI gates</td></tr>
+    <tr><td>Hands-on platform engineering</td><td><code>platform/core/kit</code>, the 116 tests, the three CI gates</td></tr>
     <tr><td>Multi-cloud strategy</td><td>AWS · Azure · GCP tab, <code>platform/adapters</code></td></tr>
     <tr><td>Industry depth</td><td>Industry packs, especially financial services and insurance</td></tr>
   </table></div>

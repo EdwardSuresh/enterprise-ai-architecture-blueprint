@@ -12,7 +12,14 @@ valid_until: 2027-06-30             # contracts expire and must be re-approved
 autonomy_level: L2                  # act with approval: writes wait for a human
 
 planning:
-  allowed_intents: [explain_fee, check_history, request_refund, remember_preference, recall_context, delegate_lookup]
+  # Each intent names exactly what it may touch. A step must match its intent.
+  intents:
+    check_history:       {tools: [get_fee_history]}
+    request_refund:      {tools: [request_fee_refund]}
+    explain_fee:         {models: [reasoning-large, reasoning-small]}
+    remember_preference: {memory: [long]}
+    recall_context:      {memory: [short]}
+    delegate_lookup:     {delegates: [fee-lookup-agent]}
   max_steps: 6
 
 models: [reasoning-large, reasoning-small]
@@ -26,7 +33,7 @@ memory:
 
 tools:
   get_fee_history:   {mode: read}
-  request_fee_refund: {mode: write, approval: human, max_amount: 50}
+  request_fee_refund: {mode: write, approval: human, max_amount: 50, amount_arg: amount}
 
 delegation:
   allowed_delegates: [fee-lookup-agent]
