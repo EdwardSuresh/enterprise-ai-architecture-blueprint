@@ -73,8 +73,16 @@ Organization examples throughout the kit (banks, insurers, retailers and so on) 
 - Code: [MIT](LICENSE)
 - Documentation and content: [CC BY 4.0](LICENSE-CONTENT.md)
 
-Cloud service names and regulatory references change often. Verify against current provider documentation and your own legal counsel. Nothing here is legal advice. Please read the full [disclaimer](DISCLAIMER.md) and the [trademark note](TRADEMARKS.md).
+Cloud service names and regulatory references change often. Verify against current provider documentation and your own legal counsel. Nothing here is legal advice. Please read the full [disclaimer](DISCLAIMER.md). If you publish an adapted version, please give it a different name and credit the original, as CC BY 4.0 requires.
 
-## Author
+## About the author
 
-**Rajaretnam Suresh Edward David**: TOGAF-certified Enterprise Architect with 25+ years in financial services, specializing in ARB governance, reference architecture and hands-on AI architecture.
+**Rajaretnam Suresh Edward David** · Enterprise Architect · Oklahoma, USA · [GitHub](https://github.com/EdwardSuresh)
+
+- TOGAF-certified Enterprise Architect with **25+ years in financial services**: banking, capital markets, insurance and energy.
+- Depth in **architecture review boards and governance**, TOGAF ADM, reference architecture and application portfolio rationalization.
+- **Hands-on AI architecture** with Microsoft Foundry (formerly Azure AI Foundry) and the Claude API.
+
+I built this kit to show how I would stand up AI governance and a governed AI platform in a real enterprise, end to end: from the ARB and risk tiers down to running code and CI gates. Every design decision is recorded in `02-architecture/adr/`.
+
+**Open to Enterprise Architect and Enterprise AI Architect roles.** I'm happy to walk through the kit with your team.

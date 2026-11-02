@@ -40,3 +40,8 @@ flowchart LR
 | Id | Sector | Adoption mode | Published |
 |---|---|---|---|
 | — | — | — | None yet |
+
+
+## Reference runs
+
+Before any client case study, this folder will hold **reference runs**: the author's own deployments of the labs on real cloud services, with measured results (eval pass rates, latency, cost per request) and screenshots. They show the kit working outside the offline mock model. Each run states the date, region, services and model versions used.
