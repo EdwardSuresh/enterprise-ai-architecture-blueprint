@@ -3,6 +3,11 @@
 All notable changes to the kit. Versions follow semantic versioning: a major
 version changes the governance schemas (`ai-inventory.yaml`, `risk-tiers.yaml`).
 
+## [Unreleased]
+### Added
+- Site tabs "Use case: financial services" (AIS-003 fee dispute explainer) and "Use case: insurance" (AIS-001 underwriting manual assistant): each follows one use case through every folder of the project structure, with 5W1H, architecture, delivery flow and runtime sequence diagrams, and a what-could-go-wrong table tied to real files.
+- ARB decision log: illustrative entries ARB-2026-019 and ARB-2026-012 referenced by the inventory.
+
 ## [1.1.0] - 2026-11-02
 ### Added: executable agent contracts
 - `contracts/`: one machine-readable contract per agent covering planning (intents mapped to the exact tools, models, memory or delegates each may use; step count), models, data classes, short- and long-term memory, tools (read/write, approval, amount limits), delegation and execution limits (cost, tool calls). Approved by ARB id, versioned, expiring, revocable.

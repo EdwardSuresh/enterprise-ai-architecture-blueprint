@@ -27,6 +27,8 @@ Approved · Approved with conditions · Deferred · Rejected · Exception grante
 
 | Decision id | Date | Use case id | Name | Tier | Stage | Decision | Conditions (owner, due date) | Exception expiry | Supersedes | Chair |
 |---|---|---|---|---|---|---|---|---|---|---|
+| ARB-2026-019 | 2026-09-24 | AIS-003 | Fee dispute explainer | 2 | release | Approved with conditions | Agent contracts for both agents, refunds capped at $50 with human approval (system owner, before pilot); hand-off and override rates reported monthly (operations, ongoing) | — | — | Head of EA |
+| ARB-2026-012 | 2026-08-27 | AIS-001 | Underwriting manual assistant | 2 | design | Approved with conditions | Data contract and freshness rule for the manual (underwriting ops, before pilot); weekly 2% sample review by a senior underwriter (underwriting-ai-team, ongoing) | — | — | Head of EA |
 | ARB-2026-041 | 2026-10-08 | UC-002 | Claims document intake | 2 | design | Approved with conditions | Data contract for claims inbox (claims data owner, 2026-11-15); red-team before release (delivery lead, 2026-12-01) | — | — | Head of EA |
 | ARB-2026-040 | 2026-10-08 | UC-001 | Policy assistant for branch staff | 1 | release | Approved | — | — | — | EA delegate |
 | ARB-2026-039 | 2026-09-24 | UC-003 | Discharge summary drafting | 3 | design | Deferred | Complete impact assessment; confirm reviewer workload | — | — | Head of EA |
