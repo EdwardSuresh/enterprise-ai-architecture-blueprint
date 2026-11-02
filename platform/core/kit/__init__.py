@@ -1,4 +1,4 @@
-"""The Architect's Enterprise AI Blueprint - cloud-neutral reference code (package `kit`).
+"""Enterprise AI Architecture Blueprint - cloud-neutral reference code (package `kit`).
 
 Modules
 -------

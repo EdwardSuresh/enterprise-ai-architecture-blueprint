@@ -5,7 +5,7 @@ version changes the governance schemas (`ai-inventory.yaml`, `risk-tiers.yaml`).
 
 ## [1.0.1] - 2026-11-01
 ### Changed (name)
-- Renamed from "The Architect's Enterprise AI Kit" to **The Architect's Enterprise AI Blueprint**, to reflect enterprise-wide, industry-neutral use. Repository: `architects-enterprise-ai-blueprint`. The reference code package keeps the name `kit`.
+- Renamed from "The Architect's Enterprise AI Kit" to **Enterprise AI Architecture Blueprint** (part of The Architect's Series), to reflect enterprise-wide, industry-neutral use. Repository: `enterprise-ai-architecture-blueprint`. The reference code package keeps the name `kit`.
 
 ### Added
 - Prompt registry: `prompts/registry.yaml`, versioned prompt library, `kit.prompts` (approved-only loading, required variables, content hash in traces, registry validation).

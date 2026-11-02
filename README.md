@@ -1,12 +1,13 @@
-# The Architect's Enterprise AI Blueprint
+# Enterprise AI Architecture Blueprint
 
-**Move AI from scattered pilots to governed, multi-cloud production, in any industry.**
+**An enterprise-wide blueprint for governing and scaling AI, with a runnable reference implementation.**
+Move AI from scattered pilots to governed, multi-cloud production, in any industry or services sector. Part of **The Architect's Series**, by Rajaretnam Suresh Edward David.
 
-[![CI](https://github.com/EdwardSuresh/architects-enterprise-ai-blueprint/actions/workflows/ci.yml/badge.svg)](https://github.com/EdwardSuresh/architects-enterprise-ai-blueprint/actions/workflows/ci.yml)
-[![Evals gate](https://github.com/EdwardSuresh/architects-enterprise-ai-blueprint/actions/workflows/evals.yml/badge.svg)](https://github.com/EdwardSuresh/architects-enterprise-ai-blueprint/actions/workflows/evals.yml)
-[![Policy gate](https://github.com/EdwardSuresh/architects-enterprise-ai-blueprint/actions/workflows/policy-gate.yml/badge.svg)](https://github.com/EdwardSuresh/architects-enterprise-ai-blueprint/actions/workflows/policy-gate.yml)
+[![CI](https://github.com/EdwardSuresh/enterprise-ai-architecture-blueprint/actions/workflows/ci.yml/badge.svg)](https://github.com/EdwardSuresh/enterprise-ai-architecture-blueprint/actions/workflows/ci.yml)
+[![Evals gate](https://github.com/EdwardSuresh/enterprise-ai-architecture-blueprint/actions/workflows/evals.yml/badge.svg)](https://github.com/EdwardSuresh/enterprise-ai-architecture-blueprint/actions/workflows/evals.yml)
+[![Policy gate](https://github.com/EdwardSuresh/enterprise-ai-architecture-blueprint/actions/workflows/policy-gate.yml/badge.svg)](https://github.com/EdwardSuresh/enterprise-ai-architecture-blueprint/actions/workflows/policy-gate.yml)
 
-**Website:** https://edwardsuresh.github.io/architects-enterprise-ai-blueprint/ · Part of **The Architect's Series** with [The Architect's ML Playbook](https://edwardsuresh.github.io/architects-ml-playbook/).
+**Website:** https://edwardsuresh.github.io/enterprise-ai-architecture-blueprint/ · Part of **The Architect's Series** with [The Architect's ML Playbook](https://edwardsuresh.github.io/architects-ml-playbook/).
 
 ## The blueprint in 5W1H
 
@@ -22,8 +23,8 @@
 ## Quick start (5 minutes, no cloud account)
 
 ```bash
-git clone https://github.com/EdwardSuresh/architects-enterprise-ai-blueprint.git
-cd architects-enterprise-ai-blueprint
+git clone https://github.com/EdwardSuresh/enterprise-ai-architecture-blueprint.git
+cd enterprise-ai-architecture-blueprint
 pip install -e ".[test]"
 pytest -q                                   # unit, integration and pack checks
 python labs/02-rag/concept.py               # one guarded, permission-aware request

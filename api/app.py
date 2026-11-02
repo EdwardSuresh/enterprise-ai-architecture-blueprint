@@ -10,7 +10,7 @@ from kit.guardrails import load_pack_rules
 from kit.orchestrator import Orchestrator
 from kit.retrieval import Document, Index
 
-app = FastAPI(title="Enterprise AI Blueprint reference API")
+app = FastAPI(title="Enterprise AI Architecture Blueprint reference API")
 _docs = [Document("POL-1", "Returns", "Returns are accepted within 30 days with a receipt.", {"customers"})]
 _bot = Orchestrator(Gateway.from_config({"mock-primary": MockProvider("mock-primary")}),
                     Index(_docs), use_case="retail-chat", rules=load_pack_rules("retail"))

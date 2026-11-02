@@ -1,6 +1,6 @@
 # Disclaimer
 
-**Please read before using The Architect's Enterprise AI Blueprint.**
+**Please read before using Enterprise AI Architecture Blueprint.**
 
 1. **Not professional advice.** This blueprint is general guidance for architects and technology leaders. It is not legal, regulatory, compliance, financial or security advice. Laws, regulator guidance and standards change, and how they apply depends on your organization. Confirm every regulatory or compliance decision with qualified counsel and your own risk and compliance teams.
 

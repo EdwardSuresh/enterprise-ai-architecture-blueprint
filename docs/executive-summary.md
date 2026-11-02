@@ -1,6 +1,6 @@
 # Executive Summary
 
-**The Architect's Enterprise AI Blueprint**: a cloud-neutral, industry-neutral way to run AI as a governed enterprise capability.
+**Enterprise AI Architecture Blueprint**: a cloud-neutral, industry-neutral way to run AI as a governed enterprise capability.
 
 | 5W1H | Answer |
 |---|---|

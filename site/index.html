@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="A cloud-neutral, industry-neutral kit for governing and scaling enterprise AI: project structure, reference architecture, AI ARB, maturity check, 10 industry packs and hands-on labs.">
 <meta name="author" content="Rajaretnam Suresh Edward David">
-<meta property="og:title" content="The Architect's Enterprise AI Kit">
-<meta property="og:description" content="Move AI from scattered pilots to governed, multi-cloud production, in any industry.">
+<meta property="og:title" content="Enterprise AI Architecture Blueprint">
+<meta property="og:description" content="An enterprise-wide blueprint for governing and scaling AI, with a runnable reference implementation.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://edwardsuresh.github.io/architects-enterprise-ai-kit/">
+<meta property="og:url" content="https://edwardsuresh.github.io/enterprise-ai-architecture-blueprint/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231d4ed8'/%3E%3Cpath d='M8 22h16M8 16h10M8 10h16' stroke='%23e3b341' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
-<title>Enterprise AI Blueprint</title>
+<title>Enterprise AI Architecture Blueprint</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;800&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
@@ -133,10 +133,10 @@ footer .wrap{padding-block:18px}
 </head>
 <body>
 <header class="top"><div class="wrap">
-  <div class="eyebrow">The Architect's Series · Cloud-neutral · Industry-neutral · Version 1.0.1</div>
-  <h1>The Architect's Enterprise AI Blueprint</h1>
-  <p class="lede">How an enterprise runs AI safely and at scale: a reusable project structure, reference architecture, governance model and Enterprise Architecture playbook. It works on AWS, Azure or Google Cloud and in any industry or services sector. Start from zero (Day 0) or plug it into AI you already run.</p>
-  <p class="links"><a href="https://github.com/EdwardSuresh/architects-enterprise-ai-blueprint" target="_blank" rel="noopener">GitHub repository</a> · <a href="https://www.linkedin.com/in/sureshedward" target="_blank" rel="noopener">Author on LinkedIn</a> · <a href="https://edwardsuresh.github.io/architects-ml-playbook/" target="_blank" rel="noopener">The Architect's ML Playbook</a> · v1.0.1 · MIT + CC BY 4.0</p>
+  <div class="eyebrow">The Architect's Series · Enterprise-wide · Cloud-neutral · Industry-neutral · v1.0.1</div>
+  <h1>Enterprise AI Architecture Blueprint</h1>
+  <p class="lede">An enterprise-wide blueprint for governing and scaling AI, with a runnable reference implementation. It covers project structure, reference architecture, governance and the Enterprise Architecture playbook, works on AWS, Azure or Google Cloud, and applies to any industry or services sector. Start from zero (Day 0) or plug it into AI you already run.</p>
+  <p class="links"><a href="https://github.com/EdwardSuresh/enterprise-ai-architecture-blueprint" target="_blank" rel="noopener">GitHub repository</a> · <a href="https://www.linkedin.com/in/sureshedward" target="_blank" rel="noopener">Author on LinkedIn</a> · <a href="https://edwardsuresh.github.io/architects-ml-playbook/" target="_blank" rel="noopener">The Architect's ML Playbook</a> · v1.0.1 · MIT + CC BY 4.0</p>
 </div></header>
 
 <nav class="tabs" aria-label="Sections"><div class="wrap" role="tablist">
@@ -186,8 +186,8 @@ footer .wrap{padding-block:18px}
     <div class="card"><h3><span class="q">COST</span></h3><p>Free under MIT (code) and CC BY 4.0 (content). Build labs aim to stay under about $50 in a sandbox; check current pricing.</p></div>
   </div>
   <div class="card tpl"><div class="tpl-head"><h3>Quick start</h3><button class="copy" type="button" data-copy="qs">Copy</button></div>
-<pre class="tree" id="qs">git clone https://github.com/EdwardSuresh/architects-enterprise-ai-blueprint.git
-cd architects-enterprise-ai-blueprint
+<pre class="tree" id="qs">git clone https://github.com/EdwardSuresh/enterprise-ai-architecture-blueprint.git
+cd enterprise-ai-architecture-blueprint
 pip install -e ".[test]"
 pytest -q                                    # tests
 python labs/02-rag/concept.py                # one guarded request
@@ -207,12 +207,12 @@ flowchart LR
 </pre></div>
   <div class="tbl"><table>
     <tr><th>Start with</th><th>Why</th><th>Link</th></tr>
-    <tr><td>Executive summary</td><td>Short brief for leaders and procurement</td><td><a href="https://github.com/EdwardSuresh/architects-enterprise-ai-blueprint/blob/main/docs/executive-summary.md" target="_blank" rel="noopener">docs/executive-summary.md</a></td></tr>
-    <tr><td>Blueprint manifest</td><td>Set cloud, sector and Day-0 or plug-in mode</td><td><a href="https://github.com/EdwardSuresh/architects-enterprise-ai-blueprint/blob/main/kit.yaml" target="_blank" rel="noopener">kit.yaml</a></td></tr>
-    <tr><td>AI inventory</td><td>Register every AI system with owner and tier</td><td><a href="https://github.com/EdwardSuresh/architects-enterprise-ai-blueprint/blob/main/01-governance/ai-inventory.yaml" target="_blank" rel="noopener">01-governance/ai-inventory.yaml</a></td></tr>
-    <tr><td>Platform core</td><td>Gateway, guardrails, retrieval, tools, evals, policy gate</td><td><a href="https://github.com/EdwardSuresh/architects-enterprise-ai-blueprint/tree/main/platform/core/kit" target="_blank" rel="noopener">platform/core/kit</a></td></tr>
-    <tr><td>Domain packs</td><td>Sector overlays and the method for any other sector</td><td><a href="https://github.com/EdwardSuresh/architects-enterprise-ai-blueprint/tree/main/domain-packs" target="_blank" rel="noopener">domain-packs/</a></td></tr>
-    <tr><td>Labs</td><td>18 hands-on labs</td><td><a href="https://github.com/EdwardSuresh/architects-enterprise-ai-blueprint/tree/main/labs" target="_blank" rel="noopener">labs/</a></td></tr>
+    <tr><td>Executive summary</td><td>Short brief for leaders and procurement</td><td><a href="https://github.com/EdwardSuresh/enterprise-ai-architecture-blueprint/blob/main/docs/executive-summary.md" target="_blank" rel="noopener">docs/executive-summary.md</a></td></tr>
+    <tr><td>Blueprint manifest</td><td>Set cloud, sector and Day-0 or plug-in mode</td><td><a href="https://github.com/EdwardSuresh/enterprise-ai-architecture-blueprint/blob/main/kit.yaml" target="_blank" rel="noopener">kit.yaml</a></td></tr>
+    <tr><td>AI inventory</td><td>Register every AI system with owner and tier</td><td><a href="https://github.com/EdwardSuresh/enterprise-ai-architecture-blueprint/blob/main/01-governance/ai-inventory.yaml" target="_blank" rel="noopener">01-governance/ai-inventory.yaml</a></td></tr>
+    <tr><td>Platform core</td><td>Gateway, guardrails, retrieval, tools, evals, policy gate</td><td><a href="https://github.com/EdwardSuresh/enterprise-ai-architecture-blueprint/tree/main/platform/core/kit" target="_blank" rel="noopener">platform/core/kit</a></td></tr>
+    <tr><td>Domain packs</td><td>Sector overlays and the method for any other sector</td><td><a href="https://github.com/EdwardSuresh/enterprise-ai-architecture-blueprint/tree/main/domain-packs" target="_blank" rel="noopener">domain-packs/</a></td></tr>
+    <tr><td>Labs</td><td>18 hands-on labs</td><td><a href="https://github.com/EdwardSuresh/enterprise-ai-architecture-blueprint/tree/main/labs" target="_blank" rel="noopener">labs/</a></td></tr>
   </table></div>
 </section>
 
@@ -253,7 +253,7 @@ flowchart LR
       <li>CI runs a <b>policy gate</b> next to tests and evals: is the tier approved, the model on the approved list, the system card present?</li>
       <li>Infrastructure code has one module per cloud behind a common interface.</li>
     </ul></div>
-  <div class="callout"><p><b>Simple way to remember the difference:</b> an agent repo is a well-built house. The Enterprise AI Blueprint is the town plan: zoning rules (governance), shared utilities (gateway, observability), building codes per district (industry packs) and an inspector (the AI ARB).</p></div>
+  <div class="callout"><p><b>Simple way to remember the difference:</b> an agent repo is a well-built house. The Enterprise AI Architecture Blueprint is the town plan: zoning rules (governance), shared utilities (gateway, observability), building codes per district (industry packs) and an inspector (the AI ARB).</p></div>
 </section>
 
 <!-- ================= OVERVIEW ================= -->
@@ -298,7 +298,7 @@ flowchart LR
 <section class="panel" id="tree" role="tabpanel">
   <h2>Project structure</h2>
   <p class="sub">This is the actual layout of the repository. Gold marks what an enterprise adds to a typical agent repo. Numbered folders are the governance spine and are read in order.</p>
-<pre class="tree"><span class="d">architects-enterprise-ai-blueprint/</span>
+<pre class="tree"><span class="d">enterprise-ai-architecture-blueprint/</span>
 ├── README.md · CHANGELOG.md · CONTRIBUTING.md · SECURITY.md
 ├── LICENSE (MIT, code) · LICENSE-CONTENT.md (CC BY 4.0, content)
 ├── CLAUDE.md · AGENTS.md            <span class="c"># rules for AI coding assistants</span>
@@ -1197,7 +1197,7 @@ sequenceDiagram
 </div></main>
 
 <footer><div class="wrap"><p>The Architect's Series by Rajaretnam Suresh Edward David · Also in the series: <a href="https://edwardsuresh.github.io/architects-ml-playbook/" target="_blank" rel="noopener">The Architect's ML Playbook</a>.</p>
-<p><b>Disclaimer:</b> general guidance only, not legal, regulatory or compliance advice, and no guarantee of compliance or certification. Organization examples are illustrative composites, not client case studies. Independent work, not affiliated with or endorsed by any vendor, standards body or regulator named; product and standard names are trademarks of their respective owners. Personal views, not those of any employer or client. Service names and prices change; verify before use. <a href="https://github.com/EdwardSuresh/architects-enterprise-ai-blueprint/blob/main/DISCLAIMER.md" target="_blank" rel="noopener">Full disclaimer</a> · <a href="https://github.com/EdwardSuresh/architects-enterprise-ai-blueprint/blob/main/ACKNOWLEDGEMENTS.md" target="_blank" rel="noopener">Acknowledgements and references</a>.</p></div></footer>
+<p><b>Disclaimer:</b> general guidance only, not legal, regulatory or compliance advice, and no guarantee of compliance or certification. Organization examples are illustrative composites, not client case studies. Independent work, not affiliated with or endorsed by any vendor, standards body or regulator named; product and standard names are trademarks of their respective owners. Personal views, not those of any employer or client. Service names and prices change; verify before use. <a href="https://github.com/EdwardSuresh/enterprise-ai-architecture-blueprint/blob/main/DISCLAIMER.md" target="_blank" rel="noopener">Full disclaimer</a> · <a href="https://github.com/EdwardSuresh/enterprise-ai-architecture-blueprint/blob/main/ACKNOWLEDGEMENTS.md" target="_blank" rel="noopener">Acknowledgements and references</a>.</p></div></footer>
 
 <script>
 (function(){
