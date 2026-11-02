@@ -16,8 +16,6 @@
 
 7. **Personal views.** The kit reflects the author's personal views and experience. It does not represent the views of any current, past or future employer or client.
 
-8. **AI assistance.** Parts of this kit were drafted with the help of AI tools and reviewed and edited by the author.
-
-9. **Costs.** Any cost figures, budgets or price ranges are planning assumptions, not quotes. Cloud usage is billed by your provider; set budget alerts and delete resources you no longer need.
+8. **Costs.** Any cost figures, budgets or price ranges are planning assumptions, not quotes. Cloud usage is billed by your provider; set budget alerts and delete resources you no longer need.
 
 © 2026 Rajaretnam Suresh Edward David. Code: MIT. Content: CC BY 4.0.
